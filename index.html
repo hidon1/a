@@ -48,14 +48,14 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #000; /* צבע טקסט שחור לבולטות */
+    color: #fff; /* צבע טקסט לבן שמתאים לרקעים בהירים וכהים */
     animation: fadeIn 1.5s ease-in-out 0.3s both;
 }
 
 .content h1 {
     font-size: 36px; /* הקטנה של גופן הכותרת */
     margin-bottom: 10px; /* הקטנה margin */
-    text-shadow: 0 4px 12px rgba(255, 255, 255, 0.9); /* צללים חזקים יותר */
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6); /* צללים שחורים לבולטות על רקעים שונים */
     letter-spacing: 1px;
     font-weight: bold;
 }
@@ -64,7 +64,7 @@ body {
     font-size: 18px; /* הקטנה של גופן הפסקאות */
     margin-bottom: 15px; /* הקטנה margin */
     line-height: 1.4; /* קווי שורה קצרים יותר */
-    text-shadow: 0 3px 10px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
     max-width: 700px;
     font-weight: bold; /* הוספת bold לבולטות */
 }
@@ -81,19 +81,19 @@ ul {
 li {
     margin-bottom: 8px; /* הקטנה margin */
     font-size: 16px; /* הקטנה גופן הרשימה */
-    text-shadow: 0 3px 10px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
     padding: 6px 12px; /* הקטנה padding */
-    background: rgba(0, 0, 0, 0.15); /* ניגודיות גבוהה יותר */
+    background: rgba(255, 255, 255, 0.1); /* רקע לבן שקוף לבולטות */
     border-radius: 12px;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     font-weight: bold; /* הוספת bold */
 }
 
 .contact-info {
     margin-bottom: 15px; /* הקטנה margin */
     font-size: 16px; /* הקטנה גופן פרטי הקשר */
-    text-shadow: 0 3px 10px rgba(255, 255, 255, 0.9);
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
     line-height: 1.3; /* קווי שורה קצרים יותר */
     font-weight: bold; /* הוספת bold */
 }
@@ -118,7 +118,7 @@ li {
     transition: all 0.4s ease;
     display: inline-block;
     backdrop-filter: blur(8px);
-    border: 2px solid rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     position: relative;
     overflow: hidden;
 }
@@ -130,7 +130,7 @@ li {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: left 0.5s;
 }
 
@@ -223,13 +223,13 @@ li {
 <body>
 
 <div class="wrapper">
-    <img src="1.png" alt="רקע דיגיטלי בהיר">
+    <img src="1.png" alt="רקע דיגיטלי">
 
     <div class="content">
         <h1>הזניקו את העסק שלכם לדיגיטל – חכם, מהיר ומשתלם!</h1>
 
         <p>
-            בעלי עסקים, הגיע הזמן להתקדם למערכת שלא רק נראית טוב, אלא גם עובדת בשבילכם. אנחנו ב-י.ז.מ. אתרים מעניקים לכם את כל הכלים הטכנולוגיים במקום אחד. אנו מציעים פתרונות דיגיטליים במחירים נגישים ומתאימים במיוחד לעמותות ולעסקים קטנים ובינוניים.
+            בעלי עסקים, הגיע הזמן להתקדם למערכת שלא רק נראית טוב, אלא גם עובדת בשבילכם. אנחנו ב-י.ז.מ. אתרים מעניקים לכם את כל הכלים הטכנולוגיים במקום אחד. אנו מציעים פתרונות דיגיטליים במחירים הוגנים ומתאימים במיוחד לעמותות ולעסקים קטנים ובינוניים.
         </p>
 
         <ul>
@@ -242,7 +242,7 @@ li {
         </ul>
 
         <p>
-            י.ז.מ. אתרים – הטכנולוגיה עלינו, הניהול עליכם!
+            י.ז.מ. אתרים – הטכנולוגיה עלינו!
         </p>
 
         <div class="contact-info">
