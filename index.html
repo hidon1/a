@@ -72,22 +72,26 @@ body {
 ul {
     list-style: none;
     margin-bottom: 20px; /* הקטנה margin */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px; /* הקטנה gap */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-items: center;
+    width: 100%;
 }
 
 li {
     margin-bottom: 8px; /* הקטנה margin */
     font-size: 16px; /* הקטנה גופן הרשימה */
     text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-    padding: 6px 12px; /* הקטנה padding */
+    padding: 10px 15px; /* הגדלה padding כדי שיהיו שווים */
     background: rgba(255, 255, 255, 0.1); /* רקע לבן שקוף לבולטות */
     border-radius: 12px;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     font-weight: bold; /* הוספת bold */
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .contact-info {
@@ -197,8 +201,7 @@ li {
         align-items: center;
     }
     ul {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -215,6 +218,9 @@ li {
     .btn {
         padding: 8px 16px;
         font-size: 12px;
+    }
+    ul {
+        grid-template-columns: 1fr;
     }
 }
 </style>
