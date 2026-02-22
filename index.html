@@ -258,10 +258,10 @@ li {
             </div>
             <textarea name="message" placeholder="ההודעה שלך" required></textarea>
             <div class="buttons">
-                <button type="submit" class="btn submit">שליחת הטופס</button>
+                <button type="submit" class="btn submit" id="submitButton">שליחת הטופס</button>
                 <a href="tel:0535485184" class="btn call">📞 התקשרו עכשיו</a>
             </div>
-            <div class="status" id="formStatus">השליחה מתבצעת ישירות דרך Google Script.</div>
+            <div class="status" id="formStatus"></div>
         </form>
 
         <iframe name="hiddenSubmitFrame" style="display:none;" title="Google Script Submit"></iframe>
@@ -272,6 +272,39 @@ li {
         </div>
     </div>
 </div>
+
+<script>
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+const submitButton = document.getElementById('submitButton');
+const hiddenSubmitFrame = document.querySelector('iframe[name="hiddenSubmitFrame"]');
+
+let awaitingSubmitResult = false;
+
+contactForm.addEventListener('submit', (event) => {
+    if (awaitingSubmitResult) {
+        event.preventDefault();
+        return;
+    }
+
+    awaitingSubmitResult = true;
+    submitButton.disabled = true;
+    submitButton.textContent = 'שולח...';
+    formStatus.textContent = '';
+});
+
+hiddenSubmitFrame.addEventListener('load', () => {
+    if (!awaitingSubmitResult) {
+        return;
+    }
+
+    awaitingSubmitResult = false;
+    submitButton.disabled = false;
+    submitButton.textContent = 'שליחת הטופס';
+    formStatus.textContent = 'הודעתך נשלחה בהצלחה';
+    contactForm.reset();
+});
+</script>
 
 </body>
 </html>
