@@ -1,14 +1,24 @@
 /**
  * Google Apps Script endpoint for the contact form in index.html
- * Deploy as Web App and paste URL into scriptEndpoint in index.html.
+ * Deploy as Web App and use its URL in the form action in index.html.
  */
 function doPost(e) {
   try {
-    var data = JSON.parse(e.postData.contents || '{}');
+    var payload = {};
 
-    var submitterName = data.name || '';
-    var respondentEmail = data.email || '';
-    var message = data.message || '';
+    if (e && e.postData && e.postData.contents) {
+      try {
+        payload = JSON.parse(e.postData.contents);
+      } catch (jsonError) {
+        payload = e.parameter || {};
+      }
+    } else {
+      payload = (e && e.parameter) || {};
+    }
+
+    var submitterName = payload.name || '';
+    var respondentEmail = payload.email || '';
+    var message = payload.message || '';
 
     var adminMessage = 'New form submission:\n\n' +
       'שם: ' + submitterName + '\n' +

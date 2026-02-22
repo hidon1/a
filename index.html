@@ -250,7 +250,7 @@ li {
             <li>✅ תחזוקה, אבטחה ושדרוגים שוטפים.</li>
         </ul>
 
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" action="https://script.google.com/macros/s/AKfycbwEHnWio0gXlI0igDrSbfSzbtPFC8Ns03aVwxodNeFL8bKILDfOuVBWOW40MMAbprqCiA/exec" method="post" target="hiddenSubmitFrame">
             <h2>טופס יצירת קשר</h2>
             <div class="form-grid">
                 <input type="text" name="name" placeholder="שם מלא" required>
@@ -261,8 +261,10 @@ li {
                 <button type="submit" class="btn submit">שליחת הטופס</button>
                 <a href="tel:0535485184" class="btn call">📞 התקשרו עכשיו</a>
             </div>
-            <div class="status" id="formStatus"></div>
+            <div class="status" id="formStatus">השליחה מתבצעת ישירות דרך Google Script.</div>
         </form>
+
+        <iframe name="hiddenSubmitFrame" style="display:none;" title="Google Script Submit"></iframe>
 
         <div class="contact-info">
             <p>📞 053-5485184 | ✉️ zm0548407450@gmail.com</p>
@@ -270,40 +272,6 @@ li {
         </div>
     </div>
 </div>
-
-<script>
-const scriptEndpoint = 'https://script.google.com/macros/s/AKfycbwEHnWio0gXlI0igDrSbfSzbtPFC8Ns03aVwxodNeFL8bKILDfOuVBWOW40MMAbprqCiA/exec';
-
-const form = document.getElementById('contactForm');
-const statusText = document.getElementById('formStatus');
-
-form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(form);
-    const payload = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message')
-    };
-
-    statusText.textContent = 'שולחים את ההודעה...';
-
-    try {
-        const response = await fetch(scriptEndpoint, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        statusText.textContent = '✅ הפנייה נשלחה בהצלחה. נחזור אליך בהקדם.';
-        form.reset();
-    } catch (error) {
-        statusText.textContent = '❌ שליחה נכשלה. נסו שוב או התקשרו אלינו.';
-    }
-});
-</script>
 
 </body>
 </html>
