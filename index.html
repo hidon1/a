@@ -217,41 +217,60 @@ li {
 
 @media (max-width: 640px) {
     body {
-        min-height: auto;
-        align-items: stretch;
-        justify-content: flex-start;
+        min-height: 100dvh;
+        align-items: center;
+        justify-content: center;
         padding: 0;
         background: #e3f2fd;
     }
 
     .wrapper {
         max-width: 100%;
-        min-height: 100dvh;
+        width: 100%;
+        height: 100dvh;
         border-radius: 0;
         box-shadow: none;
-        max-height: none;
+        max-height: 100dvh;
     }
 
     .wrapper img {
-        min-height: 100dvh;
+        min-height: 100%;
+        height: 100%;
         object-position: center;
     }
 
     .content {
-        position: relative;
-        min-height: 100dvh;
+        position: absolute;
+        inset: 0;
         justify-content: flex-start;
-        gap: 10px;
-        padding: 24px 16px 20px;
-        overflow-y: auto;
+        gap: 6px;
+        padding: 12px 10px;
+        overflow: hidden;
+        transform-origin: top center;
+    }
+
+    .content.compact-mobile {
+        width: calc(100% / var(--mobile-scale, 1));
+        transform: scale(var(--mobile-scale, 1));
     }
 
     .form-grid { grid-template-columns: 1fr; }
-    .content h1 { font-size: 25px; }
-    .content .logo { font-size: 32px; }
-    .content p, li, .contact-info { font-size: 15px; }
-    .contact-form { padding: 14px; }
-    ul { grid-template-columns: 1fr; }
+    .content h1 { font-size: 21px; margin-bottom: 6px; }
+    .content .logo { font-size: 28px; }
+    .content p { font-size: 13px; margin-bottom: 8px; line-height: 1.25; }
+    .contact-info { font-size: 12px; line-height: 1.2; }
+    .contact-form { padding: 10px; gap: 6px; }
+    .contact-form h2 { font-size: 15px; }
+    .contact-form input,
+    .contact-form textarea { font-size: 13px; padding: 7px 9px; }
+    .contact-form textarea { min-height: 52px; }
+    ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+    li { font-size: 11px; padding: 6px 5px; line-height: 1.15; }
+    .btn { font-size: 12px; padding: 7px 12px; }
 }
 </style>
 </head>
@@ -310,8 +329,30 @@ const contactForm = document.getElementById('contactForm');
 const formStatus = document.getElementById('formStatus');
 const submitButton = document.getElementById('submitButton');
 const hiddenSubmitFrame = document.querySelector('iframe[name="hiddenSubmitFrame"]');
+const content = document.querySelector('.content');
 
 let awaitingSubmitResult = false;
+
+function fitMobileContent() {
+    if (window.innerWidth > 640 || !content) {
+        content.classList.remove('compact-mobile');
+        content.style.removeProperty('--mobile-scale');
+        return;
+    }
+
+    content.classList.add('compact-mobile');
+    content.style.setProperty('--mobile-scale', '1');
+
+    requestAnimationFrame(() => {
+        const viewportHeight = window.innerHeight;
+        const requiredHeight = content.scrollHeight;
+        const scale = Math.min(1, viewportHeight / requiredHeight);
+        content.style.setProperty('--mobile-scale', `${Math.max(scale, 0.72)}`);
+    });
+}
+
+fitMobileContent();
+window.addEventListener('resize', fitMobileContent);
 
 contactForm.addEventListener('submit', (event) => {
     if (awaitingSubmitResult) {
@@ -335,6 +376,7 @@ hiddenSubmitFrame.addEventListener('load', () => {
     submitButton.textContent = 'שליחת הטופס';
     formStatus.textContent = 'הודעתך נשלחה בהצלחה';
     contactForm.reset();
+    fitMobileContent();
 });
 </script>
 
