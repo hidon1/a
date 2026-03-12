@@ -21,6 +21,34 @@ body {
     background: linear-gradient(135deg, #e3f2fd, #bbdefb);
     overflow-x: hidden;
     padding: 22px 14px;
+    position: relative;
+}
+
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    filter: blur(8px);
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::before {
+    top: -70px;
+    right: -40px;
+    background: radial-gradient(circle at 30% 30%, #9c6dff, transparent 70%);
+    animation: floatBlob 12s ease-in-out infinite alternate;
+}
+
+body::after {
+    bottom: -80px;
+    left: -50px;
+    background: radial-gradient(circle at 40% 40%, #00bcd4, transparent 72%);
+    animation: floatBlob 16s ease-in-out infinite alternate-reverse;
 }
 
 .wrapper {
@@ -32,6 +60,7 @@ body {
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     animation: slideIn 1.2s ease-out;
+    z-index: 1;
 }
 
 .wrapper img {
@@ -56,6 +85,28 @@ body {
     overflow-y: auto;
     gap: 14px;
 }
+
+.hero-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-badge {
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(13, 71, 161, 0.25);
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 6px 14px rgba(13, 71, 161, 0.1);
+    animation: popIn 0.7s ease both;
+}
+
+.hero-badge:nth-child(2) { animation-delay: 0.1s; }
+.hero-badge:nth-child(3) { animation-delay: 0.2s; }
+.hero-badge:nth-child(4) { animation-delay: 0.3s; }
 
 .content::-webkit-scrollbar {
     width: 10px;
@@ -123,6 +174,14 @@ li {
     padding: 18px;
     text-align: right;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transform: translateY(30px);
+    opacity: 0;
+    transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.section.is-visible {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .section h2 {
@@ -147,6 +206,63 @@ li {
     border-radius: 12px;
     padding: 12px;
     border: 1px solid rgba(13, 71, 161, 0.18);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.section-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(13, 71, 161, 0.16);
+}
+
+.stats-grid {
+    width: 100%;
+    max-width: 1020px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(214, 236, 255, 0.75));
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.95);
+    padding: 12px;
+    box-shadow: 0 10px 20px rgba(13, 71, 161, 0.1);
+}
+
+.stat-value {
+    font-size: clamp(22px, 2.4vw, 34px);
+    font-weight: 800;
+    color: #0d47a1;
+}
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.testimonial-track {
+    display: grid;
+    gap: 8px;
+}
+
+.testimonial {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(13, 71, 161, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    opacity: 0;
+    transform: translateX(-12px);
+    animation: quoteSlide 0.9s ease forwards;
+}
+
+.testimonial:nth-child(2) { animation-delay: 0.14s; }
+.testimonial:nth-child(3) { animation-delay: 0.26s; }
+
+.testimonial strong {
+    display: block;
+    margin-top: 7px;
+    color: #0d47a1;
 }
 
 .section-card h3 {
@@ -230,6 +346,10 @@ li {
     transform: translateY(-3px) scale(1.02);
 }
 
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
 .call {
     background: linear-gradient(90deg, #8cf6ff, #57dce8);
     box-shadow: 0 8px 22px rgba(0, 188, 212, 0.35);
@@ -238,6 +358,7 @@ li {
 .submit {
     background: linear-gradient(90deg, #d6b3ff, #bb95ff);
     box-shadow: 0 8px 22px rgba(124, 77, 255, 0.35);
+    animation: pulseGlow 2.4s ease infinite;
 }
 
 .status {
@@ -263,9 +384,29 @@ li {
     to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
+@keyframes floatBlob {
+    from { transform: translateY(0) translateX(0) scale(1); }
+    to { transform: translateY(30px) translateX(12px) scale(1.15); }
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.8) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 8px 22px rgba(124, 77, 255, 0.35); }
+    50% { box-shadow: 0 10px 28px rgba(124, 77, 255, 0.6); }
+}
+
+@keyframes quoteSlide {
+    to { opacity: 1; transform: translateX(0); }
+}
+
 @media (max-width: 900px) {
     ul { grid-template-columns: repeat(2, 1fr); }
     .section-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 640px) {
@@ -324,6 +465,7 @@ li {
     .btn { font-size: 12px; padding: 7px 12px; }
     .section { padding: 12px; }
     .section h2 { font-size: 20px; }
+    .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 </style>
 </head>
@@ -336,6 +478,13 @@ li {
     <div class="content">
         <div class="logo">י.ז.מ. אתרים</div>
         <h1>הזניקו את העסק שלכם לדיגיטל – חכם, מהיר ומשתלם</h1>
+
+        <div class="hero-badges" aria-label="יתרונות מהירים">
+            <span class="hero-badge">🎯 אסטרטגיית המרות</span>
+            <span class="hero-badge">⚡ ביצועים מהירים</span>
+            <span class="hero-badge">🔒 אבטחה ברמה גבוהה</span>
+            <span class="hero-badge">📈 צמיחה מדידה</span>
+        </div>
 
         <p>
             בעלי עסקים, הגיע הזמן להתקדם למערכת שלא רק נראית טוב אלא גם עובדת בשבילכם.
@@ -354,6 +503,25 @@ li {
             <li>✅ חיבור למנועי חיפוש ולכלי המדידה של גוגל.</li>
             <li>✅ תחזוקה, אבטחה ושדרוגים שוטפים.</li>
         </ul>
+
+        <section class="stats-grid" aria-label="נתוני הצלחה">
+            <article class="stat-card">
+                <div class="stat-value" data-counter="120">0</div>
+                <div class="stat-label">אתרים ודפי נחיתה שנבנו</div>
+            </article>
+            <article class="stat-card">
+                <div class="stat-value" data-counter="93">0</div>
+                <div class="stat-label">אחוז לקוחות שממשיכים איתנו</div>
+            </article>
+            <article class="stat-card">
+                <div class="stat-value" data-counter="4">0</div>
+                <div class="stat-label">שבועות ממוצעים לעלייה לאוויר</div>
+            </article>
+            <article class="stat-card">
+                <div class="stat-value" data-counter="24">0</div>
+                <div class="stat-label">שעות זמינות חודשית לתמיכה</div>
+            </article>
+        </section>
 
         <section class="section">
             <h2>איך אנחנו בונים אתר מקצועי שבאמת מביא תוצאות?</h2>
@@ -460,6 +628,34 @@ li {
                 המטרה שלנו היא פשוטה: להפוך את האתר שלכם לנכס עסקי אמיתי שעובד בשבילכם כל יום,
                 מושך לקוחות, בונה אמון ומאפשר שליטה מלאה בכל נתון שחשוב לעסק.
             </p>
+            <p>
+                בנוסף, אנחנו מייצרים עבורכם שפה דיגיטלית עקבית שתגרום למותג להיראות גדול,
+                אמין וחדשני: החל מתוכן משכנע ועד חוויית משתמש שמניעה אנשים ללחוץ,
+                להשאיר פרטים ולבצע רכישה בביטחון.
+            </p>
+            <p>
+                אם חשוב לכם אתר שלא רק ״נמצא באוויר״ אלא עובד כמו איש מכירות דיגיטלי 24/7,
+                אנחנו נבנה לכם מערכת שיווקית מלאה שמחברת בין טכנולוגיה, קריאייטיב וניתוח נתונים,
+                כדי שתראו תוצאות בפועל ולא רק עיצוב יפה.
+            </p>
+        </section>
+
+        <section class="section">
+            <h2>לקוחות מספרים על התוצאות</h2>
+            <div class="testimonial-track">
+                <blockquote class="testimonial">
+                    "תוך חודשיים מההשקה קיבלנו פי 3 יותר לידים איכותיים. האתר החדש פשוט מוכר בשבילנו."
+                    <strong>— אורן, בעל חברת שירותים</strong>
+                </blockquote>
+                <blockquote class="testimonial">
+                    "הרגשנו שיש מי שמבין שיווק ולא רק קוד. כל שינוי נעשה עם מטרה עסקית ברורה."
+                    <strong>— מיכל, קליניקה פרטית</strong>
+                </blockquote>
+                <blockquote class="testimonial">
+                    "המעבר לדיגיטל היה חלק, מקצועי ומרגיע. קיבלנו אתר מהיר, מרשים וממיר."
+                    <strong>— דניאל, חנות אונליין</strong>
+                </blockquote>
+            </div>
         </section>
 
         <form class="contact-form" id="contactForm" action="https://script.google.com/macros/s/AKfycbyFP9JrFSN5fQdWAokzSZH1Q2k5y-hpWIevEC9Qp14zOVBNJNJrONON8udt327EwPeJ/exec" method="post" target="hiddenSubmitFrame">
@@ -491,6 +687,8 @@ const formStatus = document.getElementById('formStatus');
 const submitButton = document.getElementById('submitButton');
 const hiddenSubmitFrame = document.querySelector('iframe[name="hiddenSubmitFrame"]');
 const content = document.querySelector('.content');
+const animatedSections = document.querySelectorAll('.section');
+const counters = document.querySelectorAll('[data-counter]');
 
 let awaitingSubmitResult = false;
 
@@ -505,6 +703,51 @@ function fitMobileContent() {
 
 fitMobileContent();
 window.addEventListener('resize', fitMobileContent);
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            sectionObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.2 });
+
+animatedSections.forEach((section) => {
+    sectionObserver.observe(section);
+});
+
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+            return;
+        }
+
+        const counter = entry.target;
+        const target = Number(counter.dataset.counter || 0);
+        const duration = 1400;
+        const startTime = performance.now();
+
+        function updateCounter(now) {
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            counter.textContent = String(Math.round(target * eased));
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = String(target);
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+        counterObserver.unobserve(counter);
+    });
+}, { threshold: 0.45 });
+
+counters.forEach((counter) => {
+    counterObserver.observe(counter);
+});
 
 contactForm.addEventListener('submit', (event) => {
     if (awaitingSubmitResult) {
