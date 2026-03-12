@@ -63,31 +63,6 @@ body::after {
     z-index: 2;
 }
 
-
-.floating-decor {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.floating-decor span {
-    position: absolute;
-    padding: 8px 14px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #0d47a1;
-    background: rgba(255,255,255,0.65);
-    border: 1px solid rgba(13, 71, 161, 0.2);
-    box-shadow: 0 8px 20px rgba(13, 71, 161, 0.15);
-    animation: driftTag 11s ease-in-out infinite;
-}
-
-.floating-decor span:nth-child(1) { top: 20px; right: 20px; }
-.floating-decor span:nth-child(2) { top: 86px; left: 26px; animation-delay: 1.2s; }
-.floating-decor span:nth-child(3) { bottom: 18px; right: 32px; animation-delay: 2.3s; }
-
 .wrapper img {
     position: relative;
     z-index: 0;
@@ -135,48 +110,6 @@ body::after {
 .hero-badge:nth-child(2) { animation-delay: 0.1s; }
 .hero-badge:nth-child(3) { animation-delay: 0.2s; }
 .hero-badge:nth-child(4) { animation-delay: 0.3s; }
-
-.motion-banner {
-    width: 100%;
-    max-width: 1020px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(214,236,255,0.9));
-    border: 1px solid rgba(13, 71, 161, 0.2);
-    border-radius: 14px;
-    padding: 10px 14px;
-    font-size: clamp(14px, 1.5vw, 18px);
-    font-weight: 800;
-    color: #0d47a1;
-    box-shadow: 0 10px 24px rgba(13, 71, 161, 0.15);
-    transform: translateY(36px);
-    opacity: 0;
-    animation: riseFromFloor 0.82s cubic-bezier(0.2, 0.9, 0.25, 1) 0.2s forwards;
-}
-
-
-.news-ticker {
-    width: 100%;
-    max-width: 1020px;
-    overflow: hidden;
-    border-radius: 14px;
-    border: 1px solid rgba(13, 71, 161, 0.2);
-    background: linear-gradient(90deg, rgba(225,245,254,0.95), rgba(255,255,255,0.93));
-    box-shadow: 0 10px 24px rgba(13, 71, 161, 0.12);
-}
-
-.news-ticker-track {
-    display: flex;
-    width: max-content;
-    gap: 24px;
-    padding: 10px 14px;
-    animation: marquee 16s linear infinite;
-}
-
-.news-ticker span {
-    font-size: 14px;
-    font-weight: 800;
-    color: #0d47a1;
-    white-space: nowrap;
-}
 
 .content::-webkit-scrollbar {
     width: 10px;
@@ -496,16 +429,6 @@ li {
     to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-}
-
-@keyframes driftTag {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-12px) rotate(-2deg); }
-}
-
 @keyframes floatPulse {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
@@ -559,8 +482,6 @@ li {
         transform: scale(var(--mobile-scale, 1));
     }
 
-    .floating-decor { display: none; }
-    .news-ticker span { font-size: 12px; }
     .form-grid { grid-template-columns: 1fr; }
     .content h1 { font-size: 21px; margin-bottom: 6px; }
     .content .logo { font-size: 28px; }
@@ -588,11 +509,6 @@ li {
 <body>
 
 <div class="wrapper">
-    <div class="floating-decor" aria-hidden="true">
-        <span>אתר שזז עם העסק</span>
-        <span>UX מרגיש חי</span>
-        <span>מיתוג דיגיטלי דינמי</span>
-    </div>
     <img src="1.png" alt="רקע דיגיטלי">
 
     <div class="content">
@@ -604,21 +520,6 @@ li {
             <span class="hero-badge">⚡ ביצועים מהירים</span>
             <span class="hero-badge">🔒 אבטחה ברמה גבוהה</span>
             <span class="hero-badge">📈 צמיחה מדידה</span>
-        </div>
-
-        <div class="motion-banner" id="motionBanner">✨ אנימציות מרהיבות עין, חוויית משתמש שמרגישה חיה ומתקדמת</div>
-
-        <div class="news-ticker" aria-label="באנר עדכונים נע">
-            <div class="news-ticker-track">
-                <span>🚀 דפי נחיתה אנימטיביים שמעלים המרות</span>
-                <span>🎬 מיקרו-אנימציות שעושות וואו</span>
-                <span>📣 באנרים חכמים שמושכים את העין</span>
-                <span>⚡ חוויית גלילה זורמת בכל מסך</span>
-                <span>🚀 דפי נחיתה אנימטיביים שמעלים המרות</span>
-                <span>🎬 מיקרו-אנימציות שעושות וואו</span>
-                <span>📣 באנרים חכמים שמושכים את העין</span>
-                <span>⚡ חוויית גלילה זורמת בכל מסך</span>
-            </div>
         </div>
 
         <p>
@@ -824,7 +725,6 @@ const hiddenSubmitFrame = document.querySelector('iframe[name="hiddenSubmitFrame
 const content = document.querySelector('.content');
 const animatedSections = document.querySelectorAll('.section');
 const counters = document.querySelectorAll('[data-counter]');
-const motionBanner = document.getElementById('motionBanner');
 
 let awaitingSubmitResult = false;
 
@@ -889,29 +789,28 @@ counters.forEach((counter) => {
     counterObserver.observe(counter);
 });
 
-if (motionBanner) {
-    const bannerMessages = [
-        '✨ אנימציות מרהיבות עין, חוויית משתמש שמרגישה חיה ומתקדמת',
-        '🎯 באנרים דינמיים שתופסים תשומת לב כבר בשנייה הראשונה',
-        '🌀 מעברים חלקים ומיקרו-אינטראקציות שמייצרות עניין אמיתי',
-        '💡 עיצוב תנועתי חכם שמוביל את הגולש לפעולה'
-    ];
+function enableGlobalContentScroll() {
+    if (!content) {
+        return;
+    }
 
-    let activeMessageIndex = 0;
-    setInterval(() => {
-        activeMessageIndex = (activeMessageIndex + 1) % bannerMessages.length;
-        motionBanner.animate([
-            { opacity: 1, transform: 'translateY(0) scale(1)' },
-            { opacity: 0, transform: 'translateY(-6px) scale(0.98)', offset: 0.45 },
-            { opacity: 0, transform: 'translateY(10px) scale(0.98)', offset: 0.55 },
-            { opacity: 1, transform: 'translateY(0) scale(1)' }
-        ], {
-            duration: 850,
-            easing: 'ease-in-out'
-        });
-        motionBanner.textContent = bannerMessages[activeMessageIndex];
-    }, 3400);
+    window.addEventListener('wheel', (event) => {
+        const hasScrollableContent = content.scrollHeight > content.clientHeight;
+        if (!hasScrollableContent || event.defaultPrevented) {
+            return;
+        }
+
+        const canScrollDown = content.scrollTop + content.clientHeight < content.scrollHeight;
+        const canScrollUp = content.scrollTop > 0;
+
+        if ((event.deltaY > 0 && canScrollDown) || (event.deltaY < 0 && canScrollUp)) {
+            content.scrollTop += event.deltaY;
+            event.preventDefault();
+        }
+    }, { passive: false });
 }
+
+enableGlobalContentScroll();
 
 
 contactForm.addEventListener('submit', (event) => {
