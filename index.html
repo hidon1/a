@@ -161,6 +161,25 @@ body {
   pointer-events: none;
 }
 .hero-content { position: relative; z-index: 2; max-width: 860px; }
+.hero-logo-large {
+  min-width: 220px;
+  height: 76px;
+  padding: 0 30px;
+  border-radius: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: clamp(38px, 5vw, 58px);
+  line-height: 1;
+  font-weight: 900;
+  color: #fff;
+  background: #061b45;
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 14px 34px rgba(10,28,78,0.4);
+  margin-bottom: 26px;
+}
+.hero-logo-large span { color: #fbbf24; }
 .hero-tag {
   display: inline-flex;
   align-items: center;
@@ -309,18 +328,18 @@ body {
 .section-header.center .section-sub { margin: 0 auto; }
 
 /* ─── FEATURES ─── */
-.features-bg { background: var(--navy); }
-.features-bg .section-label { color: var(--gold); }
-.features-bg .section-title { color: #fff; }
-.features-bg .section-sub { color: rgba(255,255,255,0.6); }
+.features-bg { background: linear-gradient(180deg, #f4fbff 0%, #e8f6ff 100%); }
+.features-bg .section-label { color: var(--accent); }
+.features-bg .section-title { color: var(--navy); }
+.features-bg .section-sub { color: var(--text-mid); }
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 .feature-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(37,99,235,0.12);
   border-radius: var(--radius);
   padding: 32px 24px;
   transition: transform 0.3s, background 0.3s;
@@ -335,7 +354,7 @@ body {
   opacity: 0;
   transition: opacity 0.3s;
 }
-.feature-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.1); }
+.feature-card:hover { transform: translateY(-6px); background: #fff; }
 .feature-card:hover::before { opacity: 1; }
 .feature-icon {
   width: 52px; height: 52px;
@@ -344,11 +363,11 @@ body {
   place-items: center;
   font-size: 24px;
   margin-bottom: 18px;
-  background: linear-gradient(135deg, rgba(37,99,235,0.25), rgba(14,165,233,0.15));
-  border: 1px solid rgba(37,99,235,0.3);
+  background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(14,165,233,0.1));
+  border: 1px solid rgba(37,99,235,0.18);
 }
-.feature-card h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; }
-.feature-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.feature-card h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.feature-card p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
 
 /* ─── PROCESS ─── */
 .process-bg { background: var(--off-white); }
@@ -453,7 +472,7 @@ body {
 /* ─── PROJECTS ─── */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 .project-card {
@@ -980,22 +999,20 @@ footer {
 <section class="hero" id="home" aria-label="אזור פתיחה">
   <div class="hero-grid-overlay"></div>
   <div class="hero-content">
-    <div class="hero-tag">✦ בניית אתרים מקצועית ומותאמת אישית</div>
-    <h1>אתר שלא רק <em>נראה טוב</em> —<br>אלא גם <em>מכניס לקוחות</em></h1>
+    <div class="hero-logo-large" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+    <h1>בונים לכם אתר שישדרג לכם את העסק</h1>
     <p class="hero-sub">פתרונות דיגיטליים מלאים לעסקים, עמותות ויוזמות — עם התאמה מושלמת לקהל החרדי ולקהל הכללי.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">📋 קבל הצעת מחיר חינם</a>
       <a href="#projects" class="btn-outline">👀 צפה בעבודות שלי</a>
     </div>
     <div class="hero-badges">
-      <span class="hero-badge">🎯 אסטרטגיית המרות</span>
       <span class="hero-badge">⚡ מהירות טעינה גבוהה</span>
       <span class="hero-badge">🔒 אבטחה ברמה גבוהה</span>
       <span class="hero-badge">📱 מותאם למובייל</span>
       <span class="hero-badge">🌐 SEO ראשוני מובנה</span>
     </div>
   </div>
-  <div class="hero-scroll" aria-hidden="true">גלול למטה</div>
 </section>
 
 <!-- ──────────────────────────────────────────────── -->
@@ -1003,9 +1020,9 @@ footer {
 <section class="features-bg" id="features" aria-labelledby="features-title">
   <div class="section-wrap">
     <div class="section-header center reveal">
-      <div class="section-label">למה לבחור בי</div>
-      <h2 class="section-title" id="features-title" style="color:#fff">הכל במקום אחד, בגובה העיניים</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,0.6);margin:0 auto">מקצועיות ללא פשרות, שפה מכבדת, ותוצאות בפועל — בין אם אתם מהמגזר החרדי ובין אם לאו.</p>
+      <div class="section-label">למה לבחור בנו</div>
+      <h2 class="section-title" id="features-title">הכל במקום אחד, בגובה העיניים</h2>
+      <p class="section-sub" style="margin:0 auto">מקצועיות ללא פשרות, שפה מכבדת, ותוצאות בפועל — בין אם אתם מהמגזר החרדי ובין אם לאו.</p>
     </div>
     <div class="features-grid">
       <article class="feature-card reveal reveal-delay-1">
@@ -1100,7 +1117,7 @@ footer {
   <div class="section-wrap">
     <div class="section-header center reveal">
       <div class="section-label">עבודות שלי</div>
-      <h2 class="section-title" id="projects-title">פרויקטים שבנינו יחד</h2>
+      <h2 class="section-title" id="projects-title">פרויקטים שבנינו ביחד</h2>
       <p class="section-sub">כל אתר הוא סיפור הצלחה שונה — תוכן, קהל וחוויה מותאמים אישית.</p>
     </div>
     <div class="projects-grid">
@@ -1116,8 +1133,7 @@ footer {
           <span class="project-tag">חנות אונליין</span>
           <h3>שם הפרויקט 1 — כאן</h3>
           <p>תיאור קצר של הפרויקט, הקהל, הצרכים שנענו והתוצאות שהושגו.</p>
-          <a href="#" class="btn-link">צפה בפרויקט ←</a>
-          <!-- החלף href בקישור אמיתי -->
+          <a href="https://lehitey.co.il" class="btn-link" target="_blank" rel="noopener">צפה בפרויקט ←</a>
         </div>
       </article>
       <article class="project-card reveal reveal-delay-2">
@@ -1131,7 +1147,7 @@ footer {
           <span class="project-tag">אתר תדמית</span>
           <h3>שם הפרויקט 2 — כאן</h3>
           <p>תיאור קצר של הפרויקט, הקהל, הצרכים שנענו והתוצאות שהושגו.</p>
-          <a href="#" class="btn-link">צפה בפרויקט ←</a>
+          <a href="#" class="btn-link" target="_blank" rel="noopener">צפה בפרויקט ←</a>
         </div>
       </article>
       <article class="project-card reveal reveal-delay-3">
@@ -1145,21 +1161,7 @@ footer {
           <span class="project-tag">עמותה / מגזר חרדי</span>
           <h3>שם הפרויקט 3 — כאן</h3>
           <p>תיאור קצר של הפרויקט, הקהל, הצרכים שנענו והתוצאות שהושגו.</p>
-          <a href="#" class="btn-link">צפה בפרויקט ←</a>
-        </div>
-      </article>
-      <article class="project-card reveal reveal-delay-4">
-        <div class="project-img" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0)">
-          <div class="project-img-placeholder">
-            <span class="placeholder-icon">🏥</span>
-            <span>תמונה לפרויקט 4</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">קליניקה / שירות</span>
-          <h3>שם הפרויקט 4 — כאן</h3>
-          <p>תיאור קצר של הפרויקט, הקהל, הצרכים שנענו והתוצאות שהושגו.</p>
-          <a href="#" class="btn-link">צפה בפרויקט ←</a>
+          <a href="#" class="btn-link" target="_blank" rel="noopener">צפה בפרויקט ←</a>
         </div>
       </article>
     </div>
@@ -1177,12 +1179,10 @@ footer {
         <p class="section-sub" style="color:rgba(255,255,255,0.6);margin:0 auto 36px">צפו בסרטון קצר שמסביר את תהליך העבודה ואת התוצאות שאפשר לצפות להן.</p>
       </div>
       <div class="video-container reveal">
-        <!-- להחליף בקוד הטמעת יוטיוב אמיתי: -->
-        <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;"></iframe> -->
-        <div class="video-placeholder">
-          <div class="play-btn" aria-label="הפעל וידאו">▶</div>
-          <p>הטמע כאן וידאו YouTube — החלף את ה-placeholder בקוד iframe</p>
-        </div>
+        <video controls preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" aria-label="סרטון תדמית">
+          <source src="סרטון תדמית.mp4" type="video/mp4">
+          הדפדפן שלכם לא תומך בהפעלת וידאו.
+        </video>
       </div>
     </div>
   </div>
@@ -1371,7 +1371,7 @@ footer {
     </div>
     <div class="blog-grid">
       <article class="blog-card reveal reveal-delay-1">
-        <div class="blog-img"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80" alt="מאמר על בניית אתרים"></div>
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1548624313-0396c75d73c6?auto=format&fit=crop&w=1200&q=80" alt="מאמר על בניית אתרים"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
@@ -1380,7 +1380,7 @@ footer {
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-2">
-        <div class="blog-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="ניתוח נתוני אתר"></div>
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80" alt="ניתוח נתוני אתר"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>איך אתר טוב מביא יותר לקוחות?</h3>
@@ -1389,7 +1389,7 @@ footer {
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-3">
-        <div class="blog-img"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="רשימת בדיקות לפני בניית אתר"></div>
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80" alt="רשימת בדיקות לפני בניית אתר"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
@@ -1424,13 +1424,6 @@ footer {
           <div>
             <strong><a href="mailto:contact@yzm-sites.co.il" style="color:var(--navy);text-decoration:none">contact@yzm-sites.co.il</a></strong>
             <!-- החלף במייל האמיתי שלך -->
-          </div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">💬</div>
-          <div>
-            <strong>WhatsApp זמין</strong><br>
-            <small style="color:var(--text-light);font-size:12px;font-weight:400">שלחו הודעה ונחזור תוך שעה</small>
           </div>
         </div>
       </div>
@@ -1487,7 +1480,6 @@ footer {
         <span class="nav-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</span>
         <p>בניית אתרים מקצועית ומותאמת אישית — לעסקים, עמותות ויוזמות. הטכנולוגיה עלינו.</p>
         <div class="footer-social">
-          <a href="#" class="social-link" aria-label="פייסבוק">𝐟</a>
           <a href="#" class="social-link" aria-label="אינסטגרם">📸</a>
           <a href="https://wa.me/972535485184" class="social-link" aria-label="ווצאפ">💬</a>
           <a href="mailto:contact@yzm-sites.co.il" class="social-link" aria-label="מייל">✉</a>
@@ -1517,7 +1509,6 @@ footer {
         <h4>פרטי קשר</h4>
         <div class="footer-contact-item">📞 <a href="tel:0535485184" style="color:rgba(255,255,255,0.55);text-decoration:none">053-548-5184</a></div>
         <div class="footer-contact-item">✉️ <a href="mailto:contact@yzm-sites.co.il" style="color:rgba(255,255,255,0.55);text-decoration:none">contact@yzm-sites.co.il</a></div>
-        <div class="footer-contact-item">💬 WhatsApp זמין</div>
         <div class="footer-contact-item">🕐 ימים א'–ה', 9:00–21:00</div>
       </div>
     </div>
