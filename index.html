@@ -12,16 +12,16 @@
 
 <style>
 :root {
-  --navy: #0a1628;
-  --navy-mid: #0e2040;
-  --blue: #1a3a6b;
-  --accent: #2563eb;
-  --accent-light: #3b82f6;
+  --navy: #0f4562;
+  --navy-mid: #136a88;
+  --blue: #1a87a8;
+  --accent: #1d9dc2;
+  --accent-light: #39b8d8;
   --gold: #f59e0b;
   --gold-light: #fbbf24;
-  --teal: #0ea5e9;
+  --teal: #2ec4b6;
   --white: #ffffff;
-  --off-white: #f8faff;
+  --off-white: #fff8ee;
   --text: #1e293b;
   --text-mid: #475569;
   --text-light: #94a3b8;
@@ -80,18 +80,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(10,22,40,0.92);
+  background: rgba(23,111,141,0.9);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .nav-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
   font-family: 'Frank Ruhl Libre', serif;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 900;
   color: #fff;
   letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #3ec9da, #2ec4b6);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 8px 20px rgba(11,94,122,0.28);
 }
-.nav-logo span { color: var(--gold); }
+.nav-logo span { color: rgba(255,255,255,0.92); }
 .nav-links { display: flex; gap: 28px; list-style: none; }
 .nav-links a {
   color: rgba(255,255,255,0.8);
@@ -119,7 +127,7 @@ body {
 /* ─── HERO ─── */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 40%, #0c1f47 100%);
+  background: linear-gradient(135deg, #1a6f8f 0%, #1e90b2 45%, #4bbcd2 100%);
   position: relative;
   display: flex;
   align-items: center;
@@ -133,8 +141,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 20% 50%, rgba(37,99,235,0.25) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(14,165,233,0.2) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 50% at 20% 50%, rgba(46,196,182,0.28) 0%, transparent 62%),
+    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(99,211,225,0.24) 0%, transparent 62%);
   pointer-events: none;
 }
 .hero-grid-overlay {
@@ -151,8 +159,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(37,99,235,0.2);
-  border: 1px solid rgba(37,99,235,0.4);
+  background: rgba(46,196,182,0.2);
+  border: 1px solid rgba(46,196,182,0.4);
   color: var(--teal);
   font-size: 13px;
   font-weight: 700;
@@ -384,7 +392,7 @@ body {
 
 /* ─── MID CTA ─── */
 .mid-cta {
-  background: linear-gradient(135deg, var(--accent) 0%, #1e40af 50%, var(--teal) 100%);
+  background: linear-gradient(135deg, #34b9d2 0%, #4bc6db 50%, #6dd8cd 100%);
   padding: 70px 24px;
   text-align: center;
   position: relative;
@@ -583,7 +591,7 @@ body {
 
 /* ─── STATS ─── */
 .stats-bg {
-  background: linear-gradient(135deg, var(--navy), var(--blue));
+  background: linear-gradient(135deg, #1a6f8f, #3cb4c6);
   padding: 70px 24px;
 }
 .stats-inner { max-width: 1000px; margin: 0 auto; }
@@ -725,7 +733,7 @@ body {
 }
 .blog-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
 .blog-img {
-  height: 160px;
+  height: 220px;
   background: linear-gradient(135deg, #dbeafe, #bfdbfe);
   display: flex;
   align-items: center;
@@ -834,7 +842,7 @@ footer {
   gap: 40px;
   margin-bottom: 48px;
 }
-.footer-brand .nav-logo { font-size: 24px; margin-bottom: 14px; display: block; }
+.footer-brand .nav-logo { margin-bottom: 14px; display: inline-grid; }
 .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 240px; margin-bottom: 20px; }
 .footer-social { display: flex; gap: 10px; }
 .social-link {
@@ -946,7 +954,7 @@ footer {
 <!-- ──────────────────────────────────────────────── -->
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="ניווט ראשי">
-  <div class="nav-logo">י<span>.</span>ז<span>.</span>מ<span>.</span> אתרים</div>
+  <div class="nav-logo" aria-label="י.ז.מ.">י<span>.</span>ז<span>.</span>מ<span>.</span></div>
   <ul class="nav-links">
     <li><a href="#features">יתרונות</a></li>
     <li><a href="#process">תהליך</a></li>
@@ -1080,7 +1088,7 @@ footer {
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- PROJECTS -->
-<section id="projects" aria-labelledby="projects-title" style="background:#fff">
+<section id="projects" aria-labelledby="projects-title" style="background:var(--off-white)">
   <div class="section-wrap">
     <div class="section-header center reveal">
       <div class="section-label">עבודות שלי</div>
@@ -1173,39 +1181,6 @@ footer {
 </section>
 
 <!-- ──────────────────────────────────────────────── -->
-<!-- BEFORE / AFTER -->
-<section id="beforeafter" aria-labelledby="ba-title">
-  <div class="section-wrap">
-    <div class="section-header center reveal">
-      <div class="section-label">מה משתנה</div>
-      <h2 class="section-title" id="ba-title">לפני האתר ואחריו</h2>
-      <p class="section-sub">ההבדל בין "נוכחות אונליין" לבין "כלי שיווקי שעובד" — ניכר מהיום הראשון.</p>
-    </div>
-    <div class="ba-grid">
-      <article class="ba-card before reveal reveal-delay-1">
-        <span class="ba-icon">😕</span>
-        <h3>לפני — ללא אתר</h3>
-        <p>לקוחות לא מוצאים אתכם בגוגל, אין אמינות בלינה, ואין מקום מרכזי לשלוח לידים.</p>
-      </article>
-      <article class="ba-card after reveal reveal-delay-2">
-        <span class="ba-icon">🚀</span>
-        <h3>אחרי — עם אתר מקצועי</h3>
-        <p>נוכחות דיגיטלית חזקה, חשיפה בגוגל, ולקוחות שמגיעים אליכם — גם בשבת בצהריים.</p>
-      </article>
-      <article class="ba-card gain reveal reveal-delay-3">
-        <span class="ba-icon">💼</span>
-        <h3>יותר פניות איכותיות</h3>
-        <p>טופס לידים חכם, מספר טלפון בולט וקריאות לפעולה — מביאים פניות אמיתיות, לא "גולשים".</p>
-      </article>
-      <article class="ba-card gain reveal reveal-delay-4">
-        <span class="ba-icon">🏆</span>
-        <h3>נראות מקצועית יותר</h3>
-        <p>מותג חזק, עיצוב יוקרתי ושפה מדויקת — שגורמים ללקוח לסמוך עליכם עוד לפני שדיברתם.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ──────────────────────────────────────────────── -->
 <!-- STATS -->
 <div class="stats-bg" aria-label="סטטיסטיקות">
@@ -1216,20 +1191,20 @@ footer {
     </div>
     <div class="stats-grid">
       <div class="stat-card reveal reveal-delay-1">
-        <div class="stat-value"><span data-counter="47" data-counter-start="0">0</span><span class="stat-suffix">+</span></div>
-        <div class="stat-label">אתרים שנבנו</div>
+        <div class="stat-value"><span data-counter="10" data-counter-start="0">0</span></div>
+        <div class="stat-label">ימים ממוצע להשקה</div>
       </div>
       <div class="stat-card reveal reveal-delay-2">
-        <div class="stat-value"><span data-counter="38" data-counter-start="0">0</span><span class="stat-suffix">+</span></div>
-        <div class="stat-label">לקוחות מרוצים</div>
-      </div>
-      <div class="stat-card reveal reveal-delay-3">
-        <div class="stat-value"><span data-counter="98" data-counter-start="0">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-value"><span data-counter="95" data-counter-start="0">0</span><span class="stat-suffix">%</span></div>
         <div class="stat-label">שביעות רצון</div>
       </div>
+      <div class="stat-card reveal reveal-delay-3">
+        <div class="stat-value"><span data-counter="24" data-counter-start="0">0</span><span class="stat-suffix">/</span><span style="font-size:22px;color:rgba(255,255,255,0.8)">6</span></div>
+        <div class="stat-label">זמינות לפניות</div>
+      </div>
       <div class="stat-card reveal reveal-delay-4">
-        <div class="stat-value"><span data-counter="14" data-counter-start="0">0</span><span class="stat-suffix"></span></div>
-        <div class="stat-label">ימים ממוצע להשקה</div>
+        <div class="stat-value"><span data-counter="100" data-counter-start="0">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-label">התאמה למובייל</div>
       </div>
     </div>
   </div>
@@ -1298,7 +1273,7 @@ footer {
           כמה זמן לוקח לבנות אתר?
           <span class="faq-arrow" aria-hidden="true">▼</span>
         </button>
-        <div class="faq-a">אתר תדמית פשוט נמסר בין 7 ל-14 ימים. אתר מורכב עם מערכות, חנות או אזורים אישיים — עד 30 יום. הכל תלוי בסוג הפרויקט ובמהירות שמתקבל תוכן מהלקוח.</div>
+        <div class="faq-a">אתר תדמית פשוט נבנה בדרך כלל בין שלושה ימים לארבעה עשר ימים. בפרויקטים מורכבים יותר, הזמנים מתארכים בהתאם לצרכים ולחיבורים מיוחדים.</div>
       </div>
 
       <div class="faq-item" role="listitem">
@@ -1306,7 +1281,7 @@ footer {
           כמה עולה לבנות אתר?
           <span class="faq-arrow" aria-hidden="true">▼</span>
         </button>
-        <div class="faq-a">המחיר תלוי בסוג האתר ורמת המורכבות. אתר תדמית מתחיל ממחיר נגיש, ואתר עם מערכות מתקדמות יתומחר בהתאם. פנו אלינו לקבל הצעת מחיר מותאמת ללא התחייבות.</div>
+        <div class="faq-a">המחיר תלוי בסוג האתר, בכמות העמודים, ברמת העיצוב ובחיבורים הנדרשים (כמו סליקה, טפסים ואוטומציות). בסיום אפיון קצר תקבלו הצעה ברורה ומדויקת. החל מ-1800 שקלים.</div>
       </div>
 
       <div class="faq-item" role="listitem">
@@ -1335,10 +1310,10 @@ footer {
 
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
-          איך בונים אתר שמתאים לקהל החרדי?
+          איך בונים אתר שמותאם באמת לציבור החרדי?
           <span class="faq-arrow" aria-hidden="true">▼</span>
         </button>
-        <div class="faq-a">שפה מכבדת וצנועה, עיצוב נקי ללא תמונות לא ראויות, קריאות לפעולה שמדברות בגובה העיניים, ותוכן שמשקף את הערכים של הקהל. אנחנו מנוסים בזה ועושים אותו נכון.</div>
+        <div class="faq-a">מתחילים מהבנת הקהילה הספציפית: סגנון שפה מכבד וצנוע, עיצוב נקי ונעים לעין, בחירת תמונות ותכנים מתאימים, והדגשת אמינות ושירות. כך בונים אתר שמרגיש טבעי, מכבד וממיר גם יחד.</div>
       </div>
 
       <div class="faq-item" role="listitem">
@@ -1357,13 +1332,29 @@ footer {
         <div class="faq-a">בהחלט. אנחנו מבצעים מחקר ביטויים ממוקד לקהל החרדי ומטמיעים SEO מובנה — כדי שהאתר ייצג אתכם גם בחיפוש העברי וגם בסביבה הדיגיטלית המגזרית.</div>
       </div>
 
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          האם אתם מלווים גם אחרי העלייה לאוויר?
+          <span class="faq-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a">כן. גם אחרי ההשקה אנחנו ממשיכים ללוות אתכם בעדכונים, שיפורים, בדיקות וייעוץ שוטף כדי שהאתר ימשיך לעבוד עבורכם לאורך זמן.</div>
+      </div>
+
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false">
+          האם אפשר להתחיל מאתר קטן ולהתרחב בהמשך?
+          <span class="faq-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="faq-a">בוודאי. אפשר להתחיל באתר תדמית ממוקד, ובהמשך להוסיף עמודים, טפסים, בלוג, מערכות ניהול ואפילו חנות — בלי לבנות הכל מחדש.</div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- BLOG -->
-<section id="blog" aria-labelledby="blog-title" style="background:#fff">
+<section id="blog" aria-labelledby="blog-title" style="background:var(--off-white)">
   <div class="section-wrap">
     <div class="section-header center reveal">
       <div class="section-label">בלוג ומאמרים</div>
@@ -1376,7 +1367,7 @@ footer {
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
-          <p>איך בונים נוכחות דיגיטלית מכבדת ואפקטיבית עבור עסקים ועמותות מהמגזר החרדי.</p>
+          <p>במאמר נסביר איך משלבים בין נראות מקצועית לבין רגישות תרבותית: בחירת שפה מדויקת, עיצוב צנוע ונקי, התאמת מסרים לקהלים שונים בתוך הציבור החרדי, והקפדה על אמינות שמייצרת פניות איכותיות לאורך זמן.</p>
           <a href="#" class="btn-link">קרא עוד ←</a>
         </div>
       </article>
@@ -1385,7 +1376,7 @@ footer {
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>איך אתר טוב מביא יותר לקוחות?</h3>
-          <p>הסיבות שגורמות לחלק מהאתרים להמיר ולאחרים לא — ומה אפשר לעשות כדי להיות בצד הנכון.</p>
+          <p>נפרק את המרכיבים שבאמת משפיעים על ההמרות: כותרת נכונה, מבנה עמוד חכם, הוכחות חברתיות, מהירות טעינה ונגישות במובייל. בנוסף תקבלו צ'ק ליסט פרקטי לשיפור מיידי גם באתר קיים.</p>
           <a href="#" class="btn-link">קרא עוד ←</a>
         </div>
       </article>
@@ -1394,7 +1385,7 @@ footer {
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
-          <p>רשימת הכנה חשובה שתחסוך לכם זמן, כסף ועיכובים מיותרים בדרך לאתר המושלם.</p>
+          <p>לפני שמתחילים פיתוח, חשוב לסגור מטרות, קהל יעד, היררכיית תוכן ותשתית שיווקית. במאמר תמצאו 5 בדיקות קריטיות שימנעו טעויות יקרות ויעזרו לכם להשיק אתר נכון כבר מהגרסה הראשונה.</p>
           <a href="#" class="btn-link">קרא עוד ←</a>
         </div>
       </article>
@@ -1433,11 +1424,6 @@ footer {
             <strong>WhatsApp זמין</strong><br>
             <small style="color:var(--text-light);font-size:12px;font-weight:400">שלחו הודעה ונחזור תוך שעה</small>
           </div>
-        </div>
-        <div style="margin-top:32px; padding:24px; background:rgba(37,99,235,0.06); border-radius:var(--radius); border:1px solid rgba(37,99,235,0.15)">
-          <p style="font-size:14px; color:var(--text-mid); line-height:1.7">
-            💡 <strong style="color:var(--navy)">כבר עזרנו ל-38 לקוחות</strong> להפוך את הנוכחות הדיגיטלית שלהם לכלי שיווקי אמיתי — בין אם מהמגזר החרדי ובין אם לאו.
-          </p>
         </div>
       </div>
 
@@ -1490,7 +1476,7 @@ footer {
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="nav-logo">י<span>.</span>ז<span>.</span>מ<span>.</span> אתרים</span>
+        <span class="nav-logo" aria-label="י.ז.מ.">י<span>.</span>ז<span>.</span>מ<span>.</span></span>
         <p>בניית אתרים מקצועית ומותאמת אישית — לעסקים, עמותות ויוזמות. הטכנולוגיה עלינו.</p>
         <div class="footer-social">
           <a href="#" class="social-link" aria-label="פייסבוק">𝐟</a>
