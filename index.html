@@ -6,6 +6,8 @@
 <title>י.ז.מ. אתרים | בניית אתרים מקצועית למגזר החרדי ולקהל הכללי</title>
 <meta name="description" content="בניית אתרים מקצועית ומותאמת אישית – לעסקים, עמותות ויוזמות מהמגזר החרדי ומהקהל הכללי. עיצוב יוקרתי, קידום אורגני, וחוויית משתמש שממירה.">
 <meta name="keywords" content="בניית אתרים, בונה אתרים חרדי, בניית אתרים למגזר החרדי, עיצוב אתרים, קידום אתרים בגוגל">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -85,21 +87,25 @@ body {
   border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .nav-logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
+  min-width: 132px;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Frank Ruhl Libre', serif;
-  font-size: 16px;
+  font-size: 30px;
+  line-height: 1;
   font-weight: 900;
   color: #fff;
   letter-spacing: 0.5px;
-  background: linear-gradient(135deg, #3ec9da, #2ec4b6);
-  border: 1px solid rgba(255,255,255,0.35);
-  box-shadow: 0 8px 20px rgba(11,94,122,0.28);
+  background: #061b45;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 20px rgba(10,28,78,0.35);
+  text-decoration: none;
 }
-.nav-logo span { color: rgba(255,255,255,0.92); }
+.nav-logo span { color: #fbbf24; }
 .nav-links { display: flex; gap: 28px; list-style: none; }
 .nav-links a {
   color: rgba(255,255,255,0.8);
@@ -734,11 +740,13 @@ body {
 .blog-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
 .blog-img {
   height: 220px;
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
+  overflow: hidden;
+}
+.blog-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .blog-body { padding: 22px; }
 .blog-date { font-size: 12px; color: var(--text-light); margin-bottom: 8px; }
@@ -842,7 +850,7 @@ footer {
   gap: 40px;
   margin-bottom: 48px;
 }
-.footer-brand .nav-logo { margin-bottom: 14px; display: inline-grid; }
+.footer-brand .nav-logo { margin-bottom: 14px; display: inline-flex; }
 .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 240px; margin-bottom: 20px; }
 .footer-social { display: flex; gap: 10px; }
 .social-link {
@@ -954,7 +962,7 @@ footer {
 <!-- ──────────────────────────────────────────────── -->
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="ניווט ראשי">
-  <div class="nav-logo" aria-label="י.ז.מ.">י<span>.</span>ז<span>.</span>מ<span>.</span></div>
+  <div class="nav-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
   <ul class="nav-links">
     <li><a href="#features">יתרונות</a></li>
     <li><a href="#process">תהליך</a></li>
@@ -1363,30 +1371,30 @@ footer {
     </div>
     <div class="blog-grid">
       <article class="blog-card reveal reveal-delay-1">
-        <div class="blog-img">🕍</div>
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1200&q=80" alt="מאמר על בניית אתרים"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
           <p>במאמר נסביר איך משלבים בין נראות מקצועית לבין רגישות תרבותית: בחירת שפה מדויקת, עיצוב צנוע ונקי, התאמת מסרים לקהלים שונים בתוך הציבור החרדי, והקפדה על אמינות שמייצרת פניות איכותיות לאורך זמן.</p>
-          <a href="#" class="btn-link">קרא עוד ←</a>
+          <a href="articles/haridi-websites.html" class="btn-link">קרא עוד ←</a>
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-2">
-        <div class="blog-img" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">📈</div>
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="ניתוח נתוני אתר"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>איך אתר טוב מביא יותר לקוחות?</h3>
           <p>נפרק את המרכיבים שבאמת משפיעים על ההמרות: כותרת נכונה, מבנה עמוד חכם, הוכחות חברתיות, מהירות טעינה ונגישות במובייל. בנוסף תקבלו צ'ק ליסט פרקטי לשיפור מיידי גם באתר קיים.</p>
-          <a href="#" class="btn-link">קרא עוד ←</a>
+          <a href="articles/website-conversions.html" class="btn-link">קרא עוד ←</a>
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-3">
-        <div class="blog-img" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0)">✅</div>
+        <div class="blog-img"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="רשימת בדיקות לפני בניית אתר"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
           <p>לפני שמתחילים פיתוח, חשוב לסגור מטרות, קהל יעד, היררכיית תוכן ותשתית שיווקית. במאמר תמצאו 5 בדיקות קריטיות שימנעו טעויות יקרות ויעזרו לכם להשיק אתר נכון כבר מהגרסה הראשונה.</p>
-          <a href="#" class="btn-link">קרא עוד ←</a>
+          <a href="articles/pre-launch-checklist.html" class="btn-link">קרא עוד ←</a>
         </div>
       </article>
     </div>
@@ -1476,7 +1484,7 @@ footer {
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="nav-logo" aria-label="י.ז.מ.">י<span>.</span>ז<span>.</span>מ<span>.</span></span>
+        <span class="nav-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</span>
         <p>בניית אתרים מקצועית ומותאמת אישית — לעסקים, עמותות ויוזמות. הטכנולוגיה עלינו.</p>
         <div class="footer-social">
           <a href="#" class="social-link" aria-label="פייסבוק">𝐟</a>
