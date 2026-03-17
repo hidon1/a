@@ -497,6 +497,12 @@ body {
   position: relative;
   overflow: hidden;
 }
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .project-img::after {
   content: '';
   position: absolute;
@@ -1123,15 +1129,11 @@ footer {
     <div class="projects-grid">
       <article class="project-card reveal reveal-delay-1">
         <div class="project-img">
-          <!-- החלף בתמונת צילום מסך אמיתית: <img src="project-1.jpg" alt="פרויקט 1"> -->
-          <div class="project-img-placeholder">
-            <span class="placeholder-icon">🏪</span>
-            <span>תמונה לפרויקט 1</span>
-          </div>
+          <img src="להיטי.png" alt="להיטי עולם הישיבות">
         </div>
         <div class="project-body">
           <span class="project-tag">חנות אונליין</span>
-          <h3>שם הפרויקט 1 — כאן</h3>
+          <h3>להיטי עולם הישיבות</h3>
           <p>תיאור קצר של הפרויקט, הקהל, הצרכים שנענו והתוצאות שהושגו.</p>
           <a href="https://lehitey.co.il" class="btn-link" target="_blank" rel="noopener">צפה בפרויקט ←</a>
         </div>
