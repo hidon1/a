@@ -1,0 +1,40 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="36" fill="url(#bg)"/>
+  <circle cx="1010" cy="126" r="84" fill="#F8D37A" fill-opacity="0.22"/>
+  <circle cx="170" cy="650" r="110" fill="#7DD3FC" fill-opacity="0.18"/>
+  <rect x="120" y="118" width="960" height="564" rx="28" fill="#F8FAFC" fill-opacity="0.92"/>
+  <rect x="165" y="164" width="870" height="474" rx="24" fill="#E2E8F0"/>
+  <rect x="660" y="248" width="274" height="172" rx="18" fill="#0F172A"/>
+  <rect x="680" y="268" width="234" height="132" rx="10" fill="#155E75"/>
+  <rect x="700" y="288" width="92" height="12" rx="6" fill="#67E8F9" fill-opacity="0.85"/>
+  <rect x="700" y="314" width="164" height="10" rx="5" fill="#CFFAFE" fill-opacity="0.9"/>
+  <rect x="700" y="338" width="184" height="10" rx="5" fill="#CFFAFE" fill-opacity="0.75"/>
+  <rect x="700" y="362" width="130" height="10" rx="5" fill="#CFFAFE" fill-opacity="0.75"/>
+  <rect x="770" y="420" width="52" height="16" rx="8" fill="#14B8A6"/>
+  <rect x="766" y="420" width="60" height="150" rx="18" fill="#475569"/>
+  <path d="M752 588H844L824 618H772L752 588Z" fill="#334155"/>
+  <ellipse cx="440" cy="462" rx="116" ry="132" fill="#111827"/>
+  <path d="M350 420C350 356 394 308 450 308C506 308 540 360 540 420V530H350V420Z" fill="#0F172A"/>
+  <ellipse cx="440" cy="270" rx="78" ry="90" fill="#F2C7A5"/>
+  <path d="M358 274C362 198 402 150 442 150C502 150 534 214 520 290C480 255 400 250 358 274Z" fill="#111827"/>
+  <path d="M362 250C382 196 416 172 452 172C474 172 494 182 514 204C482 210 442 222 362 250Z" fill="#111827"/>
+  <path d="M414 338H468V398C468 426 456 446 440 446C424 446 414 426 414 398V338Z" fill="#E5B48B"/>
+  <rect x="328" y="438" width="224" height="186" rx="30" fill="#1E293B"/>
+  <rect x="328" y="438" width="224" height="62" rx="30" fill="#0F172A"/>
+  <rect x="316" y="640" width="246" height="18" rx="9" fill="#94A3B8" fill-opacity="0.42"/>
+  <path d="M272 474C306 434 344 444 362 470V544C326 562 286 556 260 530C244 514 248 494 272 474Z" fill="#111827"/>
+  <path d="M542 470C574 442 612 442 640 470C664 494 662 522 644 538C618 562 582 566 548 548L542 470Z" fill="#111827"/>
+  <rect x="544" y="468" width="120" height="82" rx="12" transform="rotate(8 544 468)" fill="#CBD5E1"/>
+  <rect x="556" y="482" width="96" height="58" rx="8" transform="rotate(8 556 482)" fill="#F8FAFC"/>
+  <path d="M577 497L634 505" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M573 517L628 525" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/>
+  <path d="M569 537L614 543" stroke="#94A3B8" stroke-width="6" stroke-linecap="round"/>
+  <text x="170" y="222" fill="#0F4562" font-family="Arial, sans-serif" font-size="44" font-weight="700">סביבת עבודה נקייה, מקצועית ומכבדת</text>
+  <text x="170" y="278" fill="#475569" font-family="Arial, sans-serif" font-size="28">מתאים לאתרי תדמית, תוכן ועסקים לקהל חרדי</text>
+  <defs>
+    <linearGradient id="bg" x1="84" y1="44" x2="1080" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F4562"/>
+      <stop offset="1" stop-color="#1BA6C6"/>
+    </linearGradient>
+  </defs>
+</svg>

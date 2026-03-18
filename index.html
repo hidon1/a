@@ -958,10 +958,38 @@ section:not(.hero), .mid-cta {
 
 /* ─── FOOTER ─── */
 footer {
-  background: var(--navy);
+  background:
+    linear-gradient(180deg, rgba(6,27,69,0.96), rgba(7,41,63,0.98)),
+    radial-gradient(circle at top right, rgba(251,191,36,0.18), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(46,196,182,0.16), transparent 30%);
   padding: 56px 24px 28px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  opacity: 0.28;
+  pointer-events: none;
+}
+footer::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -120px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(57,184,216,0.18), transparent 68%);
+  pointer-events: none;
 }
 .footer-inner {
+  position: relative;
+  z-index: 1;
   max-width: 1160px;
   margin: 0 auto;
 }
@@ -972,7 +1000,7 @@ footer {
   margin-bottom: 48px;
 }
 .footer-brand .nav-logo { margin-bottom: 14px; display: inline-flex; }
-.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 240px; margin-bottom: 20px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.72); line-height: 1.7; max-width: 280px; margin-bottom: 20px; }
 .footer-social { display: flex; gap: 10px; }
 .social-link {
   width: 38px; height: 38px;
@@ -993,7 +1021,7 @@ footer {
 .footer-col ul li:hover { transform: none; box-shadow: none; }
 .footer-col ul a {
   font-size: 14px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.72);
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -1003,7 +1031,7 @@ footer {
   align-items: center;
   gap: 10px;
   font-size: 14px;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.72);
   margin-bottom: 10px;
 }
 .footer-bottom {
@@ -1015,8 +1043,8 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
 }
-.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.35); }
-.footer-bottom a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.52); }
+.footer-bottom a { color: rgba(255,255,255,0.72); text-decoration: none; }
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp {
@@ -1135,7 +1163,7 @@ footer {
 <!-- ──────────────────────────────────────────────── -->
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="ניווט ראשי">
-  <div class="nav-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+  <a class="nav-logo" href="#home" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</a>
   <ul class="nav-links" id="primaryMenu">
     <li><a href="#features">יתרונות</a></li>
     <li><a href="#process">תהליך</a></li>
@@ -1523,7 +1551,7 @@ footer {
     </div>
     <div class="blog-grid">
       <article class="blog-card reveal reveal-delay-1">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="פגישת עבודה מסודרת לבלוג על בניית אתרים לציבור החרדי"></div>
+        <div class="blog-img"><img src="blog-haredi-workspace.svg" alt="איור של סביבת עבודה מסודרת עם דמות חרדית לצד מחשב"></div>
         <div class="blog-body">
           <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
           <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
@@ -1543,7 +1571,7 @@ footer {
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-3">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="צוות עבודה מתכנן יחד את שלבי ההשקה לפני בניית אתר"></div>
+        <div class="blog-img"><img src="blog-haredi-planning.svg" alt="איור של תכנון אתר עם דמות חרדית, מחשב ולוח משימות"></div>
         <div class="blog-body">
           <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
           <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
@@ -1678,10 +1706,23 @@ footer {
 <!-- JAVASCRIPT -->
 <script>
 
-// ─── MOBILE MENU ───
+// ─── MOBILE MENU + SECTION NAVIGATION ───
 const navToggle = document.querySelector('.nav-hamburger');
 const navLinks = document.querySelector('.nav-links');
 const navOverlay = document.querySelector('.nav-overlay');
+const internalLinks = document.querySelectorAll('a[href^="#"]');
+
+const scrollToHash = (hash) => {
+  const target = document.querySelector(hash);
+  if (!target) return false;
+  const offset = 70;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: 'smooth' });
+  if (window.location.hash !== hash) {
+    history.replaceState(null, '', hash);
+  }
+  return true;
+};
 
 const setMenuState = (isOpen) => {
   navToggle.classList.toggle('is-open', isOpen);
@@ -1697,8 +1738,20 @@ navToggle.addEventListener('click', () => {
 });
 
 navOverlay.addEventListener('click', () => setMenuState(false));
-document.querySelectorAll('.nav-links a').forEach((link) => {
-  link.addEventListener('click', () => setMenuState(false));
+internalLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    const hash = link.getAttribute('href');
+    if (!hash || hash === '#') return;
+    if (!document.querySelector(hash)) return;
+    event.preventDefault();
+    const shouldDelayScroll = navLinks.classList.contains('is-open') && link.closest('.nav-links');
+    setMenuState(false);
+    if (shouldDelayScroll) {
+      requestAnimationFrame(() => requestAnimationFrame(() => scrollToHash(hash)));
+      return;
+    }
+    scrollToHash(hash);
+  });
 });
 window.addEventListener('resize', () => {
   if (window.innerWidth > 768) setMenuState(false);
@@ -1793,18 +1846,6 @@ hiddenFrame.addEventListener('load', () => {
   formStatus.style.color = '#10b981';
   contactForm.reset();
   setTimeout(() => { formStatus.textContent = ''; }, 6000);
-});
-
-// ─── SMOOTH SCROLL ───
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      const offset = 70;
-      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
-    }
-  });
 });
 
 // ─── NAVBAR SCROLL EFFECT ───
