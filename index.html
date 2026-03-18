@@ -41,7 +41,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Heebo', sans-serif;
-  background: var(--off-white);
+  background: url('ררקע2.jpeg') center/cover fixed no-repeat;
   color: var(--text);
   overflow-x: hidden;
   direction: rtl;
@@ -137,7 +137,7 @@ body {
 /* ─── HERO ─── */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a6f8f 0%, #1e90b2 45%, #4bbcd2 100%);
+  background: linear-gradient(rgba(6,27,69,0.68), rgba(15,69,98,0.48)), url('רקע.jpeg') center/cover no-repeat;
   position: relative;
   display: flex;
   align-items: center;
@@ -151,8 +151,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 20% 50%, rgba(46,196,182,0.28) 0%, transparent 62%),
-    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(99,211,225,0.24) 0%, transparent 62%);
+    radial-gradient(ellipse 80% 50% at 20% 50%, rgba(6,27,69,0.42) 0%, transparent 62%),
+    radial-gradient(ellipse 60% 60% at 80% 30%, rgba(15,69,98,0.3) 0%, transparent 62%);
   pointer-events: none;
 }
 .hero-grid-overlay {
@@ -341,8 +341,66 @@ body {
 .section-header.center { text-align: center; }
 .section-header.center .section-sub { margin: 0 auto; }
 
+
+section:not(.hero), .mid-cta {
+  position: relative;
+}
+.features-bg,
+.process-bg,
+#projects,
+#testimonials,
+.faq-bg,
+#blog,
+.contact-bg {
+  background: linear-gradient(rgba(255,248,238,0.9), rgba(255,248,238,0.9)), url('ררקע2.jpeg') center/cover no-repeat;
+}
+.video-bg .section-wrap,
+.features-bg .section-wrap,
+.process-bg .section-wrap,
+#projects .section-wrap,
+#testimonials .section-wrap,
+.faq-bg .section-wrap,
+#blog .section-wrap,
+.contact-bg .section-wrap {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(6px);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.45);
+  box-shadow: var(--shadow);
+}
+.blog-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  height: 54px;
+  padding: 0 20px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 34px;
+  font-weight: 900;
+  color: #fff;
+  background: #061b45;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 10px 24px rgba(10,28,78,0.3);
+}
+.blog-logo span { color: #fbbf24; }
+.blog-read-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy-mid);
+  background: rgba(255,255,255,0.7);
+  padding: 8px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
 /* ─── FEATURES ─── */
-.features-bg { background: linear-gradient(180deg, #f4fbff 0%, #e8f6ff 100%); }
+.features-bg { background: linear-gradient(rgba(255,248,238,0.9), rgba(255,248,238,0.9)), url('ררקע2.jpeg') center/cover no-repeat; }
 .features-bg .section-label { color: var(--accent); }
 .features-bg .section-title { color: var(--navy); }
 .features-bg .section-sub { color: var(--text-mid); }
@@ -390,7 +448,7 @@ body {
 .feature-card p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
 
 /* ─── PROCESS ─── */
-.process-bg { background: var(--off-white); }
+.process-bg { background: linear-gradient(rgba(255,248,238,0.9), rgba(255,248,238,0.9)), url('ררקע2.jpeg') center/cover no-repeat; }
 .process-steps {
   display: flex;
   gap: 0;
@@ -812,7 +870,7 @@ body {
 .blog-card p { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 18px; }
 
 /* ─── CONTACT ─── */
-.contact-bg { background: var(--off-white); }
+.contact-bg { background: linear-gradient(rgba(255,248,238,0.9), rgba(255,248,238,0.9)), url('ררקע2.jpeg') center/cover no-repeat; }
 .contact-layout {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
@@ -1114,7 +1172,7 @@ footer {
 <!-- ──────────────────────────────────────────────── -->
 <!-- VIDEO -->
 <section class="video-bg" id="video" aria-labelledby="video-title">
-  <div class="section-wrap">
+    <div class="section-wrap">
     <div class="video-wrap">
       <div class="section-header center reveal">
         <div class="section-label scroll-clip" style="color:var(--gold)">תראו בעצמכם</div>
@@ -1229,7 +1287,7 @@ footer {
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- PROJECTS -->
-<section id="projects" aria-labelledby="projects-title" style="background:var(--off-white)">
+<section id="projects" aria-labelledby="projects-title">
   <div class="section-wrap">
     <div class="section-header center reveal">
       <div class="section-label scroll-clip">עבודות שלי</div>
@@ -1313,7 +1371,7 @@ footer {
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- TESTIMONIALS -->
-<section id="testimonials" aria-labelledby="testi-title" style="background:var(--off-white)">
+<section id="testimonials" aria-labelledby="testi-title">
   <div class="section-wrap">
     <div class="section-header center reveal">
       <div class="section-label">לקוחות מספרים</div>
@@ -1455,7 +1513,7 @@ footer {
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- BLOG -->
-<section id="blog" aria-labelledby="blog-title" style="background:var(--off-white)">
+<section id="blog" aria-labelledby="blog-title">
   <div class="section-wrap">
     <div class="section-header center reveal">
       <div class="section-label">בלוג ומאמרים</div>
@@ -1464,9 +1522,10 @@ footer {
     </div>
     <div class="blog-grid">
       <article class="blog-card reveal reveal-delay-1">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="ספרי קודש ומחשב נייד על שולחן עבודה לבלוג על בניית אתרים לציבור החרדי"></div>
+        <div class="blog-img"><img src="https://images.pexels.com/photos/2079149/pexels-photo-2079149.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="ספרי קודש על שולחן עץ לבלוג על בניית אתרים לציבור החרדי"></div>
         <div class="blog-body">
-          <div class="blog-date">📅 מאמר מקצועי</div>
+          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
           <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
           <p>במאמר תמצאו תהליך עבודה מעשי: איך לבחור שפה מדויקת לקהל החרדי, אילו אלמנטים עיצוביים מחזקים אמון, ואיך לבנות עמודים שמובילים לפנייה בלי עומס או מסרים אגרסיביים.</p>
           <a href="articles/haridi-websites.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
@@ -1475,16 +1534,18 @@ footer {
       <article class="blog-card reveal reveal-delay-2">
         <div class="blog-img"><img src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200" alt="ניתוח נתוני אתר"></div>
         <div class="blog-body">
-          <div class="blog-date">📅 מאמר מקצועי</div>
+          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
           <h3>איך אתר טוב מביא יותר לקוחות?</h3>
           <p>נפרק שלב־שלב את המרכיבים שמביאים המרות: כותרת ברורה, היררכיית תוכן, הוכחות חברתיות, מהירות ונייד. בסוף תקבלו צ'ק ליסט קצר שאפשר ליישם גם בלי לבנות אתר מחדש.</p>
           <a href="articles/website-conversions.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-3">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="לוח תכנון עם מחשב נייד ומסמכים לבלוג על בדיקות לפני בניית אתר"></div>
+        <div class="blog-img"><img src="https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="מחברת תכנון, עיפרון ומחשב נייד כהכנה לפני בניית אתר"></div>
         <div class="blog-body">
-          <div class="blog-date">📅 מאמר מקצועי</div>
+          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
           <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
           <p>לפני שמתחילים פיתוח, כדאי לעצור לתכנון. המאמר מרכז 5 בדיקות קריטיות שיחסכו תיקונים יקרים בהמשך: מטרה עסקית, קהל יעד, תוכן, מדידה ותהליך עבודה ברור מול כל הגורמים.</p>
           <a href="articles/pre-launch-checklist.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
