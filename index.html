@@ -328,10 +328,10 @@ img, video { max-width: 100%; }
 .scroll-clip.visible { clip-path: inset(0 0 0 0); opacity:1; }
 
 section:not(.hero), .mid-cta, .stats-bg { position: relative; }
-.features-bg, .process-bg, #projects, #testimonials, .faq-bg, #blog, .contact-bg, .video-bg {
+.features-bg, .process-bg, #testimonials, .faq-bg, #blog, .contact-bg, .video-bg {
   padding: 28px 18px 76px;
 }
-.features-bg::before, .process-bg::before, #projects::before, #testimonials::before, .faq-bg::before, #blog::before, .contact-bg::before, .video-bg::before {
+.features-bg::before, .process-bg::before, #testimonials::before, .faq-bg::before, #blog::before, .contact-bg::before, .video-bg::before {
   content: '';
   position: absolute;
   inset: 18px 14px 0;
@@ -342,7 +342,6 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 }
 .features-bg .section-wrap,
 .process-bg .section-wrap,
-#projects .section-wrap,
 #testimonials .section-wrap,
 .faq-bg .section-wrap,
 #blog .section-wrap,
@@ -364,23 +363,23 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 }
 .blog-read-time { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:var(--navy-mid); background:rgba(255,255,255,0.7); padding:8px 12px; border-radius:999px; margin-bottom:12px; }
 
-.features-grid, .projects-grid, .testi-grid, .blog-grid { display:grid; gap:24px; }
+.features-grid, .testi-grid, .blog-grid { display:grid; gap:24px; }
 .features-grid { grid-template-columns: repeat(3, 1fr); }
-.projects-grid, .testi-grid, .blog-grid { grid-template-columns: repeat(3, 1fr); }
-.feature-card, .project-card, .ba-card, .stat-card, .testi-card, .blog-card, .faq-item, .contact-form {
+.testi-grid, .blog-grid { grid-template-columns: repeat(3, 1fr); }
+.feature-card, .ba-card, .stat-card, .testi-card, .blog-card, .faq-item, .contact-form {
   position: relative;
   overflow: hidden;
   background: linear-gradient(180deg, rgba(255,255,255,0.84), rgba(255,255,255,0.68));
   border: 1px solid rgba(255,255,255,0.54);
   box-shadow: var(--shadow);
 }
-.feature-card::before, .project-card::before, .ba-card::before, .stat-card::before, .testi-card::before, .blog-card::before, .contact-form::before {
+.feature-card::before, .ba-card::before, .stat-card::before, .testi-card::before, .blog-card::before, .contact-form::before {
   content:''; position:absolute; inset:0;
   background: linear-gradient(135deg, rgba(79,209,197,0.12), transparent 45%, rgba(37,99,235,0.08));
   opacity:.72; pointer-events:none;
 }
-.feature-card, .project-card, .blog-card, .testi-card, .ba-card { border-radius: var(--radius); transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
-.feature-card:hover, .project-card:hover, .blog-card:hover, .testi-card:hover, .ba-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: rgba(79,209,197,0.35); }
+.feature-card, .blog-card, .testi-card, .ba-card { border-radius: var(--radius); transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+.feature-card:hover, .blog-card:hover, .testi-card:hover, .ba-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); border-color: rgba(79,209,197,0.35); }
 .feature-card { padding: 32px 24px; }
 .feature-icon {
   width: 60px; height: 60px; border-radius: 18px; display:grid; place-items:center; font-size: 26px; margin-bottom: 20px;
@@ -388,8 +387,8 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
   border: 1px solid rgba(79,209,197,0.18);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
 }
-.feature-card h3, .project-card h3, .blog-card h3, .ba-card h3, .step-title, .testi-name { color: var(--navy-soft); }
-.feature-card p, .project-card p, .blog-card p, .ba-card p, .step-desc, .faq-a, .contact-info p { color: var(--text-mid); }
+.feature-card h3, .blog-card h3, .ba-card h3, .step-title, .testi-name { color: var(--navy-soft); }
+.feature-card p, .blog-card p, .ba-card p, .step-desc, .faq-a, .contact-info p { color: var(--text-mid); }
 .feature-card h3 { font-size: 20px; margin-bottom: 12px; }
 .feature-card p { font-size: 15px; line-height: 1.75; }
 
@@ -431,27 +430,21 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 .mid-cta p { font-size: 18px; color: rgba(255,255,255,0.78); margin-bottom: 30px; line-height:1.8; }
 .btn-white { background: linear-gradient(135deg, #ffffff, #f3f8ff); color: var(--navy-soft); box-shadow: 0 18px 40px rgba(2,8,23,0.24); }
 
-.project-img, .blog-img {
+.blog-img {
   position:relative;
   background: linear-gradient(180deg, rgba(239,246,255,0.95), rgba(226,232,240,0.92));
 }
-.project-img { height: 220px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.project-img::after, .blog-img::after {
+.blog-img::after {
   content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(15,23,42,0), rgba(15,23,42,0.08)); pointer-events:none;
 }
-.project-img img, .blog-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s ease; }
-.project-card:hover .project-img img, .blog-card:hover .blog-img img { transform: scale(1.06); }
-.project-img-placeholder { display:flex; flex-direction:column; align-items:center; gap:8px; color:var(--text-light); font-size:13px; z-index:1; }
-.project-body, .blog-body { position:relative; z-index:1; padding: 24px; }
-.project-tag {
-  display:inline-flex; align-items:center; font-size:11px; font-weight:800; color:var(--navy-mid);
-  background: rgba(79,209,197,0.14); padding: 6px 12px; border-radius:999px; margin-bottom:12px; letter-spacing: .12em;
-}
-.project-card p, .blog-card p { font-size: 14px; line-height: 1.75; margin-bottom: 18px; }
+.blog-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .6s ease; }
+.blog-card:hover .blog-img img { transform: scale(1.06); }
+.blog-body { position:relative; z-index:1; padding: 24px; }
+.blog-card p { font-size: 14px; line-height: 1.75; margin-bottom: 18px; }
 .btn-link { color: var(--blue); font-size: 14px; font-weight: 800; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition: gap .2s ease; }
 .btn-link:hover { gap: 10px; }
 .btn-link .link-arrow { display:inline-block; transition: transform .45s ease; }
-.project-card:hover .btn-link .link-arrow, .blog-card:hover .btn-link .link-arrow { animation: arrowHop .55s ease; }
+.blog-card:hover .btn-link .link-arrow { animation: arrowHop .55s ease; }
 @keyframes arrowHop { 0%{transform:translateY(0)} 35%{transform:translateY(-8px) scale(1.15)} 100%{transform:translateY(0)} }
 
 .video-wrap { max-width: 920px; margin:0 auto; text-align:center; }
@@ -570,7 +563,7 @@ footer::before {
 .reveal-delay-5 { transition-delay:.4s; }
 
 @media (max-width: 1024px) {
-  .features-grid, .projects-grid, .testi-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
+  .features-grid, .testi-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
   .process-steps { grid-template-columns: repeat(3, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .ba-grid { grid-template-columns: repeat(2, 1fr); }
@@ -595,9 +588,9 @@ footer::before {
   .hero-content { padding: 28px 18px; border-radius: 28px; }
   .hero h1 { font-size: 34px; }
   .section-wrap { padding: 28px 18px; }
-  .features-bg, .process-bg, #projects, #testimonials, .faq-bg, #blog, .contact-bg, .video-bg, .stats-bg, .mid-cta { padding-left: 8px; padding-right: 8px; }
-  .features-bg::before, .process-bg::before, #projects::before, #testimonials::before, .faq-bg::before, #blog::before, .contact-bg::before, .video-bg::before, .stats-bg::before, .mid-cta::before, .mid-cta::after { inset: 8px 6px 0; border-radius: 28px; }
-  .process-steps, .projects-grid, .testi-grid, .blog-grid, .features-grid { grid-template-columns: 1fr; }
+  .features-bg, .process-bg, #testimonials, .faq-bg, #blog, .contact-bg, .video-bg, .stats-bg, .mid-cta { padding-left: 8px; padding-right: 8px; }
+  .features-bg::before, .process-bg::before, #testimonials::before, .faq-bg::before, #blog::before, .contact-bg::before, .video-bg::before, .stats-bg::before, .mid-cta::before, .mid-cta::after { inset: 8px 6px 0; border-radius: 28px; }
+  .process-steps, .testi-grid, .blog-grid, .features-grid { grid-template-columns: 1fr; }
   .ba-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
@@ -630,7 +623,7 @@ footer::before {
   <ul class="nav-links" id="primaryMenu">
     <li><a href="#features">יתרונות</a></li>
     <li><a href="#process">תהליך</a></li>
-    <li><a href="#projects">פרויקטים</a></li>
+    <li><a href="#blog">בלוג</a></li>
     <li><a href="#faq">שאלות נפוצות</a></li>
     <li><a href="#contact" class="nav-cta">פנו אלינו</a></li>
   </ul>
@@ -650,7 +643,7 @@ footer::before {
     <p class="hero-sub">פתרונות דיגיטליים מלאים לעסקים, עמותות ויוזמות — עם התאמה מושלמת לקהל החרדי ולקהל הכללי.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">📋 קבל הצעת מחיר </a>
-      <a href="#projects" class="btn-outline">👀 צפה בעבודות שלי</a>
+      <a href="#blog" class="btn-outline">📚 למאמרים האחרונים</a>
     </div>
     <div class="hero-badges">
       <span class="hero-badge">⚡ מהירות טעינה גבוהה</span>
@@ -765,6 +758,50 @@ footer::before {
 </section>
 
 <!-- ──────────────────────────────────────────────── -->
+<!-- BLOG -->
+<section id="blog" aria-labelledby="blog-title">
+  <div class="section-wrap">
+    <div class="section-header center reveal">
+      <div class="section-label">בלוג ומאמרים</div>
+      <h2 class="section-title" id="blog-title">ידע שמועיל לכם</h2>
+      <p class="section-sub">מאמרים מקצועיים שיעזרו לכם לקבל החלטות חכמות יותר בעולם הדיגיטלי.</p>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card reveal reveal-delay-1">
+        <div class="blog-img"><img src="בלוג.png" alt="איש יושב עם מחשב נייד ובודק נתונים לעבודה על האתר"></div>
+        <div class="blog-body">
+          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
+          <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
+          <p>במאמר תמצאו תהליך עבודה מעשי: איך לבחור שפה מדויקת לקהל החרדי, אילו אלמנטים עיצוביים מחזקים אמון, ואיך לבנות עמודים שמובילים לפנייה בלי עומס או מסרים אגרסיביים.</p>
+          <a href="articles/haridi-websites.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
+        </div>
+      </article>
+      <article class="blog-card reveal reveal-delay-2">
+        <div class="blog-img"><img src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200" alt="ניתוח נתוני אתר"></div>
+        <div class="blog-body">
+          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
+          <h3>איך אתר טוב מביא יותר לקוחות?</h3>
+          <p>נפרק שלב־שלב את המרכיבים שמביאים המרות: כותרת ברורה, היררכיית תוכן, הוכחות חברתיות, מהירות ונייד. בסוף תקבלו צ'ק ליסט קצר שאפשר ליישם גם בלי לבנות אתר מחדש.</p>
+          <a href="articles/website-conversions.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
+        </div>
+      </article>
+      <article class="blog-card reveal reveal-delay-3">
+        <div class="blog-img"><img src="בלוג 1.png" alt="איור של תכנון ובדיקה לפני בניית אתר לעסק"></div>
+        <div class="blog-body">
+          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
+          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
+          <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
+          <p>לפני שמתחילים פיתוח, כדאי לעצור לתכנון. המאמר מרכז 5 בדיקות קריטיות שיחסכו תיקונים יקרים בהמשך: מטרה עסקית, קהל יעד, תוכן, מדידה ותהליך עבודה ברור מול כל הגורמים.</p>
+          <a href="articles/pre-launch-checklist.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────────────── -->
 <!-- MID CTA -->
 <div class="mid-cta" aria-label="קריאה לפעולה">
   <div class="mid-cta-inner reveal">
@@ -777,61 +814,6 @@ footer::before {
   </div>
 </div>
 
-<!-- ──────────────────────────────────────────────── -->
-<!-- PROJECTS -->
-<section id="projects" aria-labelledby="projects-title">
-  <div class="section-wrap">
-    <div class="section-header center reveal">
-      <div class="section-label scroll-clip">עבודות שלי</div>
-      <h2 class="section-title" id="projects-title">פרויקטים שבנינו ביחד</h2>
-      <p class="section-sub">כל אתר הוא סיפור הצלחה שונה — תוכן, קהל וחוויה מותאמים אישית.</p>
-    </div>
-    <div class="projects-grid">
-      <article class="project-card reveal reveal-delay-1">
-        <div class="project-img">
-          <img src="להיטי.png" alt="להיטי עולם הישיבות">
-        </div>
-        <div class="project-body">
-          <span class="project-tag">חנות אונליין</span>
-          <h3>להיטי עולם הישיבות</h3>
-          <p>חונות און ליין שפיתחנו עם הצלחות וחשיפה גבוהה.</p>
-          <a href="https://lehitey.co.il" class="btn-link" target="_blank" rel="noopener">צפה בפרויקט <span class="link-arrow">←</span></a>
-        </div>
-      </article>
-      <article class="project-card reveal reveal-delay-2">
-        <div class="project-img" style="background:linear-gradient(135deg,#e0f2fe,#bae6fd)">
-          <div class="project-img-placeholder">
-            <span class="placeholder-icon">🏢</span>
-            <span>תמונה לפרויקט 2</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">אתר תדמית</span>
-          <h3>שם הפרויקט 2 — כאן</h3>
-          <p>תיאור קצר של הפרויקט, הקהל, הצרכים שנענו והתוצאות שהושגו.</p>
-          <a href="#" class="btn-link" target="_blank" rel="noopener">צפה בפרויקט <span class="link-arrow">←</span></a>
-        </div>
-      </article>
-      <article class="project-card reveal reveal-delay-3">
-        <div class="project-img" style="background:linear-gradient(135deg,#fef9c3,#fde68a)">
-          <div class="project-img-placeholder">
-            <span class="placeholder-icon">🕍</span>
-            <span>תמונה לפרויקט 3</span>
-          </div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">עמותה / מגזר חרדי</span>
-          <h3>שם הפרויקט 3 — כאן</h3>
-          <p>תיאור קצר של הפרויקט, הקהל, הצרכים שנענו והתוצאות שהושגו.</p>
-          <a href="#" class="btn-link" target="_blank" rel="noopener">צפה בפרויקט <span class="link-arrow">←</span></a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────────────── -->
-<!-- ──────────────────────────────────────────────── -->
 <!-- ──────────────────────────────────────────────── -->
 <!-- STATS -->
 <div class="stats-bg" aria-label="סטטיסטיקות">
@@ -1004,50 +986,6 @@ footer::before {
 </section>
 
 <!-- ──────────────────────────────────────────────── -->
-<!-- BLOG -->
-<section id="blog" aria-labelledby="blog-title">
-  <div class="section-wrap">
-    <div class="section-header center reveal">
-      <div class="section-label">בלוג ומאמרים</div>
-      <h2 class="section-title" id="blog-title">ידע שמועיל לכם</h2>
-      <p class="section-sub">מאמרים מקצועיים שיעזרו לכם לקבל החלטות חכמות יותר בעולם הדיגיטלי.</p>
-    </div>
-    <div class="blog-grid">
-      <article class="blog-card reveal reveal-delay-1">
-        <div class="blog-img"><img src="בלוג.png" alt="איש יושב עם מחשב נייד ובודק נתונים לעבודה על האתר"></div>
-        <div class="blog-body">
-          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
-          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
-          <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
-          <p>במאמר תמצאו תהליך עבודה מעשי: איך לבחור שפה מדויקת לקהל החרדי, אילו אלמנטים עיצוביים מחזקים אמון, ואיך לבנות עמודים שמובילים לפנייה בלי עומס או מסרים אגרסיביים.</p>
-          <a href="articles/haridi-websites.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
-        </div>
-      </article>
-      <article class="blog-card reveal reveal-delay-2">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200" alt="ניתוח נתוני אתר"></div>
-        <div class="blog-body">
-          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
-          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
-          <h3>איך אתר טוב מביא יותר לקוחות?</h3>
-          <p>נפרק שלב־שלב את המרכיבים שמביאים המרות: כותרת ברורה, היררכיית תוכן, הוכחות חברתיות, מהירות ונייד. בסוף תקבלו צ'ק ליסט קצר שאפשר ליישם גם בלי לבנות אתר מחדש.</p>
-          <a href="articles/website-conversions.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
-        </div>
-      </article>
-      <article class="blog-card reveal reveal-delay-3">
-        <div class="blog-img"><img src="בלוג 1.png" alt="איור של תכנון ובדיקה לפני בניית אתר לעסק"></div>
-        <div class="blog-body">
-          <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
-          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
-          <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
-          <p>לפני שמתחילים פיתוח, כדאי לעצור לתכנון. המאמר מרכז 5 בדיקות קריטיות שיחסכו תיקונים יקרים בהמשך: מטרה עסקית, קהל יעד, תוכן, מדידה ותהליך עבודה ברור מול כל הגורמים.</p>
-          <a href="articles/pre-launch-checklist.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ──────────────────────────────────────────────── -->
 <!-- CONTACT -->
 <section class="contact-bg" id="contact" aria-labelledby="contact-title">
   <div class="section-wrap">
@@ -1146,7 +1084,7 @@ footer::before {
         <ul>
           <li><a href="#home">דף הבית</a></li>
           <li><a href="#process">תהליך העבודה</a></li>
-          <li><a href="#projects">פרויקטים</a></li>
+          <li><a href="#blog">בלוג</a></li>
           <li><a href="#testimonials">המלצות</a></li>
           <li><a href="#faq">שאלות נפוצות</a></li>
         </ul>
