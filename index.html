@@ -107,6 +107,7 @@ body {
 }
 .nav-logo span { color: #fbbf24; }
 .nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-overlay { display: none; }
 .nav-links a {
   color: rgba(255,255,255,0.8);
   text-decoration: none;
@@ -129,6 +130,9 @@ body {
   background: #fff; margin: 5px 0;
   transition: all 0.3s;
 }
+.nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ─── HERO ─── */
 .hero {
@@ -982,7 +986,59 @@ footer {
 }
 @media (max-width: 768px) {
   .navbar { padding: 0 18px; }
-  .nav-links { display: none; }
+  .nav-links {
+    position: fixed;
+    top: 84px;
+    right: 18px;
+    left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 14px 0;
+    background: rgba(10,22,40,0.98);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(10,22,40,0.28);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 120;
+  }
+  .nav-links.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 14px 22px;
+    font-size: 15px;
+  }
+  .nav-links .nav-cta {
+    margin: 10px 16px 0;
+    text-align: center;
+  }
+  .nav-overlay {
+    position: fixed;
+    inset: 68px 0 0;
+    display: block;
+    background: rgba(10,22,40,0.34);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 110;
+  }
+  .nav-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
   .nav-hamburger { display: block; }
   .hero h1 { font-size: 32px; }
   .process-steps {
@@ -1021,17 +1077,18 @@ footer {
 <!-- NAVBAR -->
 <nav class="navbar" role="navigation" aria-label="ניווט ראשי">
   <div class="nav-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="primaryMenu">
     <li><a href="#features">יתרונות</a></li>
     <li><a href="#process">תהליך</a></li>
     <li><a href="#projects">פרויקטים</a></li>
     <li><a href="#faq">שאלות נפוצות</a></li>
     <li><a href="#contact" class="nav-cta">פנו אלינו</a></li>
   </ul>
-  <button class="nav-hamburger" aria-label="פתח תפריט">
+  <button class="nav-hamburger" aria-label="פתח תפריט" aria-expanded="false" aria-controls="primaryMenu">
     <span></span><span></span><span></span>
   </button>
 </nav>
+<div class="nav-overlay" hidden></div>
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- HERO -->
@@ -1407,7 +1464,7 @@ footer {
     </div>
     <div class="blog-grid">
       <article class="blog-card reveal reveal-delay-1">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/3747468/pexels-photo-3747468.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="ספרי קודש לצד מחשב נייד לבניית אתרים מותאמת למגזר החרדי"></div>
+        <div class="blog-img"><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="ספרי קודש ומחשב נייד על שולחן עבודה לבלוג על בניית אתרים לציבור החרדי"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
@@ -1425,7 +1482,7 @@ footer {
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-3">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="נוף הרים מכובד וצנוע להמחשת תכנון רגוע לפני עלייה לאוויר"></div>
+        <div class="blog-img"><img src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="לוח תכנון עם מחשב נייד ומסמכים לבלוג על בדיקות לפני בניית אתר"></div>
         <div class="blog-body">
           <div class="blog-date">📅 מאמר מקצועי</div>
           <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
@@ -1558,6 +1615,36 @@ footer {
 <!-- ──────────────────────────────────────────────── -->
 <!-- JAVASCRIPT -->
 <script>
+
+// ─── MOBILE MENU ───
+const navToggle = document.querySelector('.nav-hamburger');
+const navLinks = document.querySelector('.nav-links');
+const navOverlay = document.querySelector('.nav-overlay');
+
+const setMenuState = (isOpen) => {
+  navToggle.classList.toggle('is-open', isOpen);
+  navLinks.classList.toggle('is-open', isOpen);
+  navOverlay.classList.toggle('is-open', isOpen);
+  navToggle.setAttribute('aria-expanded', String(isOpen));
+  navOverlay.hidden = !isOpen;
+  document.body.style.overflow = isOpen && window.innerWidth <= 768 ? 'hidden' : '';
+};
+
+navToggle.addEventListener('click', () => {
+  setMenuState(!navLinks.classList.contains('is-open'));
+});
+
+navOverlay.addEventListener('click', () => setMenuState(false));
+document.querySelectorAll('.nav-links a').forEach((link) => {
+  link.addEventListener('click', () => setMenuState(false));
+});
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) setMenuState(false);
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') setMenuState(false);
+});
+
 // ─── REVEAL ON SCROLL ───
 const revealEls = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver((entries) => {
