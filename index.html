@@ -641,21 +641,21 @@ section:not(.hero), .mid-cta {
 }
 
 /* ─── VIDEO ─── */
-.video-bg { background: var(--navy); }
+.video-bg { background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,248,238,0.95)); }
 .video-wrap {
   max-width: 860px;
   margin: 0 auto;
   text-align: center;
 }
-.video-bg .section-title { color: #fff; }
-.video-bg .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 36px; }
+.video-bg .section-title { color: var(--text); }
+.video-bg .section-sub { color: var(--text-mid); margin: 0 auto 36px; }
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
   border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 24px 80px rgba(15,69,98,0.18);
+  border: 1px solid rgba(15,69,98,0.12);
   background: #0a1628;
 }
 .video-placeholder {
@@ -786,14 +786,15 @@ section:not(.hero), .mid-cta {
 .testi-role { font-size: 12px; color: var(--text-light); }
 
 /* ─── FAQ ─── */
-.faq-bg { background: var(--navy); }
-.faq-bg .section-title { color: #fff; }
-.faq-bg .section-sub { color: rgba(255,255,255,0.6); }
+.faq-bg { background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,248,238,0.96)); }
+.faq-bg .section-title { color: var(--text); }
+.faq-bg .section-sub { color: var(--text-mid); }
 .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
 .faq-item {
   border-radius: var(--radius-sm);
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(15,69,98,0.12);
+  box-shadow: 0 10px 30px rgba(15,69,98,0.08);
   overflow: hidden;
   transition: border-color 0.3s;
 }
@@ -802,7 +803,7 @@ section:not(.hero), .mid-cta {
   width: 100%;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--text);
   text-align: right;
   font-family: 'Heebo', sans-serif;
   font-size: 16px;
@@ -815,25 +816,25 @@ section:not(.hero), .mid-cta {
   gap: 12px;
   transition: background 0.2s;
 }
-.faq-q:hover { background: rgba(255,255,255,0.04); }
+.faq-q:hover { background: rgba(15,69,98,0.04); }
 .faq-arrow {
   flex-shrink: 0;
   width: 28px; height: 28px;
   border-radius: 50%;
-  background: rgba(37,99,235,0.3);
+  background: rgba(15,69,98,0.08);
   display: grid;
   place-items: center;
   font-size: 14px;
-  color: var(--teal);
+  color: var(--navy);
   transition: transform 0.35s, background 0.3s;
 }
-.faq-item.open .faq-arrow { transform: rotate(180deg); background: rgba(37,99,235,0.6); }
+.faq-item.open .faq-arrow { transform: rotate(180deg); background: rgba(15,69,98,0.16); }
 .faq-a {
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.4s ease, padding 0.3s;
   font-size: 14px;
-  color: rgba(255,255,255,0.65);
+  color: var(--text-mid);
   line-height: 1.7;
   padding: 0 22px;
 }
@@ -1175,9 +1176,9 @@ footer {
     <div class="section-wrap">
     <div class="video-wrap">
       <div class="section-header center reveal">
-        <div class="section-label scroll-clip" style="color:var(--gold)">תראו בעצמכם</div>
-        <h2 class="section-title scroll-clip" id="video-title" style="color:#fff">איך זה עובד בפועל?</h2>
-        <p class="section-sub" style="color:rgba(255,255,255,0.6);margin:0 auto 36px">צפו בסרטון קצר שמסביר את תהליך העבודה ואת התוצאות שאפשר לצפות להן.</p>
+        <div class="section-label scroll-clip">תראו בעצמכם</div>
+        <h2 class="section-title scroll-clip" id="video-title">איך זה עובד בפועל?</h2>
+        <p class="section-sub" style="margin:0 auto 36px">צפו בסרטון קצר שמסביר את תהליך העבודה, שלבי הביצוע והתוצאות שאפשר לצפות להן.</p>
       </div>
       <div class="video-container reveal">
         <video controls preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" aria-label="סרטון תדמית">
@@ -1421,9 +1422,9 @@ footer {
 <section class="faq-bg" id="faq" aria-labelledby="faq-title">
   <div class="section-wrap">
     <div class="section-header center reveal">
-      <div class="section-label" style="color:var(--gold)">שאלות נפוצות</div>
+      <div class="section-label">שאלות נפוצות</div>
       <h2 class="section-title" id="faq-title">יש לכם שאלות? יש לנו תשובות</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,0.6);margin:0 auto">כל מה שרציתם לדעת לפני שמחליטים לבנות אתר.</p>
+      <p class="section-sub" style="margin:0 auto">כל מה שרציתם לדעת לפני שמחליטים לבנות אתר.</p>
     </div>
     <div class="faq-list" role="list">
 
@@ -1522,7 +1523,7 @@ footer {
     </div>
     <div class="blog-grid">
       <article class="blog-card reveal reveal-delay-1">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/2079149/pexels-photo-2079149.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="ספרי קודש על שולחן עץ לבלוג על בניית אתרים לציבור החרדי"></div>
+        <div class="blog-img"><img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="פגישת עבודה מסודרת לבלוג על בניית אתרים לציבור החרדי"></div>
         <div class="blog-body">
           <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
           <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
@@ -1542,7 +1543,7 @@ footer {
         </div>
       </article>
       <article class="blog-card reveal reveal-delay-3">
-        <div class="blog-img"><img src="https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="מחברת תכנון, עיפרון ומחשב נייד כהכנה לפני בניית אתר"></div>
+        <div class="blog-img"><img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="צוות עבודה מתכנן יחד את שלבי ההשקה לפני בניית אתר"></div>
         <div class="blog-body">
           <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
           <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
