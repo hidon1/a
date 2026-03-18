@@ -860,13 +860,17 @@ section:not(.hero), .mid-cta {
 }
 .blog-card:hover { transform: translateY(-7px); box-shadow: var(--shadow-lg); }
 .blog-img {
-  height: 220px;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(248,250,252,0.92), rgba(226,232,240,0.88));
 }
 .blog-img img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-height: 220px;
+  object-fit: contain;
   display: block;
 }
 .blog-body { padding: 22px; }
