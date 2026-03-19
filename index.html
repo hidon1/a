@@ -79,32 +79,6 @@ body::after {
 a { color: inherit; }
 img, video { max-width: 100%; }
 
-.floating-call {
-  position: fixed;
-  bottom: 28px;
-  left: 24px;
-  z-index: 999;
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(79, 209, 197, 0.96), rgba(37, 99, 235, 0.96));
-  color: #fff;
-  text-decoration: none;
-  display: grid;
-  place-items: center;
-  font-size: 28px;
-  border: 1px solid rgba(255,255,255,0.34);
-  box-shadow: 0 20px 45px rgba(14, 116, 144, 0.32);
-  backdrop-filter: blur(18px);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  animation: callPulse 2.8s ease-in-out infinite;
-}
-.floating-call:hover { transform: translateY(-5px) scale(1.08); box-shadow: 0 28px 60px rgba(14, 116, 144, 0.42); }
-@keyframes callPulse {
-  0%,100% { box-shadow: 0 20px 45px rgba(14, 116, 144, 0.32), 0 0 0 0 rgba(79, 209, 197, 0.24); }
-  50% { box-shadow: 0 20px 45px rgba(14, 116, 144, 0.32), 0 0 0 18px rgba(79, 209, 197, 0); }
-}
-
 .navbar {
   position: fixed;
   top: 18px; left: 22px; right: 22px;
@@ -611,7 +585,6 @@ footer::before {
   .hero-badges { justify-content:stretch; }
   .hero-badge { width:100%; justify-content:center; }
   .ba-grid, .stats-grid { grid-template-columns: 1fr; }
-  .floating-call { width: 58px; height: 58px; font-size: 24px; left: 16px; bottom: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -620,10 +593,6 @@ footer::before {
 </style>
 </head>
 <body>
-
-<!-- ──────────────────────────────────────────────── -->
-<!-- FLOATING CALL BUTTON -->
-<a class="floating-call" href="tel:0535485184" aria-label="התקשר עכשיו">📞</a>
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- NAVBAR -->
