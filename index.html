@@ -50,28 +50,31 @@ body {
   color: var(--text-dark);
   overflow-x: hidden;
   background:
-    radial-gradient(circle at top right, rgba(79, 209, 197, 0.18), transparent 24%),
-    radial-gradient(circle at 15% 15%, rgba(125, 211, 252, 0.18), transparent 28%),
-    radial-gradient(circle at 85% 78%, rgba(243, 201, 105, 0.14), transparent 24%),
-    linear-gradient(180deg, #06101d 0%, #0d1727 26%, #eef4fb 58%, #f7f9fc 100%);
+    linear-gradient(180deg, rgba(6, 16, 29, 0.72), rgba(6, 16, 29, 0.56)),
+    url('רקע.jpeg') center top / cover fixed no-repeat;
+  background-color: #06101d;
 }
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image:
+  background:
+    radial-gradient(circle at top right, rgba(79, 209, 197, 0.2), transparent 24%),
+    radial-gradient(circle at 15% 15%, rgba(125, 211, 252, 0.16), transparent 28%),
+    radial-gradient(circle at 85% 78%, rgba(243, 201, 105, 0.16), transparent 24%),
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 72%);
+  background-size: auto, auto, auto, 72px 72px, 72px 72px;
+  background-position: center, center, center, center, center;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.96), rgba(0,0,0,0.82) 55%, transparent 100%);
 }
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at center, transparent 45%, rgba(3, 10, 20, 0.08) 100%);
+  background: linear-gradient(180deg, rgba(3, 10, 20, 0.14), rgba(3, 10, 20, 0.24));
 }
 a { color: inherit; }
 img, video { max-width: 100%; }
@@ -170,9 +173,7 @@ img, video { max-width: 100%; }
   text-align: center;
   padding: 150px 24px 92px;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(3,10,20,0.9), rgba(8,24,40,0.74), rgba(14,116,144,0.48)),
-    url('רקע.jpeg') center/cover no-repeat;
+  background: linear-gradient(135deg, rgba(3,10,20,0.76), rgba(8,24,40,0.58), rgba(14,116,144,0.34));
 }
 .hero::before,
 .hero::after {
