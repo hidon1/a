@@ -541,8 +541,8 @@ footer::before {
   position: fixed;
   right: 18px;
   bottom: 18px;
-  width: 54px;
-  height: 54px;
+  width: 64px;
+  height: 64px;
   border: none;
   border-radius: 999px;
   display: inline-flex;
@@ -565,13 +565,13 @@ footer::before {
   outline-offset: 4px;
 }
 .chat-launcher svg {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
 }
 .chat-launcher::after {
   content: '';
   position: absolute;
-  inset: 6px;
+  inset: 7px;
   border-radius: inherit;
   border: 1px solid rgba(255,255,255,0.08);
   pointer-events: none;
@@ -619,7 +619,7 @@ footer::before {
   .form-row { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .contact-form { padding: 24px; }
-  .chat-launcher { right: 14px; bottom: 14px; width: 50px; height: 50px; }
+  .chat-launcher { right: 14px; bottom: 14px; width: 60px; height: 60px; }
 }
 @media (max-width: 480px) {
   .hero-btns { flex-direction:column; align-items:stretch; }
@@ -1292,12 +1292,23 @@ window.addEventListener('scroll', () => {
 const chatLauncher = document.getElementById('chatLauncher');
 chatLauncher?.addEventListener('click', () => {
   if (!window.Tawk_API) return;
-  if (typeof window.Tawk_API.maximize === 'function') {
-    window.Tawk_API.maximize();
+
+  if (
+    typeof window.Tawk_API.isChatMaximized === 'function' &&
+    window.Tawk_API.isChatMaximized() &&
+    typeof window.Tawk_API.minimize === 'function'
+  ) {
+    window.Tawk_API.minimize();
     return;
   }
+
   if (typeof window.Tawk_API.toggle === 'function') {
     window.Tawk_API.toggle();
+    return;
+  }
+
+  if (typeof window.Tawk_API.maximize === 'function') {
+    window.Tawk_API.maximize();
   }
 });
 </script>
