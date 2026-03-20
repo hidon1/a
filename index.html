@@ -1234,172 +1234,69 @@ window.addEventListener('scroll', () => {
     : 'rgba(10,22,40,0.92)';
 });
 </script>
-  <script src="https://cdn.enable.co.il/licenses/enable-L54377l6sbnmaph3-0326-80792/init.js"></script>
-<!-- ===== Tawk + Custom Chat Button ===== -->
+
+<!-- Tawk + הסתרה מוחלטת -->
 <script type="text/javascript">
-  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 
-  (function () {
-    var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = "https://embed.tawk.to/69bd0e80ef87941c36a9092f/1jk581afo";
-    s1.charset = "UTF-8";
-    s1.setAttribute("crossorigin", "*");
-    s0.parentNode.insertBefore(s1, s0);
-  })();
+// 🔥 זה החלק שמבטל את הכל שלהם
+Tawk_API.onLoad = function(){
+  Tawk_API.hideWidget(); // מסתיר את הבועה
+};
 
-  function openCustomTawkChat() {
-    if (typeof Tawk_API !== "undefined" && typeof Tawk_API.toggle === "function") {
-      Tawk_API.toggle();
-    }
-  }
+// גיבוי נוסף למקרה שזה נטען שוב
+Tawk_API.onChatMaximized = function(){
+  Tawk_API.hideWidget();
+};
+
+(function(){
+var s1=document.createElement("script"),
+s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69bd0e80ef87941c36a9092f/1jk581afo';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
 
+<!-- 🔥 הסתרה חזקה ב-CSS (מוחק גם את הטקסט We Are Here) -->
 <style>
-  #custom-chat-wrap {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    z-index: 999999;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-  }
-
-  #custom-chat-label {
-    background: rgba(255,255,255,0.95);
-    color: #1f3b8f;
-    border: 1px solid rgba(31,59,143,0.12);
-    border-radius: 999px;
-    padding: 8px 14px;
-    font-size: 14px;
-    line-height: 1;
-    font-weight: 700;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    backdrop-filter: blur(8px);
-    direction: rtl;
-    white-space: nowrap;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  #custom-chat-btn {
-    width: 66px;
-    height: 66px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    padding: 0;
-    display: grid;
-    place-items: center;
-    background:
-      linear-gradient(135deg, #1dd1c2 0%, #19b7c5 45%, #3f7cff 100%);
-    box-shadow:
-      0 10px 30px rgba(24, 72, 190, 0.28),
-      0 4px 10px rgba(0,0,0,0.16);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  #custom-chat-btn:hover {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow:
-      0 14px 34px rgba(24, 72, 190, 0.34),
-      0 6px 14px rgba(0,0,0,0.18);
-  }
-
-  #custom-chat-btn:active {
-    transform: scale(0.98);
-  }
-
-  #custom-chat-btn::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 35%),
-      radial-gradient(circle at 75% 70%, rgba(255,255,255,0.18), transparent 28%);
-    pointer-events: none;
-  }
-
-  #custom-chat-btn svg {
-    width: 34px;
-    height: 34px;
-    position: relative;
-    z-index: 1;
-  }
-
-  #custom-chat-pulse {
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 2px solid rgba(29, 209, 194, 0.35);
-    animation: chatPulse 2s infinite;
-    pointer-events: none;
-  }
-
-  @keyframes chatPulse {
-    0%   { transform: scale(0.92); opacity: 0.85; }
-    70%  { transform: scale(1.18); opacity: 0; }
-    100% { transform: scale(1.18); opacity: 0; }
-  }
-
-  @media (max-width: 768px) {
-    #custom-chat-wrap {
-      right: 14px;
-      bottom: 14px;
-    }
-
-    #custom-chat-btn {
-      width: 60px;
-      height: 60px;
-    }
-
-    #custom-chat-btn svg {
-      width: 31px;
-      height: 31px;
-    }
-
-    #custom-chat-label {
-      font-size: 13px;
-      padding: 7px 12px;
-    }
-  }
+iframe[src*="tawk"]{
+  display:none !important;
+}
 </style>
 
-<div id="custom-chat-wrap">
-  <div id="custom-chat-label" onclick="openCustomTawkChat()">
-    דברו איתי
-  </div>
-
-  <button id="custom-chat-btn" type="button" aria-label="פתח צ'אט" onclick="openCustomTawkChat()">
-    <span id="custom-chat-pulse"></span>
-
-    <!-- SVG לוגו פנימי - לא צריך להעלות תמונה -->
-    <svg viewBox="0 0 64 64" aria-hidden="true">
-      <defs>
-        <linearGradient id="chatBubbleGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#ffffff"/>
-          <stop offset="100%" stop-color="#eef6ff"/>
-        </linearGradient>
-      </defs>
-
-      <!-- בועת שיחה -->
-      <path
-        d="M32 10c-11.6 0-21 7.7-21 17.3 0 5.4 3 10.2 7.7 13.4L17 54l12.2-6.3c.9.1 1.8.2 2.8.2 11.6 0 21-7.7 21-17.3S43.6 10 32 10z"
-        fill="url(#chatBubbleGrad)"
-      />
-
-      <!-- 3 נקודות -->
-      <circle cx="24" cy="28.5" r="3.1" fill="#2f67ff"/>
-      <circle cx="32" cy="28.5" r="3.1" fill="#1dcfc0"/>
-      <circle cx="40" cy="28.5" r="3.1" fill="#7b5cff"/>
-    </svg>
-  </button>
+<!-- הכפתור שלך -->
+<div id="chat-btn" onclick="Tawk_API.toggle()">
+  <!-- SVG לוגו -->
+  <svg viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="30" fill="#00c48c"/>
+    <path d="M20 26h24M20 32h18M20 38h14" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  </svg>
 </div>
-<!-- ===== End Tawk + Custom Chat Button ===== --> 
+
+<style>
+#chat-btn{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,#1dd1c2,#3f7cff);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+#chat-btn svg{
+  width: 30px;
+}
+</style> 
+
 </body>
 </html>
