@@ -1272,6 +1272,7 @@ const scrollToHash = (hash) => {
 };
 
 const setMenuState = (isOpen) => {
+  if (!navToggle || !navLinks || !navOverlay) return;
   navToggle.classList.toggle('is-open', isOpen);
   navLinks.classList.toggle('is-open', isOpen);
   navOverlay.classList.toggle('is-open', isOpen);
@@ -1280,18 +1281,18 @@ const setMenuState = (isOpen) => {
   document.body.style.overflow = isOpen && window.innerWidth <= 768 ? 'hidden' : '';
 };
 
-navToggle.addEventListener('click', () => {
-  setMenuState(!navLinks.classList.contains('is-open'));
+navToggle?.addEventListener('click', () => {
+  setMenuState(!navLinks?.classList.contains('is-open'));
 });
 
-navOverlay.addEventListener('click', () => setMenuState(false));
+navOverlay?.addEventListener('click', () => setMenuState(false));
 internalLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
     const hash = link.getAttribute('href');
     if (!hash || hash === '#') return;
     if (!document.querySelector(hash)) return;
     event.preventDefault();
-    const shouldDelayScroll = navLinks.classList.contains('is-open') && link.closest('.nav-links');
+    const shouldDelayScroll = navLinks?.classList.contains('is-open') && link.closest('.nav-links');
     setMenuState(false);
     if (shouldDelayScroll) {
       requestAnimationFrame(() => requestAnimationFrame(() => scrollToHash(hash)));
@@ -1301,7 +1302,7 @@ internalLinks.forEach((link) => {
   });
 });
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 768) setMenuState(false);
+  if (window.innerWidth > 768 && navLinks?.classList.contains('is-open')) setMenuState(false);
 });
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') setMenuState(false);
@@ -1376,16 +1377,18 @@ const submitButton = document.getElementById('submitButton');
 const hiddenFrame = document.querySelector('iframe[name="hiddenSubmitFrame"]');
 let awaitingSubmit = false;
 
-contactForm.addEventListener('submit', (e) => {
-  if (awaitingSubmit) { e.preventDefault(); return; }
-  awaitingSubmit = true;
-  submitButton.disabled = true;
-  submitButton.textContent = '⏳ שולח...';
-  formStatus.textContent = '';
-});
+if (contactForm && submitButton && formStatus) {
+  contactForm.addEventListener('submit', (e) => {
+    if (awaitingSubmit) { e.preventDefault(); return; }
+    awaitingSubmit = true;
+    submitButton.disabled = true;
+    submitButton.textContent = '⏳ שולח...';
+    formStatus.textContent = '';
+  });
+}
 
-hiddenFrame.addEventListener('load', () => {
-  if (!awaitingSubmit) return;
+hiddenFrame?.addEventListener('load', () => {
+  if (!awaitingSubmit || !submitButton || !formStatus || !contactForm) return;
   awaitingSubmit = false;
   submitButton.disabled = false;
   submitButton.textContent = '📤 שלח פנייה';
@@ -1398,6 +1401,7 @@ hiddenFrame.addEventListener('load', () => {
 // ─── NAVBAR SCROLL EFFECT ───
 const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
+  if (!navbar) return;
   navbar.style.background = window.scrollY > 60
     ? 'rgba(10,22,40,0.98)'
     : 'rgba(10,22,40,0.92)';
@@ -1434,6 +1438,7 @@ const chatBridgeAllowedOrigins = new Set([
 const pendingRequests = new Map();
 
 const toggleChatPanel = (isOpen) => {
+  if (!chatPanel || !chatLauncher) return;
   const prevScrollY = window.scrollY;
   chatPanel.classList.toggle('is-open', isOpen);
   chatLauncher.setAttribute('aria-expanded', String(isOpen));
@@ -1599,7 +1604,9 @@ chatForm?.addEventListener('submit', (event) => {
   sendMessage();
 });
 
-renderHistory();
+if (chatMessages) {
+  renderHistory();
+}
 </script>
   <script src="https://cdn.enable.co.il/licenses/enable-L54377l6sbnmaph3-0326-80792/init.js"></script>
 </body>
