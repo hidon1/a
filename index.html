@@ -1431,10 +1431,18 @@ chatBridgeFrame.style.display = 'none';
 chatBridgeFrame.setAttribute('aria-hidden', 'true');
 document.body.appendChild(chatBridgeFrame);
 
-const chatBridgeAllowedOrigins = new Set([
-  new URL(CHAT_WEBHOOK_URL).origin,
-  'https://script.googleusercontent.com'
-]);
+const isAllowedChatOrigin = (origin) => {
+  try {
+    const incoming = new URL(origin);
+    const webhookOrigin = new URL(CHAT_WEBHOOK_URL).origin;
+    if (origin === webhookOrigin) return true;
+
+    const host = incoming.hostname;
+    return host === 'script.googleusercontent.com' || host.endsWith('.script.googleusercontent.com');
+  } catch (error) {
+    return false;
+  }
+};
 const pendingRequests = new Map();
 const CHAT_EDGE_GAP = 18;
 const CHAT_PANEL_GAP = 12;
@@ -1577,11 +1585,15 @@ const sendMessage = () => {
   const requestId = (window.crypto?.randomUUID?.() || `req-${Date.now()}-${Math.random().toString(16).slice(2)}`);
   const timeoutId = setRequestTimeout(requestId);
   pendingRequests.set(requestId, { waitingBubble, timeoutId });
+  chatBridgeFrame.src = 'about:blank';
   chatBridgeFrame.src = buildBridgeUrl({ message, sessionId: getSessionId(), requestId });
 };
 
 window.addEventListener('message', (event) => {
-  if (!chatBridgeAllowedOrigins.has(event.origin)) return;
+  console.log('chat message origin:', event.origin);
+  console.log('chat message payload:', event.data);
+
+  if (!isAllowedChatOrigin(event.origin)) return;
   const payload = event.data;
   if (!payload || payload.source !== 'yazm-chat-gas') return;
 
