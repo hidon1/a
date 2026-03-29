@@ -1417,10 +1417,10 @@ const chatMessages = document.getElementById('chatMessages');
 const chatStatus = document.getElementById('chatStatus');
 const chatSend = document.getElementById('chatSend');
 
-const CHAT_API_URL = 'https://still-hall-887e.zm0548407450.workers.dev/';
+const CHAT_API_URL = "XXXXXXXXXXXX";
 const CHAT_MESSAGES_KEY = 'site_chat_messages';
+const CHAT_SESSION_KEY = 'site_chat_session_id';
 const WAITING_TEXT = 'כותב תשובה...';
-const CHAT_TIMEOUT_MS = 20000;
 const CHAT_EDGE_GAP = 18;
 const CHAT_PANEL_GAP = 12;
 
@@ -1453,23 +1453,44 @@ const toggleChatPanel = (isOpen) => {
   requestAnimationFrame(() => window.scrollTo({ top: prevScrollY, behavior: 'auto' }));
 };
 
-const saveMessagesToLocalStorage = (messages) => {
+const getPageContext = () => {
+  return {
+    pageUrl: window.location.href,
+    pageTitle: document.title || '',
+    metaDescription: document.querySelector('meta[name="description"]')?.content || '',
+    h1: document.querySelector('h1')?.innerText || '',
+    phone: (document.querySelector('a[href^="tel:"]')?.getAttribute('href') || '').replace(/^tel:/i, ''),
+    email: (document.querySelector('a[href^="mailto:"]')?.getAttribute('href') || '').replace(/^mailto:/i, ''),
+    visibleText: (document.body?.innerText || '').replace(/\s+/g, ' ').trim().slice(0, 1800)
+  };
+};
+
+const getSessionId = () => {
+  const existingSessionId = localStorage.getItem(CHAT_SESSION_KEY);
+  if (existingSessionId) return existingSessionId;
+
+  const nextSessionId = `chat_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+  localStorage.setItem(CHAT_SESSION_KEY, nextSessionId);
+  return nextSessionId;
+};
+
+const saveChatHistory = (messages) => {
   localStorage.setItem(CHAT_MESSAGES_KEY, JSON.stringify(messages));
 };
 
-const loadMessagesFromLocalStorage = () => {
-  const raw = localStorage.getItem(CHAT_MESSAGES_KEY);
-  if (!raw) return [];
+const loadChatHistory = () => {
+  const rawHistory = localStorage.getItem(CHAT_MESSAGES_KEY);
+  if (!rawHistory) return [];
 
   try {
-    const parsed = JSON.parse(raw);
+    const parsed = JSON.parse(rawHistory);
     return Array.isArray(parsed) ? parsed : [];
   } catch (error) {
     return [];
   }
 };
 
-const addMessage = (role, text) => {
+const addChatMessage = (role, text) => {
   const bubble = document.createElement('div');
   const safeRole = role === 'user' ? 'user' : 'bot';
   bubble.className = `chat-msg ${safeRole}`;
@@ -1478,23 +1499,29 @@ const addMessage = (role, text) => {
   chatMessages.scrollTop = chatMessages.scrollHeight;
 };
 
+const setChatStatus = (text, isError = false) => {
+  chatStatus.textContent = text;
+  chatStatus.style.color = isError ? '#fca5a5' : 'rgba(255,255,255,0.75)';
+};
+
 const persistMessage = (role, text) => {
-  const messages = loadMessagesFromLocalStorage();
+  const messages = loadChatHistory();
   messages.push({ role, text, createdAt: new Date().toISOString() });
-  saveMessagesToLocalStorage(messages);
+  saveChatHistory(messages);
 };
 
 const renderHistory = () => {
   chatMessages.innerHTML = '';
-  const messages = loadMessagesFromLocalStorage();
+  const messages = loadChatHistory();
 
   if (!messages.length) {
-    addMessage('bot', 'שלום! אפשר לכתוב כאן הודעה ואעביר אותה למערכת הפנימית.');
-    persistMessage('bot', 'שלום! אפשר לכתוב כאן הודעה ואעביר אותה למערכת הפנימית.');
+    const welcomeMessage = 'שלום! איך אפשר לעזור לך היום?';
+    addChatMessage('bot', welcomeMessage);
+    persistMessage('bot', welcomeMessage);
     return;
   }
 
-  messages.forEach(({ role, text }) => addMessage(role, text));
+  messages.forEach(({ role, text }) => addChatMessage(role, text));
 };
 
 const removeWaitingMessage = (waitingBubble) => {
@@ -1503,26 +1530,14 @@ const removeWaitingMessage = (waitingBubble) => {
   }
 };
 
-const buildChatUrl = ({ message }) => {
-  const params = new URLSearchParams({
-    message
-  });
-  return `${CHAT_API_URL}?${params.toString()}`;
-};
-
-const sendMessage = async () => {
-  const message = chatInput.value.trim();
+const sendChatMessage = async (message) => {
   if (!message) return;
 
-  addMessage('user', message);
+  addChatMessage('user', message);
   persistMessage('user', message);
-  chatInput.value = '';
-  chatStatus.textContent = '';
-
   chatSend.disabled = true;
   chatSend.textContent = '...שולח';
-  chatStatus.textContent = '⏳ ממתין לתשובה...';
-  chatStatus.style.color = 'rgba(255,255,255,0.75)';
+  setChatStatus('⏳ ממתין לתשובה...');
 
   const waitingBubble = document.createElement('div');
   waitingBubble.className = 'chat-msg bot';
@@ -1530,13 +1545,17 @@ const sendMessage = async () => {
   chatMessages.appendChild(waitingBubble);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
-  const timeoutController = new AbortController();
-  const timeoutId = window.setTimeout(() => timeoutController.abort(), CHAT_TIMEOUT_MS);
-
   try {
-    const response = await fetch(buildChatUrl({ message }), {
-      method: 'GET',
-      signal: timeoutController.signal
+    const payload = {
+      message,
+      sessionId: getSessionId(),
+      ...getPageContext()
+    };
+
+    const response = await fetch(CHAT_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
@@ -1544,22 +1563,18 @@ const sendMessage = async () => {
     }
 
     const data = await response.json();
-    const replyText = data?.reply || 'התקבלה תשובה ללא תוכן.';
-    addMessage('bot', replyText);
+    const replyText = typeof data?.reply === 'string' && data.reply.trim()
+      ? data.reply.trim()
+      : 'לא התקבלה תשובה מלאה, אפשר לנסות שוב בעוד רגע.';
+    addChatMessage('bot', replyText);
     persistMessage('bot', replyText);
-    chatStatus.textContent = '✅ נשלח בהצלחה';
-    chatStatus.style.color = '#86efac';
+    setChatStatus(data?.ok === false ? '⚠️ התקבלה הודעת שגיאה' : '✅ נשלח בהצלחה', data?.ok === false);
   } catch (error) {
-    const isTimeout = error?.name === 'AbortError';
-    const errorMessage = isTimeout
-      ? 'השרת לא הגיב בזמן. נסו שוב בעוד רגע.'
-      : 'אירעה שגיאה בשליחת ההודעה. נסו שוב בעוד רגע.';
-    addMessage('bot', errorMessage);
+    const errorMessage = 'אירעה שגיאה זמנית, נסו שוב בעוד רגע.';
+    addChatMessage('bot', errorMessage);
     persistMessage('bot', errorMessage);
-    chatStatus.textContent = isTimeout ? '⌛ פג זמן ההמתנה' : '❌ שליחה נכשלה';
-    chatStatus.style.color = '#fca5a5';
+    setChatStatus('❌ שליחה נכשלה', true);
   } finally {
-    clearTimeout(timeoutId);
     removeWaitingMessage(waitingBubble);
     chatSend.disabled = false;
     chatSend.textContent = 'שלח';
@@ -1579,7 +1594,11 @@ document.addEventListener('keydown', (event) => {
 
 chatForm?.addEventListener('submit', (event) => {
   event.preventDefault();
-  sendMessage();
+  const message = chatInput.value.trim();
+  if (!message) return;
+  chatInput.value = '';
+  setChatStatus('');
+  sendChatMessage(message);
 });
 
 if (chatMessages) {
