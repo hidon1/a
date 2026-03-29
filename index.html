@@ -1417,9 +1417,8 @@ const chatMessages = document.getElementById('chatMessages');
 const chatStatus = document.getElementById('chatStatus');
 const chatSend = document.getElementById('chatSend');
 
-const CHAT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyG6cjfKj9yIUTy2PEcQBkvZJbPdUVWgfy4cLOAvvFRDJgWTDXwFgmF8kfFEi4aahOftg/exec';
+const CHAT_API_URL = 'https://still-hall-887e.zm0548407450.workers.dev/';
 const CHAT_MESSAGES_KEY = 'site_chat_messages';
-const CHAT_SESSION_ID_KEY = 'site_chat_session_id';
 const WAITING_TEXT = 'כותב תשובה...';
 const CHAT_TIMEOUT_MS = 20000;
 const CHAT_EDGE_GAP = 18;
@@ -1452,15 +1451,6 @@ const toggleChatPanel = (isOpen) => {
   chatPanel.classList.toggle('is-open', isOpen);
   chatLauncher.setAttribute('aria-expanded', String(isOpen));
   requestAnimationFrame(() => window.scrollTo({ top: prevScrollY, behavior: 'auto' }));
-};
-
-const getSessionId = () => {
-  const existing = localStorage.getItem(CHAT_SESSION_ID_KEY);
-  if (existing) return existing;
-
-  const newSessionId = (window.crypto?.randomUUID?.() || `session-${Date.now()}-${Math.random().toString(16).slice(2)}`);
-  localStorage.setItem(CHAT_SESSION_ID_KEY, newSessionId);
-  return newSessionId;
 };
 
 const saveMessagesToLocalStorage = (messages) => {
@@ -1513,13 +1503,11 @@ const removeWaitingMessage = (waitingBubble) => {
   }
 };
 
-const buildChatUrl = ({ message, sessionId }) => {
+const buildChatUrl = ({ message }) => {
   const params = new URLSearchParams({
-    message,
-    sessionId,
-    pageUrl: window.location.href
+    message
   });
-  return `${CHAT_WEBHOOK_URL}?${params.toString()}`;
+  return `${CHAT_API_URL}?${params.toString()}`;
 };
 
 const sendMessage = async () => {
@@ -1546,7 +1534,7 @@ const sendMessage = async () => {
   const timeoutId = window.setTimeout(() => timeoutController.abort(), CHAT_TIMEOUT_MS);
 
   try {
-    const response = await fetch(buildChatUrl({ message, sessionId: getSessionId() }), {
+    const response = await fetch(buildChatUrl({ message }), {
       method: 'GET',
       signal: timeoutController.signal
     });
