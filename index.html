@@ -1422,28 +1422,6 @@ const CHAT_MESSAGES_KEY = 'site_chat_messages';
 const CHAT_SESSION_ID_KEY = 'site_chat_session_id';
 const WAITING_TEXT = 'כותב תשובה...';
 const CHAT_TIMEOUT_MS = 20000;
-const CHAT_IFRAME_NAME = 'yazmChatBridgeFrame';
-
-const chatBridgeFrame = document.createElement('iframe');
-chatBridgeFrame.name = CHAT_IFRAME_NAME;
-chatBridgeFrame.title = 'Chat Bridge';
-chatBridgeFrame.style.display = 'none';
-chatBridgeFrame.setAttribute('aria-hidden', 'true');
-document.body.appendChild(chatBridgeFrame);
-
-const isAllowedChatOrigin = (origin) => {
-  try {
-    const incoming = new URL(origin);
-    const webhookOrigin = new URL(CHAT_WEBHOOK_URL).origin;
-    if (origin === webhookOrigin) return true;
-
-    const host = incoming.hostname;
-    return host === 'script.googleusercontent.com' || host.endsWith('.script.googleusercontent.com');
-  } catch (error) {
-    return false;
-  }
-};
-const pendingRequests = new Map();
 const CHAT_EDGE_GAP = 18;
 const CHAT_PANEL_GAP = 12;
 
@@ -1535,34 +1513,16 @@ const removeWaitingMessage = (waitingBubble) => {
   }
 };
 
-const setRequestTimeout = (requestId) => {
-  return window.setTimeout(() => {
-    const pending = pendingRequests.get(requestId);
-    if (!pending) return;
-    pendingRequests.delete(requestId);
-    removeWaitingMessage(pending.waitingBubble);
-    const timeoutMessage = 'השרת לא הגיב בזמן. נסו שוב בעוד רגע.';
-    addMessage('bot', timeoutMessage);
-    persistMessage('bot', timeoutMessage);
-    chatStatus.textContent = '⌛ פג זמן ההמתנה';
-    chatStatus.style.color = '#fca5a5';
-    chatSend.disabled = false;
-    chatSend.textContent = 'שלח';
-  }, CHAT_TIMEOUT_MS);
-};
-
-const buildBridgeUrl = ({ message, sessionId, requestId }) => {
+const buildChatUrl = ({ message, sessionId }) => {
   const params = new URLSearchParams({
     message,
     sessionId,
-    pageUrl: window.location.href,
-    requestId,
-    origin: window.location.origin
+    pageUrl: window.location.href
   });
   return `${CHAT_WEBHOOK_URL}?${params.toString()}`;
 };
 
-const sendMessage = () => {
+const sendMessage = async () => {
   const message = chatInput.value.trim();
   if (!message) return;
 
@@ -1582,46 +1542,41 @@ const sendMessage = () => {
   chatMessages.appendChild(waitingBubble);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
-  const requestId = (window.crypto?.randomUUID?.() || `req-${Date.now()}-${Math.random().toString(16).slice(2)}`);
-  const timeoutId = setRequestTimeout(requestId);
-  pendingRequests.set(requestId, { waitingBubble, timeoutId });
-  chatBridgeFrame.src = 'about:blank';
-  chatBridgeFrame.src = buildBridgeUrl({ message, sessionId: getSessionId(), requestId });
-};
+  const timeoutController = new AbortController();
+  const timeoutId = window.setTimeout(() => timeoutController.abort(), CHAT_TIMEOUT_MS);
 
-window.addEventListener('message', (event) => {
-  console.log('chat message origin:', event.origin);
-  console.log('chat message payload:', event.data);
+  try {
+    const response = await fetch(buildChatUrl({ message, sessionId: getSessionId() }), {
+      method: 'GET',
+      signal: timeoutController.signal
+    });
 
-  if (!isAllowedChatOrigin(event.origin)) return;
-  const payload = event.data;
-  if (!payload || payload.source !== 'yazm-chat-gas') return;
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
 
-  const requestId = payload.requestId;
-  if (!requestId || !pendingRequests.has(requestId)) return;
-
-  const pending = pendingRequests.get(requestId);
-  pendingRequests.delete(requestId);
-  clearTimeout(pending.timeoutId);
-  removeWaitingMessage(pending.waitingBubble);
-
-  if (payload.error) {
-    const errorMessage = 'אירעה שגיאה בשליחת ההודעה. נסו שוב בעוד רגע.';
-    addMessage('bot', errorMessage);
-    persistMessage('bot', errorMessage);
-    chatStatus.textContent = '❌ שליחה נכשלה';
-    chatStatus.style.color = '#fca5a5';
-  } else {
-    const replyText = payload.reply || 'התקבלה תשובה ללא תוכן.';
+    const data = await response.json();
+    const replyText = data?.reply || 'התקבלה תשובה ללא תוכן.';
     addMessage('bot', replyText);
     persistMessage('bot', replyText);
     chatStatus.textContent = '✅ נשלח בהצלחה';
     chatStatus.style.color = '#86efac';
+  } catch (error) {
+    const isTimeout = error?.name === 'AbortError';
+    const errorMessage = isTimeout
+      ? 'השרת לא הגיב בזמן. נסו שוב בעוד רגע.'
+      : 'אירעה שגיאה בשליחת ההודעה. נסו שוב בעוד רגע.';
+    addMessage('bot', errorMessage);
+    persistMessage('bot', errorMessage);
+    chatStatus.textContent = isTimeout ? '⌛ פג זמן ההמתנה' : '❌ שליחה נכשלה';
+    chatStatus.style.color = '#fca5a5';
+  } finally {
+    clearTimeout(timeoutId);
+    removeWaitingMessage(waitingBubble);
+    chatSend.disabled = false;
+    chatSend.textContent = 'שלח';
   }
-
-  chatSend.disabled = false;
-  chatSend.textContent = 'שלח';
-});
+};
 
 chatLauncher?.addEventListener('click', () => {
   const isOpen = chatPanel.classList.contains('is-open');
