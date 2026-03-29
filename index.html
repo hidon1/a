@@ -576,6 +576,107 @@ footer::before {
   border: 1px solid rgba(255,255,255,0.08);
   pointer-events: none;
 }
+.chat-panel {
+  position: fixed;
+  right: 18px;
+  bottom: 94px;
+  width: min(350px, calc(100vw - 24px));
+  background: rgba(8, 21, 38, 0.96);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  box-shadow: 0 28px 54px rgba(2, 8, 23, 0.36);
+  overflow: hidden;
+  z-index: 2147482999;
+  transform-origin: bottom right;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  pointer-events: none;
+  transition: opacity .22s ease, transform .22s ease;
+}
+.chat-panel.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.chat-panel-head {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #fff;
+}
+.chat-panel-title { font-size: 15px; font-weight: 800; }
+.chat-close {
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.chat-body {
+  padding: 14px 14px 16px;
+}
+.chat-messages {
+  min-height: 110px;
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(3,10,20,0.52);
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-msg {
+  max-width: 90%;
+  border-radius: 12px;
+  padding: 7px 10px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.chat-msg.user {
+  align-self: flex-start;
+  background: rgba(79, 209, 197, 0.2);
+  color: #d9fffa;
+}
+.chat-msg.bot {
+  align-self: flex-end;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
+}
+.chat-form { display: flex; gap: 8px; }
+.chat-input {
+  flex: 1;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.95);
+  color: var(--text-dark);
+  font-family: 'Heebo', sans-serif;
+  font-size: 14px;
+  padding: 10px 12px;
+}
+.chat-send {
+  border: none;
+  border-radius: 12px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #58d6c8, #3478f6);
+  color: #fff;
+  cursor: pointer;
+}
+.chat-status {
+  margin-top: 8px;
+  min-height: 20px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+}
 
 @keyframes fadeUp { from { opacity:0; transform: translateY(28px); } to { opacity:1; transform: translateY(0); } }
 .reveal { opacity:0; transform: translateY(32px); transition: opacity .8s ease, transform .8s ease; }
@@ -620,6 +721,11 @@ footer::before {
   .footer-grid { grid-template-columns: 1fr; }
   .contact-form { padding: 24px; }
   .chat-launcher { right: 14px; bottom: 14px; width: 60px; height: 60px; }
+  .chat-panel {
+    right: 12px;
+    bottom: 84px;
+    width: calc(100vw - 24px);
+  }
 }
 @media (max-width: 480px) {
   .hero-btns { flex-direction:column; align-items:stretch; }
@@ -1122,21 +1228,32 @@ footer::before {
   </div>
 </footer>
 
-<button class="chat-launcher" id="chatLauncher" type="button" aria-label="פתח שיחה">
+<button class="chat-launcher" id="chatLauncher" type="button" aria-label="פתח שיחה" aria-expanded="false">
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path d="M7 17.5C4.9 16.1 3.5 13.7 3.5 11c0-4.14 3.81-7.5 8.5-7.5s8.5 3.36 8.5 7.5-3.81 7.5-8.5 7.5c-1.03 0-2.02-.16-2.94-.47L5 19.5l2-2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M8.5 10.5h7M8.5 13.5h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
   </svg>
 </button>
+<section class="chat-panel" id="chatPanel" aria-label="צ'אט פנימי">
+  <div class="chat-panel-head">
+    <strong class="chat-panel-title">צ'אט מהיר</strong>
+    <button class="chat-close" id="chatClose" type="button" aria-label="סגור צ'אט">✕</button>
+  </div>
+  <div class="chat-body">
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">שלום! אפשר לכתוב כאן הודעה ואעביר אותה למערכת הפנימית.</div>
+    </div>
+    <form class="chat-form" id="chatForm">
+      <input class="chat-input" id="chatInput" type="text" placeholder="כתבו הודעה..." required>
+      <button class="chat-send" id="chatSend" type="submit">שלח</button>
+    </form>
+    <div class="chat-status" id="chatStatus"></div>
+  </div>
+</section>
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- JAVASCRIPT -->
 <script>
-
-window.Tawk_API = window.Tawk_API || {};
-window.Tawk_API.onBeforeLoad = function() {
-  window.Tawk_API.hideWidget();
-};
 
 // ─── MOBILE MENU + SECTION NAVIGATION ───
 const navToggle = document.querySelector('.nav-hamburger');
@@ -1288,43 +1405,95 @@ window.addEventListener('scroll', () => {
     : 'rgba(10,22,40,0.92)';
 });
 
-// ─── CUSTOM CHAT LAUNCHER ───
+// ─── INTERNAL CHAT PANEL ───
 const chatLauncher = document.getElementById('chatLauncher');
+const chatPanel = document.getElementById('chatPanel');
+const chatClose = document.getElementById('chatClose');
+const chatForm = document.getElementById('chatForm');
+const chatInput = document.getElementById('chatInput');
+const chatMessages = document.getElementById('chatMessages');
+const chatStatus = document.getElementById('chatStatus');
+const chatSend = document.getElementById('chatSend');
+
+// החלף בהמשך לכתובת ה-Google Apps Script האמיתית
+const CHAT_WEBHOOK_URL = '';
+// אפשר להחליף בטוקן אמיתי כאשר תחברו את הסקריפט
+const CHAT_TOKEN = '';
+
+const toggleChatPanel = (isOpen) => {
+  chatPanel.classList.toggle('is-open', isOpen);
+  chatLauncher.setAttribute('aria-expanded', String(isOpen));
+  if (isOpen) {
+    setTimeout(() => chatInput.focus(), 30);
+  }
+};
+
+const addChatMessage = (text, role) => {
+  const bubble = document.createElement('div');
+  bubble.className = `chat-msg ${role}`;
+  bubble.textContent = text;
+  chatMessages.appendChild(bubble);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+};
+
 chatLauncher?.addEventListener('click', () => {
-  if (!window.Tawk_API) return;
+  const isOpen = chatPanel.classList.contains('is-open');
+  toggleChatPanel(!isOpen);
+});
+chatClose?.addEventListener('click', () => toggleChatPanel(false));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && chatPanel.classList.contains('is-open')) {
+    toggleChatPanel(false);
+  }
+});
 
-  if (
-    typeof window.Tawk_API.isChatMaximized === 'function' &&
-    window.Tawk_API.isChatMaximized() &&
-    typeof window.Tawk_API.minimize === 'function'
-  ) {
-    window.Tawk_API.minimize();
+chatForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const message = chatInput.value.trim();
+  if (!message) return;
+
+  addChatMessage(message, 'user');
+  chatInput.value = '';
+  chatStatus.textContent = '';
+
+  if (!CHAT_WEBHOOK_URL) {
+    chatStatus.textContent = 'יש לחבר כאן כתובת Google Apps Script כדי לשלוח הודעות.';
+    chatStatus.style.color = '#facc15';
     return;
   }
 
-  if (typeof window.Tawk_API.toggle === 'function') {
-    window.Tawk_API.toggle();
-    return;
-  }
+  chatSend.disabled = true;
+  chatSend.textContent = '...שולח';
 
-  if (typeof window.Tawk_API.maximize === 'function') {
-    window.Tawk_API.maximize();
+  try {
+    const response = await fetch(CHAT_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(CHAT_TOKEN ? { Authorization: `Bearer ${CHAT_TOKEN}` } : {})
+      },
+      body: JSON.stringify({ message })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const replyText = data?.reply || data?.message || 'ההודעה נשלחה בהצלחה.';
+    addChatMessage(replyText, 'bot');
+    chatStatus.textContent = '✅ נשלח בהצלחה';
+    chatStatus.style.color = '#86efac';
+  } catch (error) {
+    addChatMessage('אירעה שגיאה בשליחת ההודעה. נסו שוב בעוד רגע.', 'bot');
+    chatStatus.textContent = '❌ שליחה נכשלה';
+    chatStatus.style.color = '#fca5a5';
+  } finally {
+    chatSend.disabled = false;
+    chatSend.textContent = 'שלח';
   }
 });
 </script>
   <script src="https://cdn.enable.co.il/licenses/enable-L54377l6sbnmaph3-0326-80792/init.js"></script>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69bd0e80ef87941c36a9092f/1jk5dgaop';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
 </body>
 </html>
