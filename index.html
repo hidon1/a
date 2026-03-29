@@ -579,7 +579,7 @@ footer::before {
 .chat-panel {
   position: fixed;
   right: 18px;
-  top: 96px;
+  bottom: 94px;
   width: min(350px, calc(100vw - 24px));
   background: rgba(8, 21, 38, 0.96);
   border: 1px solid rgba(255,255,255,0.12);
@@ -587,9 +587,9 @@ footer::before {
   box-shadow: 0 28px 54px rgba(2, 8, 23, 0.36);
   overflow: hidden;
   z-index: 2147482999;
-  transform-origin: top right;
+  transform-origin: bottom right;
   opacity: 0;
-  transform: translateY(-12px) scale(0.96);
+  transform: translateY(12px) scale(0.96);
   pointer-events: none;
   transition: opacity .22s ease, transform .22s ease;
 }
@@ -723,7 +723,7 @@ footer::before {
   .chat-launcher { right: 14px; bottom: 14px; width: 60px; height: 60px; }
   .chat-panel {
     right: 12px;
-    top: 86px;
+    bottom: 84px;
     width: calc(100vw - 24px);
   }
 }
@@ -1234,7 +1234,7 @@ footer::before {
     <path d="M8.5 10.5h7M8.5 13.5h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
   </svg>
 </button>
-<section class="chat-panel" id="chatPanel" aria-label="צ'אט פנימי">
+<div class="chat-panel" id="chatPanel" aria-label="צ'אט פנימי">
   <div class="chat-panel-head">
     <strong class="chat-panel-title">צ'אט מהיר</strong>
     <button class="chat-close" id="chatClose" type="button" aria-label="סגור צ'אט">✕</button>
@@ -1247,7 +1247,7 @@ footer::before {
     </form>
     <div class="chat-status" id="chatStatus"></div>
   </div>
-</section>
+</div>
 
 <!-- ──────────────────────────────────────────────── -->
 <!-- JAVASCRIPT -->
@@ -1436,10 +1436,33 @@ const chatBridgeAllowedOrigins = new Set([
   'https://script.googleusercontent.com'
 ]);
 const pendingRequests = new Map();
+const CHAT_EDGE_GAP = 18;
+const CHAT_PANEL_GAP = 12;
+
+const ensureFloatingChatMount = () => {
+  if (!chatLauncher || !chatPanel) return;
+  if (chatLauncher.parentElement !== document.body) {
+    document.body.appendChild(chatLauncher);
+  }
+  if (chatPanel.parentElement !== document.body) {
+    document.body.appendChild(chatPanel);
+  }
+};
+
+const positionChatPanelNearLauncher = () => {
+  if (!chatLauncher || !chatPanel) return;
+  const launcherRect = chatLauncher.getBoundingClientRect();
+  const rightOffset = Math.max(window.innerWidth - launcherRect.right, CHAT_EDGE_GAP);
+  const bottomOffset = Math.max(window.innerHeight - launcherRect.top + CHAT_PANEL_GAP, launcherRect.height + CHAT_PANEL_GAP);
+
+  chatPanel.style.right = `${rightOffset}px`;
+  chatPanel.style.bottom = `${bottomOffset}px`;
+};
 
 const toggleChatPanel = (isOpen) => {
   if (!chatPanel || !chatLauncher) return;
   const prevScrollY = window.scrollY;
+  positionChatPanelNearLauncher();
   chatPanel.classList.toggle('is-open', isOpen);
   chatLauncher.setAttribute('aria-expanded', String(isOpen));
   requestAnimationFrame(() => window.scrollTo({ top: prevScrollY, behavior: 'auto' }));
@@ -1607,6 +1630,11 @@ chatForm?.addEventListener('submit', (event) => {
 if (chatMessages) {
   renderHistory();
 }
+
+ensureFloatingChatMount();
+positionChatPanelNearLauncher();
+window.addEventListener('resize', positionChatPanelNearLauncher);
+window.addEventListener('orientationchange', positionChatPanelNearLauncher);
 </script>
   <script src="https://cdn.enable.co.il/licenses/enable-L54377l6sbnmaph3-0326-80792/init.js"></script>
 </body>
