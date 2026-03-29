@@ -1240,9 +1240,7 @@ footer::before {
     <button class="chat-close" id="chatClose" type="button" aria-label="סגור צ'אט">✕</button>
   </div>
   <div class="chat-body">
-    <div class="chat-messages" id="chatMessages">
-      <div class="chat-msg bot">שלום! אפשר לכתוב כאן הודעה ואעביר אותה למערכת הפנימית.</div>
-    </div>
+    <div class="chat-messages" id="chatMessages"></div>
     <form class="chat-form" id="chatForm">
       <input class="chat-input" id="chatInput" type="text" placeholder="כתבו הודעה..." required>
       <button class="chat-send" id="chatSend" type="submit">שלח</button>
@@ -1415,10 +1413,10 @@ const chatMessages = document.getElementById('chatMessages');
 const chatStatus = document.getElementById('chatStatus');
 const chatSend = document.getElementById('chatSend');
 
-// החלף בהמשך לכתובת ה-Google Apps Script האמיתית
-const CHAT_WEBHOOK_URL = '';
-// אפשר להחליף בטוקן אמיתי כאשר תחברו את הסקריפט
-const CHAT_TOKEN = '';
+const CHAT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzp4P6w0mNB6hhvX4WOEi3wi_xgQq1I7z0hBzEq4OoM5Ihgrl7rczZdPnpdHqC2HpXBbg/exec';
+const CHAT_MESSAGES_KEY = 'site_chat_messages';
+const CHAT_SESSION_ID_KEY = 'site_chat_session_id';
+const WAITING_TEXT = 'כותב תשובה...';
 
 const toggleChatPanel = (isOpen) => {
   chatPanel.classList.toggle('is-open', isOpen);
@@ -1428,12 +1426,118 @@ const toggleChatPanel = (isOpen) => {
   }
 };
 
-const addChatMessage = (text, role) => {
+const getSessionId = () => {
+  const existing = localStorage.getItem(CHAT_SESSION_ID_KEY);
+  if (existing) return existing;
+
+  const newSessionId = (window.crypto?.randomUUID?.() || `session-${Date.now()}-${Math.random().toString(16).slice(2)}`);
+  localStorage.setItem(CHAT_SESSION_ID_KEY, newSessionId);
+  return newSessionId;
+};
+
+const saveMessagesToLocalStorage = (messages) => {
+  localStorage.setItem(CHAT_MESSAGES_KEY, JSON.stringify(messages));
+};
+
+const loadMessagesFromLocalStorage = () => {
+  const raw = localStorage.getItem(CHAT_MESSAGES_KEY);
+  if (!raw) return [];
+
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    return [];
+  }
+};
+
+const addMessage = (role, text) => {
   const bubble = document.createElement('div');
-  bubble.className = `chat-msg ${role}`;
+  const safeRole = role === 'user' ? 'user' : 'bot';
+  bubble.className = `chat-msg ${safeRole}`;
   bubble.textContent = text;
   chatMessages.appendChild(bubble);
   chatMessages.scrollTop = chatMessages.scrollHeight;
+};
+
+const persistMessage = (role, text) => {
+  const messages = loadMessagesFromLocalStorage();
+  messages.push({ role, text, createdAt: new Date().toISOString() });
+  saveMessagesToLocalStorage(messages);
+};
+
+const renderHistory = () => {
+  chatMessages.innerHTML = '';
+  const messages = loadMessagesFromLocalStorage();
+
+  if (!messages.length) {
+    addMessage('bot', 'שלום! אפשר לכתוב כאן הודעה ואעביר אותה למערכת הפנימית.');
+    persistMessage('bot', 'שלום! אפשר לכתוב כאן הודעה ואעביר אותה למערכת הפנימית.');
+    return;
+  }
+
+  messages.forEach(({ role, text }) => addMessage(role, text));
+};
+
+const removeWaitingMessage = (waitingBubble) => {
+  if (waitingBubble && waitingBubble.parentNode === chatMessages) {
+    chatMessages.removeChild(waitingBubble);
+  }
+};
+
+const sendMessage = async () => {
+  const message = chatInput.value.trim();
+  if (!message) return;
+
+  addMessage('user', message);
+  persistMessage('user', message);
+  chatInput.value = '';
+  chatStatus.textContent = '';
+
+  chatSend.disabled = true;
+  chatSend.textContent = '...שולח';
+
+  const waitingBubble = document.createElement('div');
+  waitingBubble.className = 'chat-msg bot';
+  waitingBubble.textContent = WAITING_TEXT;
+  chatMessages.appendChild(waitingBubble);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  try {
+    const response = await fetch(CHAT_WEBHOOK_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message,
+        sessionId: getSessionId(),
+        pageUrl: window.location.href
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const replyText = data?.reply || 'התקבלה תשובה ללא תוכן.';
+    removeWaitingMessage(waitingBubble);
+    addMessage('bot', replyText);
+    persistMessage('bot', replyText);
+    chatStatus.textContent = '✅ נשלח בהצלחה';
+    chatStatus.style.color = '#86efac';
+  } catch (error) {
+    removeWaitingMessage(waitingBubble);
+    const errorMessage = 'אירעה שגיאה בשליחת ההודעה. נסו שוב בעוד רגע.';
+    addMessage('bot', errorMessage);
+    persistMessage('bot', errorMessage);
+    chatStatus.textContent = '❌ שליחה נכשלה';
+    chatStatus.style.color = '#fca5a5';
+  } finally {
+    chatSend.disabled = false;
+    chatSend.textContent = 'שלח';
+  }
 };
 
 chatLauncher?.addEventListener('click', () => {
@@ -1449,50 +1553,10 @@ document.addEventListener('keydown', (event) => {
 
 chatForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const message = chatInput.value.trim();
-  if (!message) return;
-
-  addChatMessage(message, 'user');
-  chatInput.value = '';
-  chatStatus.textContent = '';
-
-  if (!CHAT_WEBHOOK_URL) {
-    chatStatus.textContent = 'יש לחבר כאן כתובת Google Apps Script כדי לשלוח הודעות.';
-    chatStatus.style.color = '#facc15';
-    return;
-  }
-
-  chatSend.disabled = true;
-  chatSend.textContent = '...שולח';
-
-  try {
-    const response = await fetch(CHAT_WEBHOOK_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(CHAT_TOKEN ? { Authorization: `Bearer ${CHAT_TOKEN}` } : {})
-      },
-      body: JSON.stringify({ message })
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const data = await response.json();
-    const replyText = data?.reply || data?.message || 'ההודעה נשלחה בהצלחה.';
-    addChatMessage(replyText, 'bot');
-    chatStatus.textContent = '✅ נשלח בהצלחה';
-    chatStatus.style.color = '#86efac';
-  } catch (error) {
-    addChatMessage('אירעה שגיאה בשליחת ההודעה. נסו שוב בעוד רגע.', 'bot');
-    chatStatus.textContent = '❌ שליחה נכשלה';
-    chatStatus.style.color = '#fca5a5';
-  } finally {
-    chatSend.disabled = false;
-    chatSend.textContent = 'שלח';
-  }
+  await sendMessage();
 });
+
+renderHistory();
 </script>
   <script src="https://cdn.enable.co.il/licenses/enable-L54377l6sbnmaph3-0326-80792/init.js"></script>
 </body>
