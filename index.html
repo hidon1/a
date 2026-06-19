@@ -738,6 +738,119 @@ footer::before {
   * { animation: none !important; transition: none !important; }
 }
 
+
+/* Modern clean refresh: minimal visual language without legacy emoji markings */
+:root {
+  --navy: #111827;
+  --navy-soft: #172033;
+  --navy-mid: #334155;
+  --blue: #2563eb;
+  --accent: #14b8a6;
+  --accent-strong: #0f766e;
+  --gold: #c0842d;
+  --off-white: #f6f7fb;
+  --text-dark: #111827;
+  --text-mid: #5b6472;
+  --text-light: #8a94a6;
+  --border: rgba(17, 24, 39, 0.1);
+  --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+  --shadow-lg: 0 28px 70px rgba(17, 24, 39, 0.12);
+}
+body {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 42%, #f8fafc 100%);
+  background-color: #f8fafc;
+}
+body::before {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(20, 184, 166, 0.16), transparent 26%),
+    radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.10), transparent 24%);
+  mask-image: none;
+}
+body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none; }
+.navbar {
+  background: rgba(255,255,255,0.84);
+  border-color: rgba(17,24,39,0.08);
+  box-shadow: 0 18px 42px rgba(17,24,39,0.08);
+}
+.nav-logo, .hero-logo-large, .blog-logo {
+  color: var(--navy);
+  background: #fff;
+  border-color: rgba(17,24,39,0.08);
+  box-shadow: 0 10px 24px rgba(17,24,39,0.06);
+}
+.nav-logo span, .hero-logo-large span, .blog-logo span { color: var(--accent-strong); }
+.nav-links a { color: var(--navy-mid); }
+.nav-links a:hover { color: var(--navy); background: rgba(17,24,39,0.06); }
+.nav-cta, .btn-primary, .form-submit, .chat-send {
+  background: #111827;
+  box-shadow: 0 14px 30px rgba(17,24,39,0.16);
+}
+.hero {
+  background: transparent;
+  min-height: 92vh;
+}
+.hero::before {
+  width: 620px; height: 620px; top: 0; right: -180px;
+  background: radial-gradient(circle, rgba(20,184,166,0.18), transparent 68%);
+}
+.hero::after {
+  width: 520px; height: 520px; bottom: 20px; left: -160px;
+  background: radial-gradient(circle, rgba(37,99,235,0.12), transparent 70%);
+}
+.hero-content, .features-bg .section-wrap, .process-bg .section-wrap, #testimonials .section-wrap, .faq-bg .section-wrap, #blog .section-wrap, .contact-bg .section-wrap, .video-bg .section-wrap {
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(17,24,39,0.08);
+  box-shadow: var(--shadow);
+}
+.section-label, .hero-badge, .blog-read-time {
+  background: #fff;
+  border-color: rgba(17,24,39,0.08);
+  color: var(--accent-strong);
+  letter-spacing: 0.12em;
+}
+.hero-badge::before, .blog-read-time::before {
+  content: '';
+  width: 7px; height: 7px; border-radius: 999px;
+  background: var(--accent);
+  display: inline-block;
+}
+.btn-outline { background: #fff; border-color: rgba(17,24,39,0.10); }
+.feature-card, .ba-card, .stat-card, .testi-card, .blog-card, .faq-item, .contact-form, .contact-detail {
+  background: #fff;
+  border-color: rgba(17,24,39,0.08);
+}
+.feature-card::before, .ba-card::before, .stat-card::before, .testi-card::before, .blog-card::before, .contact-form::before { content: none; }
+.feature-icon {
+  width: 52px; height: 52px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(20,184,166,.13), rgba(37,99,235,.08));
+  position: relative;
+}
+.feature-icon::before {
+  content: ''; position: absolute; inset: 15px; border-radius: 8px;
+  border: 2px solid var(--accent-strong);
+}
+.step-num {
+  width: 76px; height: 76px; border-radius: 24px;
+  background: #111827;
+  box-shadow: 0 16px 34px rgba(17,24,39,0.14);
+}
+.step-icon { font-size: 18px; font-weight: 900; letter-spacing: .08em; }
+.mid-cta::before, .stats-bg::before, footer {
+  background: linear-gradient(135deg, #111827 0%, #172033 58%, #0f766e 100%);
+}
+.testi-stars { color: var(--accent-strong); letter-spacing: 4px; }
+.faq-arrow { font-size: 0; }
+.faq-arrow::before { content: ''; width: 8px; height: 8px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); display:block; }
+.contact-detail-icon, .social-link {
+  background: #f3f6f9;
+  color: var(--navy);
+  border-color: rgba(17,24,39,0.08);
+  font-size: 13px;
+  font-weight: 900;
+}
+.footer-mark { width: 8px; height: 8px; border-radius: 999px; background: var(--accent); display:inline-block; flex:0 0 auto; }
+.chat-launcher { background: #111827; box-shadow: 0 18px 38px rgba(17,24,39,0.18); }
+
 </style>
 </head>
 <body>
@@ -768,14 +881,14 @@ footer::before {
     <h1>בונים לכם אתר שישדרג לכם את העסק</h1>
     <p class="hero-sub">פתרונות דיגיטליים מלאים לעסקים, עמותות ויוזמות — עם התאמה מושלמת לקהל החרדי ולקהל הכללי.</p>
     <div class="hero-btns">
-      <a href="#contact" class="btn-primary">📋 קבל הצעת מחיר </a>
-      <a href="#blog" class="btn-outline">📚 למאמרים האחרונים</a>
+      <a href="#contact" class="btn-primary">קבל הצעת מחיר</a>
+      <a href="#blog" class="btn-outline">למאמרים האחרונים</a>
     </div>
     <div class="hero-badges">
-      <span class="hero-badge">⚡ מהירות טעינה גבוהה</span>
-      <span class="hero-badge">🔒 אבטחה ברמה גבוהה</span>
-      <span class="hero-badge">📱 מותאם למובייל</span>
-      <span class="hero-badge">🌐 SEO ראשוני מובנה</span>
+      <span class="hero-badge">מהירות טעינה גבוהה</span>
+      <span class="hero-badge">אבטחה ברמה גבוהה</span>
+      <span class="hero-badge">מותאם למובייל</span>
+      <span class="hero-badge">SEO ראשוני מובנה</span>
     </div>
   </div>
 </section>
@@ -811,32 +924,32 @@ footer::before {
     </div>
     <div class="features-grid">
       <article class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon">🎨</div>
+        <div class="feature-icon" aria-hidden="true"></div>
         <h3>עיצוב יוקרתי ומותאם</h3>
         <p>כל אתר נבנה מאפס, עם זהות ויזואלית ייחודית שמשקפת את הערכים והקהל שלכם.</p>
       </article>
       <article class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon">📈</div>
+        <div class="feature-icon" aria-hidden="true"></div>
         <h3>ממוקד המרות ותוצאות</h3>
         <p>כל עמוד ומסר נבנים כדי לגרום לגולש לפנות, לרכוש או להשאיר פרטים — לא רק "לבקר".</p>
       </article>
       <article class="feature-card reveal reveal-delay-3">
-        <div class="feature-icon">🕍</div>
+        <div class="feature-icon" aria-hidden="true"></div>
         <h3>התאמה לקהל החרדי</h3>
         <p>שפה מכבדת, עיצוב נקי, ותוכן מדויק לקהל החרדי</p>
       </article>
       <article class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon">🔍</div>
+        <div class="feature-icon" aria-hidden="true"></div>
         <h3>קידום אורגני (SEO)</h3>
         <p>תשתית SEO מובנית מהיום הראשון — כדי שגוגל ימצא אתכם לפני המתחרים.</p>
       </article>
       <article class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon">⚡</div>
+        <div class="feature-icon" aria-hidden="true"></div>
         <h3>ביצועים ומהירות</h3>
         <p>קוד נקי ואופטימיזציה מלאה — אתר שנטען מהר ונשאר יציב גם בעומס תנועה.</p>
       </article>
       <article class="feature-card reveal reveal-delay-3">
-        <div class="feature-icon">🤝</div>
+        <div class="feature-icon" aria-hidden="true"></div>
         <h3>ליווי אישי ורציף</h3>
         <p>לא נעלמים אחרי ההשקה. תמיד זמינים לתמיכה, שדרוגים ושאלות.</p>
       </article>
@@ -855,27 +968,27 @@ footer::before {
     </div>
     <div class="process-steps">
       <div class="process-step reveal reveal-delay-1">
-        <div class="step-num"><span class="step-icon">💬</span></div>
+        <div class="step-num"><span class="step-icon">01</span></div>
         <div class="step-title">אפיון</div>
         <p class="step-desc">מבינים את העסק, הקהל והמטרות שלכם</p>
       </div>
       <div class="process-step reveal reveal-delay-2">
-        <div class="step-num"><span class="step-icon">✏️</span></div>
+        <div class="step-num"><span class="step-icon">02</span></div>
         <div class="step-title">עיצוב</div>
         <p class="step-desc">מעצבים חוויה ויזואלית שמרשימה וממירה</p>
       </div>
       <div class="process-step reveal reveal-delay-3">
-        <div class="step-num"><span class="step-icon">💻</span></div>
+        <div class="step-num"><span class="step-icon">03</span></div>
         <div class="step-title">פיתוח</div>
         <p class="step-desc">בונים אתר מהיר, יציב ומאובטח</p>
       </div>
       <div class="process-step reveal reveal-delay-4">
-        <div class="step-num"><span class="step-icon">🔗</span></div>
+        <div class="step-num"><span class="step-icon">04</span></div>
         <div class="step-title">חיבור מערכות</div>
         <p class="step-desc">CRM, סליקה, טפסים, אנליטיקס ועוד</p>
       </div>
       <div class="process-step reveal reveal-delay-5">
-        <div class="step-num"><span class="step-icon">🚀</span></div>
+        <div class="step-num"><span class="step-icon">05</span></div>
         <div class="step-title">השקה</div>
         <p class="step-desc">עולים לאוויר ומתחילים לראות תוצאות</p>
       </div>
@@ -897,7 +1010,7 @@ footer::before {
         <div class="blog-img"><img src="בלוג.png" alt="איש יושב עם מחשב נייד ובודק נתונים לעבודה על האתר"></div>
         <div class="blog-body">
           <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
-          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
+          <div class="blog-read-time">זמן קריאה: 2–3 דקות</div>
           <h3>בניית אתרים לציבור החרדי — מה חשוב לדעת?</h3>
           <p>במאמר תמצאו תהליך עבודה מעשי: איך לבחור שפה מדויקת לקהל החרדי, אילו אלמנטים עיצוביים מחזקים אמון, ואיך לבנות עמודים שמובילים לפנייה בלי עומס או מסרים אגרסיביים.</p>
           <a href="articles/haridi-websites.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
@@ -907,7 +1020,7 @@ footer::before {
         <div class="blog-img"><img src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200" alt="ניתוח נתוני אתר"></div>
         <div class="blog-body">
           <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
-          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
+          <div class="blog-read-time">זמן קריאה: 2–3 דקות</div>
           <h3>איך אתר טוב מביא יותר לקוחות?</h3>
           <p>נפרק שלב־שלב את המרכיבים שמביאים המרות: כותרת ברורה, היררכיית תוכן, הוכחות חברתיות, מהירות ונייד. בסוף תקבלו צ'ק ליסט קצר שאפשר ליישם גם בלי לבנות אתר מחדש.</p>
           <a href="articles/website-conversions.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
@@ -917,7 +1030,7 @@ footer::before {
         <div class="blog-img"><img src="בלוג 1.png" alt="איור של תכנון ובדיקה לפני בניית אתר לעסק"></div>
         <div class="blog-body">
           <div class="blog-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</div>
-          <div class="blog-read-time">⏱️ זמן קריאה: 2–3 דקות</div>
+          <div class="blog-read-time">זמן קריאה: 2–3 דקות</div>
           <h3>5 דברים לבדוק לפני שבונים אתר לעסק</h3>
           <p>לפני שמתחילים פיתוח, כדאי לעצור לתכנון. המאמר מרכז 5 בדיקות קריטיות שיחסכו תיקונים יקרים בהמשך: מטרה עסקית, קהל יעד, תוכן, מדידה ותהליך עבודה ברור מול כל הגורמים.</p>
           <a href="articles/pre-launch-checklist.html" class="btn-link">קרא עוד <span class="link-arrow">←</span></a>
@@ -934,8 +1047,8 @@ footer::before {
     <h2>מוכנים לאתר שעובד בשבילכם 24/6?</h2>
     <p>אל תחכו — כל יום ללא אתר מקצועי הוא לקוח פוטנציאלי שהולך למתחרה.</p>
     <div class="hero-btns">
-      <a href="#contact" class="btn-white">📋 קבל הצעת מחיר</a>
-      <a href="tel:0535485184" class="btn-outline-white">📞 053-548-5184</a>
+      <a href="#contact" class="btn-white">קבל הצעת מחיר</a>
+      <a href="tel:0535485184" class="btn-outline-white">053-548-5184</a>
     </div>
   </div>
 </div>
@@ -980,7 +1093,7 @@ footer::before {
     </div>
     <div class="testi-grid">
       <article class="testi-card reveal reveal-delay-1">
-        <div class="testi-stars">★★★★★</div>
+        <div class="testi-stars">המלצה</div>
         <blockquote>תוך חודשיים מההשקה קיבלנו פי שלושה יותר לידים. האתר פשוט מוכר בשבילנו — בלי שנצטרך לרדוף אחרי לקוחות.</blockquote>
         <div class="testi-author">
           <div class="testi-avatar">ד</div>
@@ -991,7 +1104,7 @@ footer::before {
         </div>
       </article>
       <article class="testi-card reveal reveal-delay-2">
-        <div class="testi-stars">★★★★★</div>
+        <div class="testi-stars">המלצה</div>
         <blockquote>הרגשנו שיש מי שמבין שיווק ולא רק קוד. כל שינוי נעשה עם מטרה ברורה, ומוסבר בגובה העיניים.</blockquote>
         <div class="testi-author">
           <div class="testi-avatar">נ</div>
@@ -1002,7 +1115,7 @@ footer::before {
         </div>
       </article>
       <article class="testi-card reveal reveal-delay-3">
-        <div class="testi-stars">★★★★★</div>
+        <div class="testi-stars">המלצה</div>
         <blockquote>המעבר לדיגיטל היה חלק לגמרי. קיבלנו אתר שנראה יוקרתי, עובד מהר, ומביא פניות כבר בשבוע הראשון.</blockquote>
         <div class="testi-author">
           <div class="testi-avatar">א</div>
@@ -1030,7 +1143,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           כמה זמן לוקח לבנות אתר?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">אתר תדמית פשוט נבנה בדרך כלל בין שלושה ימים לארבעה עשר ימים. בפרויקטים מורכבים יותר, הזמנים מתארכים בהתאם לצרכים ולחיבורים מיוחדים.</div>
       </div>
@@ -1038,7 +1151,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           כמה עולה לבנות אתר?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">המחיר תלוי בסוג האתר, בכמות העמודים, ברמת העיצוב ובחיבורים הנדרשים (כמו סליקה, טפסים ואוטומציות). בסיום אפיון קצר תקבלו הצעה ברורה ומדויקת. החל מ-1800 שקלים.</div>
       </div>
@@ -1046,7 +1159,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           האם האתר מותאם למובייל?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">כן, תמיד. כל האתרים שאנחנו בונים מותאמים במלואם למובייל, טאבלט ודסקטופ — כי יותר מ-70% מהגולשים מגיעים ממכשיר נייד.</div>
       </div>
@@ -1054,7 +1167,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           האם אפשר לחבר סליקת אשראי?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">בהחלט. אנחנו מחברים מגוון מערכות סליקה מאובטחות — כולל ישראכרט, פייפאל, Stripe ועוד — בהתאם לצרכי העסק.</div>
       </div>
@@ -1062,7 +1175,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           האם אפשר לחבר טופס לידים?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">כן. אנחנו מחברים טפסים ל-Google Sheets, CRM, מייל, ו-WhatsApp — כדי שכל פנייה תגיע אליכם מיד, בלי לאבד ליד אחד.</div>
       </div>
@@ -1070,7 +1183,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           איך בונים אתר שמותאם באמת לציבור החרדי?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">מתחילים מהבנת הקהילה הספציפית: סגנון שפה מכבד וצנוע, עיצוב נקי ונעים לעין, בחירת תמונות ותכנים מתאימים, והדגשת אמינות ושירות. כך בונים אתר שמרגיש טבעי, מכבד וממיר גם יחד.</div>
       </div>
@@ -1078,7 +1191,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           האם אפשר להתאים את העיצוב והשפה לקהל יעד מסוים?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">זו ליבת העבודה שלנו. כל אתר בנוי על תשתית של הבנת קהל היעד — שפה, עיצוב, מבנה תוכן וקריאות לפעולה — כולם מכווננים לקהל הספציפי שלכם.</div>
       </div>
@@ -1086,7 +1199,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           האם אפשר לשלב קידום אורגני בגוגל עם התאמה לקהל החרדי?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">בהחלט. אנחנו מבצעים מחקר ביטויים ממוקד לקהל החרדי ומטמיעים SEO מובנה — כדי שהאתר ייצג אתכם גם בחיפוש העברי וגם בסביבה הדיגיטלית המגזרית.</div>
       </div>
@@ -1094,7 +1207,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           האם אתם מלווים גם אחרי העלייה לאוויר?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">כן. גם אחרי ההשקה אנחנו ממשיכים ללוות אתכם בעדכונים, שיפורים, בדיקות וייעוץ שוטף כדי שהאתר ימשיך לעבוד עבורכם לאורך זמן.</div>
       </div>
@@ -1102,7 +1215,7 @@ footer::before {
       <div class="faq-item" role="listitem">
         <button class="faq-q" aria-expanded="false">
           האם אפשר להתחיל מאתר קטן ולהתרחב בהמשך?
-          <span class="faq-arrow" aria-hidden="true">▼</span>
+          <span class="faq-arrow" aria-hidden="true"></span>
         </button>
         <div class="faq-a">בוודאי. אפשר להתחיל באתר תדמית ממוקד, ובהמשך להוסיף עמודים, טפסים, בלוג, מערכות ניהול ואפילו חנות — בלי לבנות הכל מחדש.</div>
       </div>
@@ -1123,14 +1236,14 @@ footer::before {
     <div class="contact-layout">
       <div class="reveal">
         <div class="contact-detail">
-          <div class="contact-detail-icon">📞</div>
+          <div class="contact-detail-icon" aria-hidden="true">טל</div>
           <div>
             <strong><a href="tel:0535485184" style="color:var(--navy);text-decoration:none">053-548-5184</a></strong><br>
             <small style="color:var(--text-light);font-size:12px;font-weight:400">זמינים לשיחה בימי א'–ה'</small>
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">✉️</div>
+          <div class="contact-detail-icon" aria-hidden="true">@</div>
           <div>
             <strong><a href="https://mail.google.com/mail/?view=cm&fs=1&to=zm0548407450@gmail.com" target="_blank" rel="noopener noreferrer" style="color:var(--navy);text-decoration:none">zm0548407450@gmail.com</a></strong>
             <!-- החלף במייל האמיתי שלך -->
@@ -1171,7 +1284,7 @@ footer::before {
             <label for="message">ספרו לי על הפרויקט *</label>
             <textarea id="message" name="message" placeholder="מה אתם צריכים? מה הקהל שלכם? מה המטרה?" required></textarea>
           </div>
-          <button type="submit" class="form-submit" id="submitButton">📤 שלח פנייה</button>
+          <button type="submit" class="form-submit" id="submitButton">שלח פנייה</button>
           <div class="form-status" id="formStatus"></div>
         </form>
       </div>
@@ -1190,8 +1303,8 @@ footer::before {
         <span class="nav-logo" aria-label="י.ז.מ. אתרים">י<span>.</span>ז<span>.</span>מ אתרים</span>
         <p>בניית אתרים מקצועית ומותאמת אישית — לעסקים, עמותות ויוזמות. הטכנולוגיה עלינו.</p>
         <div class="footer-social">
-          <a href="#" class="social-link" aria-label="אינסטגרם">📸</a>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zm0548407450@gmail.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="מייל">✉</a>
+          <a href="#" class="social-link" aria-label="אינסטגרם">IG</a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zm0548407450@gmail.com" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="מייל">@</a>
         </div>
       </div>
       <div class="footer-col">
@@ -1216,9 +1329,9 @@ footer::before {
       </div>
       <div class="footer-col">
         <h4>פרטי קשר</h4>
-        <div class="footer-contact-item">📞 <a href="tel:0535485184" style="color:rgba(255,255,255,0.55);text-decoration:none">053-548-5184</a></div>
-        <div class="footer-contact-item">✉️ <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zm0548407450@gmail.com" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.55);text-decoration:none">zm0548407450@gmail.com</a></div>
-        <div class="footer-contact-item">🕐 ימים א'–ה', 9:00–21:00</div>
+        <div class="footer-contact-item"><span class="footer-mark" aria-hidden="true"></span> <a href="tel:0535485184" style="color:rgba(255,255,255,0.55);text-decoration:none">053-548-5184</a></div>
+        <div class="footer-contact-item"><span class="footer-mark" aria-hidden="true"></span> <a href="https://mail.google.com/mail/?view=cm&fs=1&to=zm0548407450@gmail.com" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.55);text-decoration:none">zm0548407450@gmail.com</a></div>
+        <div class="footer-contact-item"><span class="footer-mark" aria-hidden="true"></span> ימים א'–ה', 9:00–21:00</div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1382,7 +1495,7 @@ if (contactForm && submitButton && formStatus) {
     if (awaitingSubmit) { e.preventDefault(); return; }
     awaitingSubmit = true;
     submitButton.disabled = true;
-    submitButton.textContent = '⏳ שולח...';
+    submitButton.textContent = 'שולח...';
     formStatus.textContent = '';
   });
 }
@@ -1391,8 +1504,8 @@ hiddenFrame?.addEventListener('load', () => {
   if (!awaitingSubmit || !submitButton || !formStatus || !contactForm) return;
   awaitingSubmit = false;
   submitButton.disabled = false;
-  submitButton.textContent = '📤 שלח פנייה';
-  formStatus.textContent = '✅ הפנייה נשלחה בהצלחה! נחזור אליך בהקדם.';
+  submitButton.textContent = 'שלח פנייה';
+  formStatus.textContent = 'הפנייה נשלחה בהצלחה! נחזור אליך בהקדם.';
   formStatus.style.color = '#10b981';
   contactForm.reset();
   setTimeout(() => { formStatus.textContent = ''; }, 6000);
@@ -1403,8 +1516,8 @@ const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
   if (!navbar) return;
   navbar.style.background = window.scrollY > 60
-    ? 'rgba(10,22,40,0.98)'
-    : 'rgba(10,22,40,0.92)';
+    ? 'rgba(255,255,255,0.96)'
+    : 'rgba(255,255,255,0.84)';
 });
 
 // ─── INTERNAL CHAT PANEL ───
@@ -1537,7 +1650,7 @@ const sendChatMessage = async (message) => {
   persistMessage('user', message);
   chatSend.disabled = true;
   chatSend.textContent = '...שולח';
-  setChatStatus('⏳ ממתין לתשובה...');
+  setChatStatus('ממתין לתשובה...');
 
   const waitingBubble = document.createElement('div');
   waitingBubble.className = 'chat-msg bot';
@@ -1568,12 +1681,12 @@ const sendChatMessage = async (message) => {
       : 'לא התקבלה תשובה מלאה, אפשר לנסות שוב בעוד רגע.';
     addChatMessage('bot', replyText);
     persistMessage('bot', replyText);
-    setChatStatus(data?.ok === false ? '⚠️ התקבלה הודעת שגיאה' : '✅ נשלח בהצלחה', data?.ok === false);
+    setChatStatus(data?.ok === false ? 'התקבלה הודעת שגיאה' : 'נשלח בהצלחה', data?.ok === false);
   } catch (error) {
     const errorMessage = 'אירעה שגיאה זמנית, נסו שוב בעוד רגע.';
     addChatMessage('bot', errorMessage);
     persistMessage('bot', errorMessage);
-    setChatStatus('❌ שליחה נכשלה', true);
+    setChatStatus('שליחה נכשלה', true);
   } finally {
     removeWaitingMessage(waitingBubble);
     chatSend.disabled = false;
