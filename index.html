@@ -376,7 +376,7 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 .feature-card p { font-size: 15px; line-height: 1.75; }
 
 .process-steps {
-  display:grid; grid-template-columns: repeat(5, 1fr); gap:18px; position:relative;
+  display:grid; grid-template-columns: repeat(6, 1fr); gap:18px; position:relative;
 }
 .process-step {
   display:flex; flex-direction:column; align-items:center; text-align:center; padding: 18px 16px 0; position:relative; z-index:1;
@@ -453,9 +453,9 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 }
 .stats-inner { position:relative; z-index:1; max-width: 1100px; margin:0 auto; padding: 44px 24px 0; }
 .stats-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; text-align:center; }
-.stat-card { padding: 34px 20px; border-radius: var(--radius); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); }
-.stat-value { font-family:'Frank Ruhl Libre',serif; font-size: clamp(36px, 4vw, 54px); font-weight:900; color:#fff; line-height:1; margin-bottom:10px; position:relative; z-index:1; display:flex; align-items:baseline; justify-content:center; gap:4px; }
-.stat-suffix { color: var(--gold); font-size:.58em; }
+.stat-card { padding: 34px 20px; border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06)); border-color: rgba(255,255,255,0.16); box-shadow: 0 22px 60px rgba(2,8,23,0.22); }
+.stat-value { font-family:'Frank Ruhl Libre',serif; font-size: clamp(42px, 5vw, 66px); font-weight:900; line-height:.95; margin-bottom:12px; position:relative; z-index:1; display:flex; align-items:baseline; justify-content:center; gap:5px; direction:ltr; color:transparent; background: linear-gradient(180deg, #fff 0%, #fde68a 46%, #f3c969 100%); -webkit-background-clip:text; background-clip:text; text-shadow: 0 14px 35px rgba(243,201,105,.18); }
+.stat-suffix { color: #fde68a; font-size:.5em; font-weight:800; }
 .stat-label { position:relative; z-index:1; font-size:14px; color: rgba(255,255,255,0.72); font-weight:600; }
 .stat-note { position:relative; z-index:1; margin-top:10px; color: rgba(255,255,255,.86); font-size:13px; font-weight:700; }
 .stat-trend {
@@ -714,6 +714,7 @@ footer::before {
 .reveal-delay-3 { transition-delay:.24s; }
 .reveal-delay-4 { transition-delay:.32s; }
 .reveal-delay-5 { transition-delay:.4s; }
+.reveal-delay-6 { transition-delay:.48s; }
 
 @media (max-width: 1024px) {
   .features-grid, .testi-grid, .blog-grid { grid-template-columns: repeat(2, 1fr); }
@@ -873,10 +874,6 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
   content: ''; position: absolute; inset: 7px; border-radius: 14px;
   border: 1px solid rgba(20,184,166,.32);
 }
-.feature-icon::after {
-  content: ''; position: absolute; width: 9px; height: 9px; border-radius: 999px;
-  left: 10px; top: 10px; background: var(--gold); box-shadow: 0 0 0 5px rgba(243,201,105,.14);
-}
 .step-num {
   width: 76px; height: 76px; border-radius: 24px;
   background: #111827;
@@ -1011,7 +1008,7 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
   <div class="section-wrap">
     <div class="section-header center reveal">
       <div class="section-label">תהליך העבודה</div>
-      <h2 class="section-title" id="process-title">מהרעיון ועד ההשקה — 5 שלבים פשוטים</h2>
+      <h2 class="section-title" id="process-title">מהרעיון ועד העלייה — 6 שלבים פשוטים</h2>
       <p class="section-sub">תהליך שקוף, מובנה ויעיל — בלי הפתעות ובלי עיכובים מיותרים.</p>
     </div>
     <div class="process-steps">
@@ -1037,8 +1034,13 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
       </div>
       <div class="process-step reveal reveal-delay-5">
         <div class="step-num"><span class="step-icon">05</span></div>
-        <div class="step-title">השקה</div>
-        <p class="step-desc">עולים לאוויר ומתחילים לראות תוצאות</p>
+        <div class="step-title">בדיקות</div>
+        <p class="step-desc">בודקים מהירות, התאמה ותוכן לפני העלייה</p>
+      </div>
+      <div class="process-step reveal reveal-delay-6">
+        <div class="step-num"><span class="step-icon">06</span></div>
+        <div class="step-title">השקה וליווי</div>
+        <p class="step-desc">עולים לאוויר וממשיכים ללוות אתכם</p>
       </div>
     </div>
   </div>
