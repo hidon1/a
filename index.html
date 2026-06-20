@@ -457,6 +457,33 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 .stat-value { font-family:'Frank Ruhl Libre',serif; font-size: clamp(38px, 4vw, 56px); font-weight:900; color:#fff; line-height:1; margin-bottom:8px; position:relative; z-index:1; }
 .stat-suffix { color: var(--gold); }
 .stat-label { position:relative; z-index:1; font-size:14px; color: rgba(255,255,255,0.72); font-weight:600; }
+.stat-trend {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(20, 184, 166, 0.18);
+  border: 1px solid rgba(45, 212, 191, 0.32);
+  color: #ccfbf1;
+  font-size: 13px;
+  font-weight: 900;
+}
+.stat-trend::before {
+  content: '↗';
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #ccfbf1;
+  color: #0f766e;
+  font-size: 15px;
+  line-height: 1;
+}
 
 .testi-card { padding: 30px; }
 .testi-card::before {
@@ -757,13 +784,17 @@ footer::before {
   --shadow-lg: 0 28px 70px rgba(17, 24, 39, 0.12);
 }
 body {
-  background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 42%, #f8fafc 100%);
-  background-color: #f8fafc;
+  background:
+    radial-gradient(circle at 84% 6%, rgba(20, 184, 166, 0.18), transparent 28%),
+    radial-gradient(circle at 12% 18%, rgba(45, 212, 191, 0.14), transparent 26%),
+    linear-gradient(180deg, #eefdfa 0%, #e6f8f7 42%, #f7fffe 100%);
+  background-color: #eefdfa;
 }
 body::before {
   background:
-    radial-gradient(circle at 88% 8%, rgba(20, 184, 166, 0.16), transparent 26%),
-    radial-gradient(circle at 12% 18%, rgba(37, 99, 235, 0.10), transparent 24%);
+    radial-gradient(circle at 88% 8%, rgba(20, 184, 166, 0.2), transparent 26%),
+    radial-gradient(circle at 12% 18%, rgba(45, 212, 191, 0.16), transparent 24%),
+    linear-gradient(135deg, rgba(240, 253, 250, 0.44), rgba(204, 251, 241, 0.24));
   mask-image: none;
 }
 body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none; }
@@ -1064,18 +1095,22 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
     <div class="stats-grid">
       <div class="stat-card reveal reveal-delay-1">
         <div class="stat-value"><span data-counter="10" data-counter-start="0">0</span></div>
+        <div class="stat-trend"><span data-counter="78" data-counter-start="0">0</span>% יותר מהר</div>
         <div class="stat-label">ימים ממוצע להשקה</div>
       </div>
       <div class="stat-card reveal reveal-delay-2">
         <div class="stat-value"><span data-counter="95" data-counter-start="0">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-trend"><span data-counter="32" data-counter-start="0">0</span>% עלייה באמון</div>
         <div class="stat-label">שביעות רצון</div>
       </div>
       <div class="stat-card reveal reveal-delay-3">
         <div class="stat-value"><span data-counter="24" data-counter-start="0">0</span><span class="stat-suffix">/</span><span style="font-size:22px;color:rgba(255,255,255,0.8)">6</span></div>
+        <div class="stat-trend"><span data-counter="41" data-counter-start="0">0</span>% יותר פניות</div>
         <div class="stat-label">זמינות לפניות</div>
       </div>
       <div class="stat-card reveal reveal-delay-4">
         <div class="stat-value"><span data-counter="100" data-counter-start="0">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-trend"><span data-counter="64" data-counter-start="0">0</span>% יותר נגיש</div>
         <div class="stat-label">התאמה למובייל</div>
       </div>
     </div>
