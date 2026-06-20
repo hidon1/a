@@ -454,9 +454,10 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 .stats-inner { position:relative; z-index:1; max-width: 1100px; margin:0 auto; padding: 44px 24px 0; }
 .stats-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; text-align:center; }
 .stat-card { padding: 34px 20px; border-radius: var(--radius); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); }
-.stat-value { font-family:'Frank Ruhl Libre',serif; font-size: clamp(38px, 4vw, 56px); font-weight:900; color:#fff; line-height:1; margin-bottom:8px; position:relative; z-index:1; }
-.stat-suffix { color: var(--gold); }
+.stat-value { font-family:'Frank Ruhl Libre',serif; font-size: clamp(36px, 4vw, 54px); font-weight:900; color:#fff; line-height:1; margin-bottom:10px; position:relative; z-index:1; display:flex; align-items:baseline; justify-content:center; gap:4px; }
+.stat-suffix { color: var(--gold); font-size:.58em; }
 .stat-label { position:relative; z-index:1; font-size:14px; color: rgba(255,255,255,0.72); font-weight:600; }
+.stat-note { position:relative; z-index:1; margin-top:10px; color: rgba(255,255,255,.86); font-size:13px; font-weight:700; }
 .stat-trend {
   position: relative;
   z-index: 1;
@@ -852,13 +853,29 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
 }
 .feature-card::before, .ba-card::before, .stat-card::before, .testi-card::before, .blog-card::before, .contact-form::before { content: none; }
 .feature-icon {
-  width: 52px; height: 52px; border-radius: 16px;
-  background: linear-gradient(135deg, rgba(20,184,166,.13), rgba(37,99,235,.08));
+  width: 58px; height: 58px; border-radius: 18px;
+  background: linear-gradient(135deg, rgba(20,184,166,.12), rgba(243,201,105,.1));
   position: relative;
+  color: var(--navy-mid);
+}
+.feature-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  position: relative;
+  z-index: 1;
 }
 .feature-icon::before {
-  content: ''; position: absolute; inset: 15px; border-radius: 8px;
-  border: 2px solid var(--accent-strong);
+  content: ''; position: absolute; inset: 7px; border-radius: 14px;
+  border: 1px solid rgba(20,184,166,.32);
+}
+.feature-icon::after {
+  content: ''; position: absolute; width: 9px; height: 9px; border-radius: 999px;
+  left: 10px; top: 10px; background: var(--gold); box-shadow: 0 0 0 5px rgba(243,201,105,.14);
 }
 .step-num {
   width: 76px; height: 76px; border-radius: 24px;
@@ -955,32 +972,32 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
     </div>
     <div class="features-grid">
       <article class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon" aria-hidden="true"></div>
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17.5V6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5Z"/><path d="M8 9h8M8 13h5M16.5 15.5l1.5 1.5 2.5-3"/></svg></div>
         <h3>עיצוב יוקרתי ומותאם</h3>
         <p>כל אתר נבנה מאפס, עם זהות ויזואלית ייחודית שמשקפת את הערכים והקהל שלכם.</p>
       </article>
       <article class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon" aria-hidden="true"></div>
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 12 5l8 7.5"/><path d="M7 11.5V19h10v-7.5"/><path d="M10 19v-5h4v5"/><path d="M17 5.5h2v4"/></svg></div>
         <h3>ממוקד המרות ותוצאות</h3>
         <p>כל עמוד ומסר נבנים כדי לגרום לגולש לפנות, לרכוש או להשאיר פרטים — לא רק "לבקר".</p>
       </article>
       <article class="feature-card reveal reveal-delay-3">
-        <div class="feature-icon" aria-hidden="true"></div>
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-4.2 7-10.5A7 7 0 0 0 5 10.5C5 16.8 12 21 12 21Z"/><path d="M9 10.5c.8-1.1 1.8-1.7 3-1.7s2.2.6 3 1.7"/><path d="M8.5 14h7"/></svg></div>
         <h3>התאמה לקהל החרדי</h3>
         <p>שפה מכבדת, עיצוב נקי, ותוכן מדויק לקהל החרדי</p>
       </article>
       <article class="feature-card reveal reveal-delay-1">
-        <div class="feature-icon" aria-hidden="true"></div>
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/><path d="M8.5 11h5M11 8.5v5"/></svg></div>
         <h3>קידום אורגני (SEO)</h3>
         <p>תשתית SEO מובנית מהיום הראשון — כדי שגוגל ימצא אתכם לפני המתחרים.</p>
       </article>
       <article class="feature-card reveal reveal-delay-2">
-        <div class="feature-icon" aria-hidden="true"></div>
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l4-5"/><path d="M6.5 18h11"/><path d="M8 14h.01M16 14h.01"/></svg></div>
         <h3>ביצועים ומהירות</h3>
         <p>קוד נקי ואופטימיזציה מלאה — אתר שנטען מהר ונשאר יציב גם בעומס תנועה.</p>
       </article>
       <article class="feature-card reveal reveal-delay-3">
-        <div class="feature-icon" aria-hidden="true"></div>
+        <div class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18.5V7a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v11.5"/><path d="M8.5 20h7"/><path d="M9 8h6M9 12h4"/><path d="M16.5 16.5 18 18l2.5-3"/></svg></div>
         <h3>ליווי אישי ורציף</h3>
         <p>לא נעלמים אחרי ההשקה. תמיד זמינים לתמיכה, שדרוגים ושאלות.</p>
       </article>
@@ -1094,24 +1111,28 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
     </div>
     <div class="stats-grid">
       <div class="stat-card reveal reveal-delay-1">
-        <div class="stat-value"><span data-counter="10" data-counter-start="0">0</span></div>
-        <div class="stat-trend"><span data-counter="78" data-counter-start="0">0</span>% יותר מהר</div>
-        <div class="stat-label">ימים ממוצע להשקה</div>
+        <div class="stat-value"><span data-counter="10" data-counter-start="0">0</span><span class="stat-suffix">ימים</span></div>
+        <div class="stat-trend">לו״ז קצר וברור</div>
+        <div class="stat-label">ממוצע להשקה</div>
+        <div class="stat-note">אפיון, עיצוב ופיתוח בקצב מסודר</div>
       </div>
       <div class="stat-card reveal reveal-delay-2">
-        <div class="stat-value"><span data-counter="95" data-counter-start="0">0</span><span class="stat-suffix">%</span></div>
-        <div class="stat-trend"><span data-counter="32" data-counter-start="0">0</span>% עלייה באמון</div>
-        <div class="stat-label">שביעות רצון</div>
+        <div class="stat-value"><span data-counter="6" data-counter-start="0">0</span><span class="stat-suffix">שלבים</span></div>
+        <div class="stat-trend">תהליך שקוף</div>
+        <div class="stat-label">מהרעיון ועד העלייה</div>
+        <div class="stat-note">כל שלב מוגדר, מדויק וקל למעקב</div>
       </div>
       <div class="stat-card reveal reveal-delay-3">
         <div class="stat-value"><span data-counter="24" data-counter-start="0">0</span><span class="stat-suffix">/</span><span style="font-size:22px;color:rgba(255,255,255,0.8)">6</span></div>
-        <div class="stat-trend"><span data-counter="41" data-counter-start="0">0</span>% יותר פניות</div>
-        <div class="stat-label">זמינות לפניות</div>
+        <div class="stat-trend">זמינות אנושית</div>
+        <div class="stat-label">לפניות ושאלות</div>
+        <div class="stat-note">מענה רציף, מכבד ולעניין</div>
       </div>
       <div class="stat-card reveal reveal-delay-4">
-        <div class="stat-value"><span data-counter="100" data-counter-start="0">0</span><span class="stat-suffix">%</span></div>
-        <div class="stat-trend"><span data-counter="64" data-counter-start="0">0</span>% יותר נגיש</div>
-        <div class="stat-label">התאמה למובייל</div>
+        <div class="stat-value"><span data-counter="3" data-counter-start="0">0</span><span class="stat-suffix">מסכים</span></div>
+        <div class="stat-trend">מותאם לכל מכשיר</div>
+        <div class="stat-label">מחשב, טאבלט ונייד</div>
+        <div class="stat-note">חוויית גלישה אלגנטית ומהירה</div>
       </div>
     </div>
   </div>
