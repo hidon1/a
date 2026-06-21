@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yazam-sites.co.il/sitemap.xml
