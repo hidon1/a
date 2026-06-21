@@ -22,8 +22,8 @@
   --accent: #4fd1c5;
   --accent-strong: #2dd4bf;
   --accent-light: #7dd3fc;
-  --gold: #f3c969;
-  --gold-light: #fde68a;
+  --gold: #d89b1f;
+  --gold-light: #ffe27a;
   --rose: #f472b6;
   --white: #ffffff;
   --off-white: #f8fafc;
@@ -447,43 +447,67 @@ section:not(.hero), .mid-cta, .stats-bg { position: relative; }
 .stats-bg::before {
   content:''; position:absolute; inset:0 18px 0; border-radius:36px;
   background:
-    radial-gradient(circle at top right, rgba(243,201,105,0.22), transparent 25%),
-    linear-gradient(135deg, #08111f, #103052 48%, #0f6b86 100%);
-  box-shadow: 0 34px 90px rgba(2,8,23,0.26);
+    radial-gradient(circle at 82% 16%, rgba(255,226,122,0.22), transparent 28%),
+    radial-gradient(circle at 16% 84%, rgba(20,184,166,0.16), transparent 30%),
+    linear-gradient(135deg, #070d18 0%, #101827 48%, #17344a 100%);
+  box-shadow: 0 34px 90px rgba(2,8,23,0.32);
 }
-.stats-inner { position:relative; z-index:1; max-width: 1100px; margin:0 auto; padding: 44px 24px 0; }
+.stats-inner { position:relative; z-index:1; max-width: 1160px; margin:0 auto; padding: 48px 24px 0; }
 .stats-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:24px; text-align:center; }
-.stat-card { padding: 34px 20px; border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.06)); border-color: rgba(255,255,255,0.16); box-shadow: 0 22px 60px rgba(2,8,23,0.22); }
-.stat-value { font-family:'Frank Ruhl Libre',serif; font-size: clamp(42px, 5vw, 66px); font-weight:900; line-height:.95; margin-bottom:12px; position:relative; z-index:1; display:flex; align-items:baseline; justify-content:center; gap:5px; direction:ltr; color:transparent; background: linear-gradient(180deg, #fff 0%, #fde68a 46%, #f3c969 100%); -webkit-background-clip:text; background-clip:text; text-shadow: 0 14px 35px rgba(243,201,105,.18); }
-.stat-suffix { color: #fde68a; font-size:.5em; font-weight:800; }
-.stat-label { position:relative; z-index:1; font-size:14px; color: rgba(255,255,255,0.72); font-weight:600; }
-.stat-note { position:relative; z-index:1; margin-top:10px; color: rgba(255,255,255,.86); font-size:13px; font-weight:700; }
-.stat-trend {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 14px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  background: rgba(20, 184, 166, 0.18);
-  border: 1px solid rgba(45, 212, 191, 0.32);
-  color: #ccfbf1;
-  font-size: 13px;
-  font-weight: 900;
+.stat-card {
+  padding: 40px 22px 36px;
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.94));
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: 0 24px 70px rgba(2,8,23,0.28);
 }
-.stat-trend::before {
-  content: '↗';
-  display: inline-grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  background: #ccfbf1;
-  color: #0f766e;
-  font-size: 15px;
-  line-height: 1;
+.stat-card::before {
+  content: none;
+}
+.stat-value {
+  font-family:'Frank Ruhl Libre', 'Heebo', serif;
+  font-size: clamp(48px, 5.4vw, 76px);
+  font-weight:900;
+  line-height:.92;
+  margin-bottom:18px;
+  position:relative;
+  z-index:1;
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:7px;
+  direction:ltr;
+  color:#b77912;
+  letter-spacing:-0.035em;
+  text-shadow: 0 2px 0 #fff2bd, 0 18px 34px rgba(183,121,18,.24);
+}
+.stat-suffix {
+  color: #c48a16;
+  font-family:'Heebo', sans-serif;
+  font-size:.44em;
+  font-weight:900;
+  letter-spacing:-0.02em;
+}
+.stat-label {
+  position:relative;
+  z-index:1;
+  font-size:17px;
+  color: #111827;
+  font-weight:900;
+  letter-spacing:-0.01em;
+}
+.stat-note {
+  position:relative;
+  z-index:1;
+  margin-top:10px;
+  color: #526074;
+  font-size:14px;
+  line-height:1.7;
+  font-weight:600;
+}
+.stat-trend {
+  display: none;
 }
 
 .testi-card { padding: 30px; }
@@ -776,7 +800,8 @@ footer::before {
   --blue: #2563eb;
   --accent: #14b8a6;
   --accent-strong: #0f766e;
-  --gold: #c0842d;
+  --gold: #d89b1f;
+  --gold-light: #ffe27a;
   --off-white: #f6f7fb;
   --text-dark: #111827;
   --text-mid: #5b6472;
@@ -880,8 +905,14 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
   box-shadow: 0 16px 34px rgba(17,24,39,0.14);
 }
 .step-icon { font-size: 18px; font-weight: 900; letter-spacing: .08em; }
-.mid-cta::before, .stats-bg::before, footer {
+.mid-cta::before, footer {
   background: linear-gradient(135deg, #111827 0%, #172033 58%, #0f766e 100%);
+}
+.stats-bg::before {
+  background:
+    radial-gradient(circle at 82% 16%, rgba(255,226,122,0.22), transparent 28%),
+    radial-gradient(circle at 16% 84%, rgba(20,184,166,0.16), transparent 30%),
+    linear-gradient(135deg, #070d18 0%, #101827 48%, #17344a 100%);
 }
 .testi-stars { color: var(--accent-strong); letter-spacing: 4px; }
 .faq-arrow { font-size: 0; }
@@ -1114,25 +1145,21 @@ body::after, .hero-grid-overlay, footer::before, .mid-cta::after { content: none
     <div class="stats-grid">
       <div class="stat-card reveal reveal-delay-1">
         <div class="stat-value"><span data-counter="10" data-counter-start="0">0</span><span class="stat-suffix">ימים</span></div>
-        <div class="stat-trend">לו״ז קצר וברור</div>
         <div class="stat-label">ממוצע להשקה</div>
         <div class="stat-note">אפיון, עיצוב ופיתוח בקצב מסודר</div>
       </div>
       <div class="stat-card reveal reveal-delay-2">
         <div class="stat-value"><span data-counter="6" data-counter-start="0">0</span><span class="stat-suffix">שלבים</span></div>
-        <div class="stat-trend">תהליך שקוף</div>
         <div class="stat-label">מהרעיון ועד העלייה</div>
         <div class="stat-note">כל שלב מוגדר, מדויק וקל למעקב</div>
       </div>
       <div class="stat-card reveal reveal-delay-3">
-        <div class="stat-value"><span data-counter="24" data-counter-start="0">0</span><span class="stat-suffix">/</span><span style="font-size:22px;color:rgba(255,255,255,0.8)">6</span></div>
-        <div class="stat-trend">זמינות אנושית</div>
+        <div class="stat-value"><span data-counter="24" data-counter-start="0">0</span><span class="stat-suffix">/</span><span class="stat-suffix">6</span></div>
         <div class="stat-label">לפניות ושאלות</div>
         <div class="stat-note">מענה רציף, מכבד ולעניין</div>
       </div>
       <div class="stat-card reveal reveal-delay-4">
         <div class="stat-value"><span data-counter="3" data-counter-start="0">0</span><span class="stat-suffix">מסכים</span></div>
-        <div class="stat-trend">מותאם לכל מכשיר</div>
         <div class="stat-label">מחשב, טאבלט ונייד</div>
         <div class="stat-note">חוויית גלישה אלגנטית ומהירה</div>
       </div>
